@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_470c73df58c64840b69ca5f21430cdab {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_470c73df58c64840b69ca5f21430cdab" ></div>
+        
+</body>
+<script>    
+    
+            var map_470c73df58c64840b69ca5f21430cdab = L.map(
+                "map_470c73df58c64840b69ca5f21430cdab",
+                {
+                    center: [25.1893107, 84.94095920000001],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 20,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_09685caf85bc4546bfb4a0a1ace63803 = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=s\u0026x={x}\u0026y={y}\u0026z={z}",
+                {"attribution": "\u003ca href=\"mailto:jbindroo@careindia.org\"\u003eFeedback\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+            var circle_marker_95e1fa82392b49c8a8f017754d201489 = L.circleMarker(
+                [25.189156399999998, 84.9409056],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_3933735df524491895497df619d270a1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fcb365e5c25e4c648025d3910b62371b = $(`<div id="html_fcb365e5c25e4c648025d3910b62371b" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/005</div>`)[0];
+            popup_3933735df524491895497df619d270a1.setContent(html_fcb365e5c25e4c648025d3910b62371b);
+        
+
+        circle_marker_95e1fa82392b49c8a8f017754d201489.bindPopup(popup_3933735df524491895497df619d270a1)
+        ;
+
+        
+    
+    
+            var circle_marker_78049c14a9494ebba8df91428953041b = L.circleMarker(
+                [25.189042899999997, 84.9409429],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_dab68846136048e194bd3b4c706d6706 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9864b70a57c146bea1238c6357fceb4f = $(`<div id="html_9864b70a57c146bea1238c6357fceb4f" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/013</div>`)[0];
+            popup_dab68846136048e194bd3b4c706d6706.setContent(html_9864b70a57c146bea1238c6357fceb4f);
+        
+
+        circle_marker_78049c14a9494ebba8df91428953041b.bindPopup(popup_dab68846136048e194bd3b4c706d6706)
+        ;
+
+        
+    
+    
+            var circle_marker_412147adb22e41f392cd949f70500645 = L.circleMarker(
+                [25.189442, 84.9409186],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_168cdd5d02eb474ca7d59d95a0245086 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6cdbfb5588f6482a8c5d0d8a779dd0a6 = $(`<div id="html_6cdbfb5588f6482a8c5d0d8a779dd0a6" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/011</div>`)[0];
+            popup_168cdd5d02eb474ca7d59d95a0245086.setContent(html_6cdbfb5588f6482a8c5d0d8a779dd0a6);
+        
+
+        circle_marker_412147adb22e41f392cd949f70500645.bindPopup(popup_168cdd5d02eb474ca7d59d95a0245086)
+        ;
+
+        
+    
+    
+            var circle_marker_bf25fc71cb4543ec89b0801e365db901 = L.circleMarker(
+                [25.189287699999998, 84.941039],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_300bff62fb704abeacd79eceaea0ebf0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7f7af981b8324e1fb07ddf7a3a94732e = $(`<div id="html_7f7af981b8324e1fb07ddf7a3a94732e" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/002</div>`)[0];
+            popup_300bff62fb704abeacd79eceaea0ebf0.setContent(html_7f7af981b8324e1fb07ddf7a3a94732e);
+        
+
+        circle_marker_bf25fc71cb4543ec89b0801e365db901.bindPopup(popup_300bff62fb704abeacd79eceaea0ebf0)
+        ;
+
+        
+    
+    
+            var circle_marker_7f3d0d9f7aba47a2abdb65099a5bbaa2 = L.circleMarker(
+                [25.189385100000003, 84.9409141],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_559ab08cf6794f50be541997635c7b9d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a404c818b3c04eb5bbbf1f75afa864c7 = $(`<div id="html_a404c818b3c04eb5bbbf1f75afa864c7" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/009</div>`)[0];
+            popup_559ab08cf6794f50be541997635c7b9d.setContent(html_a404c818b3c04eb5bbbf1f75afa864c7);
+        
+
+        circle_marker_7f3d0d9f7aba47a2abdb65099a5bbaa2.bindPopup(popup_559ab08cf6794f50be541997635c7b9d)
+        ;
+
+        
+    
+    
+            var circle_marker_f81cedc633a8413bb32b1283adfb0ec7 = L.circleMarker(
+                [25.1894043, 84.94106109999998],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_7c727dd590824873bf938a28858ce4c4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a2a00077d8c540e89c56f2bc7fd77ab8 = $(`<div id="html_a2a00077d8c540e89c56f2bc7fd77ab8" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/012</div>`)[0];
+            popup_7c727dd590824873bf938a28858ce4c4.setContent(html_a2a00077d8c540e89c56f2bc7fd77ab8);
+        
+
+        circle_marker_f81cedc633a8413bb32b1283adfb0ec7.bindPopup(popup_7c727dd590824873bf938a28858ce4c4)
+        ;
+
+        
+    
+    
+            var circle_marker_6d11942fb65c4fa9b02a93e3a86014db = L.circleMarker(
+                [25.189359600000003, 84.9409684],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_5084c45300644fabb478056b3d8fdac6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_04b4997dfb5445498522631972f544b7 = $(`<div id="html_04b4997dfb5445498522631972f544b7" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/001</div>`)[0];
+            popup_5084c45300644fabb478056b3d8fdac6.setContent(html_04b4997dfb5445498522631972f544b7);
+        
+
+        circle_marker_6d11942fb65c4fa9b02a93e3a86014db.bindPopup(popup_5084c45300644fabb478056b3d8fdac6)
+        ;
+
+        
+    
+    
+            var circle_marker_8dabd0f920aa41928c822ed70b9f5384 = L.circleMarker(
+                [25.1894076, 84.9409239],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 2}
+            ).addTo(map_470c73df58c64840b69ca5f21430cdab);
+        
+    
+        var popup_3fc39a045f2949cda120b57d91630323 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_cc17d4500fb64ba7a2b3008ab00d5efb = $(`<div id="html_cc17d4500fb64ba7a2b3008ab00d5efb" style="width: 100.0%; height: 100.0%;">IN/BI/JBD/JEH/PNJ/DIH/010</div>`)[0];
+            popup_3fc39a045f2949cda120b57d91630323.setContent(html_cc17d4500fb64ba7a2b3008ab00d5efb);
+        
+
+        circle_marker_8dabd0f920aa41928c822ed70b9f5384.bindPopup(popup_3fc39a045f2949cda120b57d91630323)
+        ;
+
+        
+    
+</script>
