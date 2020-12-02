@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+      <title>Candidate VL Outbreak Map (2-Dec-2020)</title>
+    </head>
+    <body>
+        <div id="heading"><h2>&nbsp;Candidate VL Outbreak Map - KA Outbreak Map</h2></div>
+        <div id="map" style="height: 85%">
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/BiharBlocks_2.js"></script>
+        <script src="data/Newlyreportedvillages2020_3.js"></script>
+        <script src="data/VillageswithmoreVLcasesin2020thanin20132019_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[24.56642947840803,82.99674936544534],[27.590591731467693,88.92976785844974]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        map.createPane('pane_GoogleSatellite_1');
+        map.getPane('pane_GoogleSatellite_1').style.zIndex = 401;
+        var layer_GoogleSatellite_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_1;
+        map.addLayer(layer_GoogleSatellite_1);
+        function pop_BiharBlocks_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">AutoID</th>\
+                        <td>' + (feature.properties['AutoID'] !== null ? autolinker.link(feature.properties['AutoID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BLOCK</th>\
+                        <td>' + (feature.properties['BLOCK'] !== null ? autolinker.link(feature.properties['BLOCK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DISTRICT</th>\
+                        <td>' + (feature.properties['DISTRICT'] !== null ? autolinker.link(feature.properties['DISTRICT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">STATE</th>\
+                        <td>' + (feature.properties['STATE'] !== null ? autolinker.link(feature.properties['STATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BiharBlocks_2_0() {
+            return {
+                pane: 'pane_BiharBlocks_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,0.00784313725490196)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BiharBlocks_2');
+        map.getPane('pane_BiharBlocks_2').style.zIndex = 402;
+        map.getPane('pane_BiharBlocks_2').style['mix-blend-mode'] = 'normal';
+        var layer_BiharBlocks_2 = new L.geoJson(json_BiharBlocks_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BiharBlocks_2',
+            layerName: 'layer_BiharBlocks_2',
+            pane: 'pane_BiharBlocks_2',
+            onEachFeature: pop_BiharBlocks_2,
+            style: style_BiharBlocks_2_0,
+        });
+        bounds_group.addLayer(layer_BiharBlocks_2);
+        map.addLayer(layer_BiharBlocks_2);
+        function pop_Newlyreportedvillages2020_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">VCODE</th>\
+                        <td>' + (feature.properties['VCODE'] !== null ? autolinker.link(feature.properties['VCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VL cases 2020</th>\
+                        <td>' + (feature.properties['VL cases 2020'] !== null ? autolinker.link(feature.properties['VL cases 2020'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS population</th>\
+                        <td>' + (feature.properties['KAMIS population'] !== null ? autolinker.link(feature.properties['KAMIS population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat.</th>\
+                        <td>' + (feature.properties['Lat.'] !== null ? autolinker.link(feature.properties['Lat.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng.</th>\
+                        <td>' + (feature.properties['Lng.'] !== null ? autolinker.link(feature.properties['Lng.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Google Maps Driving Distance from CARE State Office (in KM)</th>\
+                        <td>' + (feature.properties['Google Maps Driving Distance from CARE State Office (in KM)'] !== null ? autolinker.link(feature.properties['Google Maps Driving Distance from CARE State Office (in KM)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Newlyreportedvillages2020_3_0(feature) {
+            switch(String(feature.properties['VL cases 2020'])) {
+                case '1':
+                    return {
+                pane: 'pane_Newlyreportedvillages2020_3',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,253,11,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Newlyreportedvillages2020_3',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,169,24,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Newlyreportedvillages2020_3',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,173,216,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_Newlyreportedvillages2020_3',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,3,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '13':
+                    return {
+                pane: 'pane_Newlyreportedvillages2020_3',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,48,21,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Newlyreportedvillages2020_3');
+        map.getPane('pane_Newlyreportedvillages2020_3').style.zIndex = 403;
+        map.getPane('pane_Newlyreportedvillages2020_3').style['mix-blend-mode'] = 'normal';
+        var layer_Newlyreportedvillages2020_3 = new L.geoJson(json_Newlyreportedvillages2020_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Newlyreportedvillages2020_3',
+            layerName: 'layer_Newlyreportedvillages2020_3',
+            pane: 'pane_Newlyreportedvillages2020_3',
+            onEachFeature: pop_Newlyreportedvillages2020_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Newlyreportedvillages2020_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Newlyreportedvillages2020_3);
+        map.addLayer(layer_Newlyreportedvillages2020_3);
+        function pop_VillageswithmoreVLcasesin2020thanin20132019_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">VCODE</th>\
+                        <td>' + (feature.properties['VCODE'] !== null ? autolinker.link(feature.properties['VCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VL cases 2013-2019</th>\
+                        <td>' + (feature.properties['VL cases 2013-2019'] !== null ? autolinker.link(feature.properties['VL cases 2013-2019'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VL cases 2020</th>\
+                        <td>' + (feature.properties['VL cases 2020'] !== null ? autolinker.link(feature.properties['VL cases 2020'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS population</th>\
+                        <td>' + (feature.properties['KAMIS population'] !== null ? autolinker.link(feature.properties['KAMIS population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat.</th>\
+                        <td>' + (feature.properties['Lat.'] !== null ? autolinker.link(feature.properties['Lat.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng.</th>\
+                        <td>' + (feature.properties['Lng.'] !== null ? autolinker.link(feature.properties['Lng.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Google Maps Driving Distance from CARE State Office (in KM)</th>\
+                        <td>' + (feature.properties['Google Maps Driving Distance from CARE State Office (in KM)'] !== null ? autolinker.link(feature.properties['Google Maps Driving Distance from CARE State Office (in KM)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VillageswithmoreVLcasesin2020thanin20132019_4_0(feature) {
+            switch(String(feature.properties['VL cases 2020'])) {
+                case '2':
+                    return {
+                pane: 'pane_VillageswithmoreVLcasesin2020thanin20132019_4',
+                shape: 'triangle',
+                radius: 4.8,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,132,8,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_VillageswithmoreVLcasesin2020thanin20132019_4',
+                shape: 'triangle',
+                radius: 4.8,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(100,65,243,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_VillageswithmoreVLcasesin2020thanin20132019_4',
+                shape: 'triangle',
+                radius: 4.8,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,108,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_VillageswithmoreVLcasesin2020thanin20132019_4',
+                shape: 'triangle',
+                radius: 4.8,
+                opacity: 1,
+                color: 'rgba(50,87,128,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,0,187,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_VillageswithmoreVLcasesin2020thanin20132019_4');
+        map.getPane('pane_VillageswithmoreVLcasesin2020thanin20132019_4').style.zIndex = 404;
+        map.getPane('pane_VillageswithmoreVLcasesin2020thanin20132019_4').style['mix-blend-mode'] = 'normal';
+        var layer_VillageswithmoreVLcasesin2020thanin20132019_4 = new L.geoJson(json_VillageswithmoreVLcasesin2020thanin20132019_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VillageswithmoreVLcasesin2020thanin20132019_4',
+            layerName: 'layer_VillageswithmoreVLcasesin2020thanin20132019_4',
+            pane: 'pane_VillageswithmoreVLcasesin2020thanin20132019_4',
+            onEachFeature: pop_VillageswithmoreVLcasesin2020thanin20132019_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_VillageswithmoreVLcasesin2020thanin20132019_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_VillageswithmoreVLcasesin2020thanin20132019_4);
+        map.addLayer(layer_VillageswithmoreVLcasesin2020thanin20132019_4);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Villages with more VL cases in 2020 than in 2013-2019<br /><table><tr><td style="text-align: center;"><img src="legend/VillageswithmoreVLcasesin2020thanin20132019_4_2casesin20200.png" /></td><td>2 cases in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/VillageswithmoreVLcasesin2020thanin20132019_4_3casesin20201.png" /></td><td>3 cases in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/VillageswithmoreVLcasesin2020thanin20132019_4_5casesin20202.png" /></td><td>5 cases in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/VillageswithmoreVLcasesin2020thanin20132019_4_10casesin20203.png" /></td><td>10 cases in 2020</td></tr></table>': layer_VillageswithmoreVLcasesin2020thanin20132019_4,'Newly reported villages 2020<br /><table><tr><td style="text-align: center;"><img src="legend/Newlyreportedvillages2020_3_1casein20200.png" /></td><td>1 case in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/Newlyreportedvillages2020_3_2casesin20201.png" /></td><td>2 cases in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/Newlyreportedvillages2020_3_3casesin20202.png" /></td><td>3 cases in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/Newlyreportedvillages2020_3_10casesin20203.png" /></td><td>10 cases in 2020</td></tr><tr><td style="text-align: center;"><img src="legend/Newlyreportedvillages2020_3_13casesin20204.png" /></td><td>13 cases in 2020</td></tr></table>': layer_Newlyreportedvillages2020_3,'<img src="legend/BiharBlocks_2.png" /> Bihar Blocks': layer_BiharBlocks_2,"Google Satellite": layer_GoogleSatellite_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
