@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+        <title>Rahar Diyara and Paharichak, Sonepur, Saran - KA Outbreak Map (2-Dec-2020)</title>
+    </head>
+    <body>
+        <div id="heading"><h2>&nbsp;Rahar Diyara and Paharichak, Sonepur, Saran - KA Outbreak Map</h2></div>
+        <div id="map" style="height: 90%">
+            </div>
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/BindTolaExtentPoints_1.js"></script>
+        <script src="data/BindTolaBoundary_2.js"></script>
+        <script src="data/PaharichakPKDLCases_3.js"></script>
+        <script src="data/PaharichakVLCases_4.js"></script>
+        <script src="data/RaharDiyaraPKDLCases_5.js"></script>
+        <script src="data/RaharDiyaraVLCases_6.js"></script>
+        <script src="data/Villages_7.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_BindTolaExtentPoints_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Point</th>\
+                        <td>' + (feature.properties['Point'] !== null ? autolinker.link(feature.properties['Point'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BindTolaExtentPoints_1_0() {
+            return {
+                pane: 'pane_BindTolaExtentPoints_1',
+                shape: 'square',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BindTolaExtentPoints_1');
+        map.getPane('pane_BindTolaExtentPoints_1').style.zIndex = 401;
+        map.getPane('pane_BindTolaExtentPoints_1').style['mix-blend-mode'] = 'normal';
+        var layer_BindTolaExtentPoints_1 = new L.geoJson(json_BindTolaExtentPoints_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BindTolaExtentPoints_1',
+            layerName: 'layer_BindTolaExtentPoints_1',
+            pane: 'pane_BindTolaExtentPoints_1',
+            onEachFeature: pop_BindTolaExtentPoints_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_BindTolaExtentPoints_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_BindTolaExtentPoints_1);
+        map.addLayer(layer_BindTolaExtentPoints_1);
+        function pop_BindTolaBoundary_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BindTolaBoundary_2_0() {
+            return {
+                pane: 'pane_BindTolaBoundary_2',
+                opacity: 1,
+                color: 'rgba(251,191,9,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,0.00784313725490196)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BindTolaBoundary_2');
+        map.getPane('pane_BindTolaBoundary_2').style.zIndex = 402;
+        map.getPane('pane_BindTolaBoundary_2').style['mix-blend-mode'] = 'normal';
+        var layer_BindTolaBoundary_2 = new L.geoJson(json_BindTolaBoundary_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BindTolaBoundary_2',
+            layerName: 'layer_BindTolaBoundary_2',
+            pane: 'pane_BindTolaBoundary_2',
+            onEachFeature: pop_BindTolaBoundary_2,
+            style: style_BindTolaBoundary_2_0,
+        });
+        bounds_group.addLayer(layer_BindTolaBoundary_2);
+        map.addLayer(layer_BindTolaBoundary_2);
+        function pop_PaharichakPKDLCases_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS PID</th>\
+                        <td>' + (feature.properties['KAMIS PID'] !== null ? autolinker.link(feature.properties['KAMIS PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PaharichakPKDLCases_3_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2019':
+                    return {
+                pane: 'pane_PaharichakPKDLCases_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(98,133,246,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_PaharichakPKDLCases_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(74,28,224,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_PaharichakPKDLCases_3');
+        map.getPane('pane_PaharichakPKDLCases_3').style.zIndex = 403;
+        map.getPane('pane_PaharichakPKDLCases_3').style['mix-blend-mode'] = 'normal';
+        var layer_PaharichakPKDLCases_3 = new L.geoJson(json_PaharichakPKDLCases_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PaharichakPKDLCases_3',
+            layerName: 'layer_PaharichakPKDLCases_3',
+            pane: 'pane_PaharichakPKDLCases_3',
+            onEachFeature: pop_PaharichakPKDLCases_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_PaharichakPKDLCases_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_PaharichakPKDLCases_3);
+        map.addLayer(layer_PaharichakPKDLCases_3);
+        function pop_PaharichakVLCases_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS PID</th>\
+                        <td>' + (feature.properties['KAMIS PID'] !== null ? autolinker.link(feature.properties['KAMIS PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PaharichakVLCases_4_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2014':
+                    return {
+                pane: 'pane_PaharichakVLCases_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2015':
+                    return {
+                pane: 'pane_PaharichakVLCases_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,221,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2017':
+                    return {
+                pane: 'pane_PaharichakVLCases_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,183,81,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2018':
+                    return {
+                pane: 'pane_PaharichakVLCases_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,141,60,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2019':
+                    return {
+                pane: 'pane_PaharichakVLCases_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,86,41,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_PaharichakVLCases_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,39,34,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_PaharichakVLCases_4');
+        map.getPane('pane_PaharichakVLCases_4').style.zIndex = 404;
+        map.getPane('pane_PaharichakVLCases_4').style['mix-blend-mode'] = 'normal';
+        var layer_PaharichakVLCases_4 = new L.geoJson(json_PaharichakVLCases_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PaharichakVLCases_4',
+            layerName: 'layer_PaharichakVLCases_4',
+            pane: 'pane_PaharichakVLCases_4',
+            onEachFeature: pop_PaharichakVLCases_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_PaharichakVLCases_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_PaharichakVLCases_4);
+        map.addLayer(layer_PaharichakVLCases_4);
+        function pop_RaharDiyaraPKDLCases_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS PID</th>\
+                        <td>' + (feature.properties['KAMIS PID'] !== null ? autolinker.link(feature.properties['KAMIS PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever</th>\
+                        <td>' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RaharDiyaraPKDLCases_5_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2019':
+                    return {
+                pane: 'pane_RaharDiyaraPKDLCases_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(98,133,246,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_RaharDiyaraPKDLCases_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(74,28,224,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RaharDiyaraPKDLCases_5');
+        map.getPane('pane_RaharDiyaraPKDLCases_5').style.zIndex = 405;
+        map.getPane('pane_RaharDiyaraPKDLCases_5').style['mix-blend-mode'] = 'normal';
+        var layer_RaharDiyaraPKDLCases_5 = new L.geoJson(json_RaharDiyaraPKDLCases_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RaharDiyaraPKDLCases_5',
+            layerName: 'layer_RaharDiyaraPKDLCases_5',
+            pane: 'pane_RaharDiyaraPKDLCases_5',
+            onEachFeature: pop_RaharDiyaraPKDLCases_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RaharDiyaraPKDLCases_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_RaharDiyaraPKDLCases_5);
+        map.addLayer(layer_RaharDiyaraPKDLCases_5);
+        function pop_RaharDiyaraVLCases_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS PID</th>\
+                        <td>' + (feature.properties['KAMIS PID'] !== null ? autolinker.link(feature.properties['KAMIS PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever</th>\
+                        <td>' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RaharDiyaraVLCases_6_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2014':
+                    return {
+                pane: 'pane_RaharDiyaraVLCases_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2015':
+                    return {
+                pane: 'pane_RaharDiyaraVLCases_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,221,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2017':
+                    return {
+                pane: 'pane_RaharDiyaraVLCases_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,183,81,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2018':
+                    return {
+                pane: 'pane_RaharDiyaraVLCases_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,141,60,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2019':
+                    return {
+                pane: 'pane_RaharDiyaraVLCases_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,86,41,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_RaharDiyaraVLCases_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,39,34,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RaharDiyaraVLCases_6');
+        map.getPane('pane_RaharDiyaraVLCases_6').style.zIndex = 406;
+        map.getPane('pane_RaharDiyaraVLCases_6').style['mix-blend-mode'] = 'normal';
+        var layer_RaharDiyaraVLCases_6 = new L.geoJson(json_RaharDiyaraVLCases_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RaharDiyaraVLCases_6',
+            layerName: 'layer_RaharDiyaraVLCases_6',
+            pane: 'pane_RaharDiyaraVLCases_6',
+            onEachFeature: pop_RaharDiyaraVLCases_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RaharDiyaraVLCases_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_RaharDiyaraVLCases_6);
+        map.addLayer(layer_RaharDiyaraVLCases_6);
+        function pop_Villages_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Villages_7_0() {
+            return {
+                pane: 'pane_Villages_7',
+                shape: 'triangle',
+                radius: 5.6,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Villages_7');
+        map.getPane('pane_Villages_7').style.zIndex = 407;
+        map.getPane('pane_Villages_7').style['mix-blend-mode'] = 'normal';
+        var layer_Villages_7 = new L.geoJson(json_Villages_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Villages_7',
+            layerName: 'layer_Villages_7',
+            pane: 'pane_Villages_7',
+            onEachFeature: pop_Villages_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Villages_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Villages_7);
+        map.addLayer(layer_Villages_7);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Villages_7.png" /> Villages': layer_Villages_7,'Rahar Diyara VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20205.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraVLCases_6,'Rahar Diyara PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_5_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_5_20201.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraPKDLCases_5,'Paharichak VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20205.png" /></td><td>2020</td></tr></table>': layer_PaharichakVLCases_4,'Paharichak PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_3_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_3_20201.png" /></td><td>2020</td></tr></table>': layer_PaharichakPKDLCases_3,'<img src="legend/BindTolaBoundary_2.png" /> Bind Tola Boundary': layer_BindTolaBoundary_2,'<img src="legend/BindTolaExtentPoints_1.png" /> Bind Tola Extent Points': layer_BindTolaExtentPoints_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_BindTolaExtentPoints_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Point'] !== null?String('<div style="color: #f1d70d; font-size: 9pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Point']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BindTolaExtentPoints_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Villages_7.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Village'] !== null?String('<div style="color: #f7fa11; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Village']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Villages_7'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_BindTolaExtentPoints_1,layer_Villages_7]);
+        map.on("zoomend", function(){
+            resetLabels([layer_BindTolaExtentPoints_1,layer_Villages_7]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_BindTolaExtentPoints_1,layer_Villages_7]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_BindTolaExtentPoints_1,layer_Villages_7]);
+        });
+        </script>
+    </body>
+</html>
