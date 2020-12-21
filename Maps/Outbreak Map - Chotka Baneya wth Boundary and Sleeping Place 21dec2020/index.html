@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+      <title>Outbreak Map - Chotka Baneya with Boundary and Sleeping Place 21dec2020</title>
+    </head>
+    <body>
+        <div id="heading"><h2>&nbsp;Chotka Baneya, Saran - KA Outbreak Map</h2></div>
+        <div id="map" style="height: 85%">
+        </div>
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/ChotkaBaneyaBoundary_2.js"></script>
+        <script src="data/VillageBoundaryPointsCaptured_3.js"></script>
+        <script src="data/LocationofbathancowshedusedforsleepingbyVLcases_4.js"></script>
+        <script src="data/ChotkaBaneyaVLCase_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        map.createPane('pane_GoogleSatellite_1');
+        map.getPane('pane_GoogleSatellite_1').style.zIndex = 401;
+        var layer_GoogleSatellite_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_1;
+        map.addLayer(layer_GoogleSatellite_1);
+        function pop_ChotkaBaneyaBoundary_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ChotkaBaneyaBoundary_2_0() {
+            return {
+                pane: 'pane_ChotkaBaneyaBoundary_2',
+                opacity: 1,
+                color: 'rgba(248,139,13,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_ChotkaBaneyaBoundary_2');
+        map.getPane('pane_ChotkaBaneyaBoundary_2').style.zIndex = 402;
+        map.getPane('pane_ChotkaBaneyaBoundary_2').style['mix-blend-mode'] = 'normal';
+        var layer_ChotkaBaneyaBoundary_2 = new L.geoJson(json_ChotkaBaneyaBoundary_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_ChotkaBaneyaBoundary_2',
+            layerName: 'layer_ChotkaBaneyaBoundary_2',
+            pane: 'pane_ChotkaBaneyaBoundary_2',
+            onEachFeature: pop_ChotkaBaneyaBoundary_2,
+            style: style_ChotkaBaneyaBoundary_2_0,
+        });
+        bounds_group.addLayer(layer_ChotkaBaneyaBoundary_2);
+        map.addLayer(layer_ChotkaBaneyaBoundary_2);
+        function pop_VillageBoundaryPointsCaptured_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">S.No.</th>\
+                        <td>' + (feature.properties['S.No.'] !== null ? autolinker.link(feature.properties['S.No.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat</th>\
+                        <td>' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng</th>\
+                        <td>' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Image</th>\
+                        <td>' + (feature.properties['Image'] !== null ? autolinker.link(feature.properties['Image'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Remarks</th>\
+                        <td>' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VillageBoundaryPointsCaptured_3_0() {
+            return {
+                pane: 'pane_VillageBoundaryPointsCaptured_3',
+                shape: 'square',
+                radius: 3.2,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VillageBoundaryPointsCaptured_3');
+        map.getPane('pane_VillageBoundaryPointsCaptured_3').style.zIndex = 403;
+        map.getPane('pane_VillageBoundaryPointsCaptured_3').style['mix-blend-mode'] = 'normal';
+        var layer_VillageBoundaryPointsCaptured_3 = new L.geoJson(json_VillageBoundaryPointsCaptured_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VillageBoundaryPointsCaptured_3',
+            layerName: 'layer_VillageBoundaryPointsCaptured_3',
+            pane: 'pane_VillageBoundaryPointsCaptured_3',
+            onEachFeature: pop_VillageBoundaryPointsCaptured_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_VillageBoundaryPointsCaptured_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_VillageBoundaryPointsCaptured_3);
+        map.addLayer(layer_VillageBoundaryPointsCaptured_3);
+        function pop_LocationofbathancowshedusedforsleepingbyVLcases_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KAMISID</th>\
+                        <td>' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat</th>\
+                        <td>' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng</th>\
+                        <td>' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LocationofbathancowshedusedforsleepingbyVLcases_4_0() {
+            return {
+                pane: 'pane_LocationofbathancowshedusedforsleepingbyVLcases_4',
+                shape: 'diamond',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,227,4,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LocationofbathancowshedusedforsleepingbyVLcases_4');
+        map.getPane('pane_LocationofbathancowshedusedforsleepingbyVLcases_4').style.zIndex = 404;
+        map.getPane('pane_LocationofbathancowshedusedforsleepingbyVLcases_4').style['mix-blend-mode'] = 'normal';
+        var layer_LocationofbathancowshedusedforsleepingbyVLcases_4 = new L.geoJson(json_LocationofbathancowshedusedforsleepingbyVLcases_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LocationofbathancowshedusedforsleepingbyVLcases_4',
+            layerName: 'layer_LocationofbathancowshedusedforsleepingbyVLcases_4',
+            pane: 'pane_LocationofbathancowshedusedforsleepingbyVLcases_4',
+            onEachFeature: pop_LocationofbathancowshedusedforsleepingbyVLcases_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_LocationofbathancowshedusedforsleepingbyVLcases_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LocationofbathancowshedusedforsleepingbyVLcases_4);
+        map.addLayer(layer_LocationofbathancowshedusedforsleepingbyVLcases_4);
+        function pop_ChotkaBaneyaVLCase_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KAMISID</th>\
+                        <td>' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever</th>\
+                        <td>' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sleeping Place</th>\
+                        <td>' + (feature.properties['Sleeping Place'] !== null ? autolinker.link(feature.properties['Sleeping Place'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SLP_LAT</th>\
+                        <td>' + (feature.properties['SLP_LAT'] !== null ? autolinker.link(feature.properties['SLP_LAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SLP_LNG</th>\
+                        <td>' + (feature.properties['SLP_LNG'] !== null ? autolinker.link(feature.properties['SLP_LNG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ChotkaBaneyaVLCase_5_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2015':
+                    return {
+                pane: 'pane_ChotkaBaneyaVLCase_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,198,23,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2017':
+                    return {
+                pane: 'pane_ChotkaBaneyaVLCase_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,119,23,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2018':
+                    return {
+                pane: 'pane_ChotkaBaneyaVLCase_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(50,105,224,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_ChotkaBaneyaVLCase_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,14,94,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ChotkaBaneyaVLCase_5');
+        map.getPane('pane_ChotkaBaneyaVLCase_5').style.zIndex = 405;
+        map.getPane('pane_ChotkaBaneyaVLCase_5').style['mix-blend-mode'] = 'normal';
+        var layer_ChotkaBaneyaVLCase_5 = new L.geoJson(json_ChotkaBaneyaVLCase_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ChotkaBaneyaVLCase_5',
+            layerName: 'layer_ChotkaBaneyaVLCase_5',
+            pane: 'pane_ChotkaBaneyaVLCase_5',
+            onEachFeature: pop_ChotkaBaneyaVLCase_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ChotkaBaneyaVLCase_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_ChotkaBaneyaVLCase_5);
+        map.addLayer(layer_ChotkaBaneyaVLCase_5);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Chotka Baneya VL Case<br /><table><tr><td style="text-align: center;"><img src="legend/ChotkaBaneyaVLCase_5_20150.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/ChotkaBaneyaVLCase_5_20171.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/ChotkaBaneyaVLCase_5_20182.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/ChotkaBaneyaVLCase_5_20203.png" /></td><td>2020</td></tr></table>': layer_ChotkaBaneyaVLCase_5,'<img src="legend/LocationofbathancowshedusedforsleepingbyVLcases_4.png" /> Location of bathan/cowshed used for sleeping by VL cases': layer_LocationofbathancowshedusedforsleepingbyVLcases_4,'<img src="legend/VillageBoundaryPointsCaptured_3.png" /> Village Boundary Points Captured': layer_VillageBoundaryPointsCaptured_3,'<img src="legend/ChotkaBaneyaBoundary_2.png" /> Chotka Baneya Boundary': layer_ChotkaBaneyaBoundary_2,"Google Satellite": layer_GoogleSatellite_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        setBounds();
+        resetLabels([layer_VillageBoundaryPointsCaptured_3,layer_LocationofbathancowshedusedforsleepingbyVLcases_4]);
+        map.on("zoomend", function(){
+            resetLabels([layer_VillageBoundaryPointsCaptured_3,layer_LocationofbathancowshedusedforsleepingbyVLcases_4]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_VillageBoundaryPointsCaptured_3,layer_LocationofbathancowshedusedforsleepingbyVLcases_4]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_VillageBoundaryPointsCaptured_3,layer_LocationofbathancowshedusedforsleepingbyVLcases_4]);
+        });
+        </script>
+    </body>
+</html>
