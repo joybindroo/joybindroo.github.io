@@ -16,15 +16,15 @@
             margin: 0;
         }
         </style>
-         <title>Thariya Bakiya, Forbesganj, Araria - KA Outbreak Map (2-Dec-2020)</title>
-        </head>
-        <body>
-            <div id="heading"><h2>&nbsp;Thariya Bakiya, Forbesganj, Araria - KA Outbreak Map</h2></div>
-            <div id="map" style="height: 85%">
-                </div>
+        <title>Outbreak Map - Thariya Bakiya, Forbesganj, Araria 2Feb2021</title>
+       
+    </head>
+    <body>
+        <div id="heading"><h2>&nbsp;Thariya Bakiya, Forbesganj, Araria - KA Outbreak Map</h2></div>
+        <div id="map" style="height: 85%">
+        </div>
         <script src="js/gis.js"></script>
         <script src="js/leaflet.js"></script>
-        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -32,13 +32,12 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/ThariyaBakiyaPKDLCases_1.js"></script>
-        <script src="data/ThariyaBakiyaVLCases_2.js"></script>
-        <script src="data/Village_3.js"></script>
+        <script src="data/PKDL_1.js"></script>
+        <script src="data/VL_2.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[26.163335102593898,87.3867495267923],[26.165668148657552,87.39092146680196]]);
+        }).fitBounds([[26.16273706059504,87.38414978199418],[26.166306544077205,87.39087974564285]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -58,7 +57,7 @@
         });
         layer_GoogleSatellite_0;
         map.addLayer(layer_GoogleSatellite_0);
-        function pop_ThariyaBakiyaPKDLCases_1(feature, layer) {
+        function pop_PKDL_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Block</th>\
@@ -104,9 +103,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_ThariyaBakiyaPKDLCases_1_0() {
-            return {
-                pane: 'pane_ThariyaBakiyaPKDLCases_1',
+        function style_PKDL_1_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2020':
+                    return {
+                pane: 'pane_PKDL_1',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -116,31 +117,33 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(59,11,233,1.0)',
+                fillColor: 'rgba(132,32,209,1.0)',
                 interactive: true,
             }
+                    break;
+            }
         }
-        map.createPane('pane_ThariyaBakiyaPKDLCases_1');
-        map.getPane('pane_ThariyaBakiyaPKDLCases_1').style.zIndex = 401;
-        map.getPane('pane_ThariyaBakiyaPKDLCases_1').style['mix-blend-mode'] = 'normal';
-        var layer_ThariyaBakiyaPKDLCases_1 = new L.geoJson(json_ThariyaBakiyaPKDLCases_1, {
+        map.createPane('pane_PKDL_1');
+        map.getPane('pane_PKDL_1').style.zIndex = 401;
+        map.getPane('pane_PKDL_1').style['mix-blend-mode'] = 'normal';
+        var layer_PKDL_1 = new L.geoJson(json_PKDL_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_ThariyaBakiyaPKDLCases_1',
-            layerName: 'layer_ThariyaBakiyaPKDLCases_1',
-            pane: 'pane_ThariyaBakiyaPKDLCases_1',
-            onEachFeature: pop_ThariyaBakiyaPKDLCases_1,
+            dataVar: 'json_PKDL_1',
+            layerName: 'layer_PKDL_1',
+            pane: 'pane_PKDL_1',
+            onEachFeature: pop_PKDL_1,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_ThariyaBakiyaPKDLCases_1_0(feature));
+                return L.circleMarker(latlng, style_PKDL_1_0(feature));
             },
         });
-        bounds_group.addLayer(layer_ThariyaBakiyaPKDLCases_1);
-        map.addLayer(layer_ThariyaBakiyaPKDLCases_1);
-        function pop_ThariyaBakiyaVLCases_2(feature, layer) {
+        bounds_group.addLayer(layer_PKDL_1);
+        map.addLayer(layer_PKDL_1);
+        function pop_VL_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Block</th>\
@@ -186,9 +189,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_ThariyaBakiyaVLCases_2_0() {
-            return {
-                pane: 'pane_ThariyaBakiyaVLCases_2',
+        function style_VL_2_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2020':
+                    return {
+                pane: 'pane_VL_2',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -198,109 +203,51 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(239,3,7,1.0)',
+                fillColor: 'rgba(254,235,23,1.0)',
                 interactive: true,
             }
-        }
-        map.createPane('pane_ThariyaBakiyaVLCases_2');
-        map.getPane('pane_ThariyaBakiyaVLCases_2').style.zIndex = 402;
-        map.getPane('pane_ThariyaBakiyaVLCases_2').style['mix-blend-mode'] = 'normal';
-        var layer_ThariyaBakiyaVLCases_2 = new L.geoJson(json_ThariyaBakiyaVLCases_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_ThariyaBakiyaVLCases_2',
-            layerName: 'layer_ThariyaBakiyaVLCases_2',
-            pane: 'pane_ThariyaBakiyaVLCases_2',
-            onEachFeature: pop_ThariyaBakiyaVLCases_2,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_ThariyaBakiyaVLCases_2_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_ThariyaBakiyaVLCases_2);
-        map.addLayer(layer_ThariyaBakiyaVLCases_2);
-        function pop_Village_3(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Village</th>\
-                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Village_3_0() {
-            return {
-                pane: 'pane_Village_3',
-                shape: 'triangle',
-                radius: 5.6,
+                    break;
+                case '2021':
+                    return {
+                pane: 'pane_VL_2',
+                radius: 4.0,
                 opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
+                color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0,
+                weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(0,0,0,1.0)',
+                fillColor: 'rgba(220,10,38,1.0)',
                 interactive: true,
             }
+                    break;
+            }
         }
-        map.createPane('pane_Village_3');
-        map.getPane('pane_Village_3').style.zIndex = 403;
-        map.getPane('pane_Village_3').style['mix-blend-mode'] = 'normal';
-        var layer_Village_3 = new L.geoJson(json_Village_3, {
+        map.createPane('pane_VL_2');
+        map.getPane('pane_VL_2').style.zIndex = 402;
+        map.getPane('pane_VL_2').style['mix-blend-mode'] = 'normal';
+        var layer_VL_2 = new L.geoJson(json_VL_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Village_3',
-            layerName: 'layer_Village_3',
-            pane: 'pane_Village_3',
-            onEachFeature: pop_Village_3,
+            dataVar: 'json_VL_2',
+            layerName: 'layer_VL_2',
+            pane: 'pane_VL_2',
+            onEachFeature: pop_VL_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_Village_3_0(feature));
+                return L.circleMarker(latlng, style_VL_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Village_3);
-        map.addLayer(layer_Village_3);
+        bounds_group.addLayer(layer_VL_2);
+        map.addLayer(layer_VL_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Village_3.png" /> Village': layer_Village_3,'<img src="legend/ThariyaBakiyaVLCases_2.png" /> Thariya Bakiya VL Cases': layer_ThariyaBakiyaVLCases_2,'<img src="legend/ThariyaBakiyaPKDLCases_1.png" /> Thariya Bakiya PKDL Cases': layer_ThariyaBakiyaPKDLCases_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'VL<br /><table><tr><td style="text-align: center;"><img src="legend/VL_2_20200.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VL_2_20211.png" /></td><td>2021</td></tr></table>': layer_VL_2,'PKDL<br /><table><tr><td style="text-align: center;"><img src="legend/PKDL_1_20200.png" /></td><td>2020</td></tr></table>': layer_PKDL_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
-        var i = 0;
-        layer_Village_3.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['Village'] !== null?String('<div style="color: #f7fa11; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Village']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Village_3'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        resetLabels([layer_Village_3]);
-        map.on("zoomend", function(){
-            resetLabels([layer_Village_3]);
-        });
-        map.on("layeradd", function(){
-            resetLabels([layer_Village_3]);
-        });
-        map.on("layerremove", function(){
-            resetLabels([layer_Village_3]);
-        });
         </script>
     </body>
 </html>
