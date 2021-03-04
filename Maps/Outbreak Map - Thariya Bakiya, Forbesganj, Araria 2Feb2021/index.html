@@ -32,6 +32,7 @@
         <div id="map" style="height: 85%">
         </div>
         <script src="js/gis.js"></script>
+        
         <script src="js/leaflet.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
@@ -41,9 +42,12 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/PKDL_1.js"></script>
-        <script src="data/VL_2.js"></script>
-        <script src="data/TolaBoundaries_3.js"></script>
+        <script src="data/TolaBoundaries_1.js"></script>
+        <script src="data/C3200mradius_2.js"></script>
+        <script src="data/C2100mradius_3.js"></script>
+        <script src="data/C150mradius_4.js"></script>
+        <script src="data/PKDL_5.js"></script>
+        <script src="data/VL_6.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -82,7 +86,173 @@
         });
         layer_GoogleSatellite_0;
         map.addLayer(layer_GoogleSatellite_0);
-        function pop_PKDL_1(feature, layer) {
+        function pop_TolaBoundaries_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tola</th>\
+                        <td>' + (feature.properties['Tola'] !== null ? autolinker.link(feature.properties['Tola'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TolaBoundaries_1_0() {
+            return {
+                pane: 'pane_TolaBoundaries_1',
+                opacity: 1,
+                color: 'rgba(247,252,97,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.0392156862745098)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_TolaBoundaries_1');
+        map.getPane('pane_TolaBoundaries_1').style.zIndex = 401;
+        map.getPane('pane_TolaBoundaries_1').style['mix-blend-mode'] = 'normal';
+        var layer_TolaBoundaries_1 = new L.geoJson(json_TolaBoundaries_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_TolaBoundaries_1',
+            layerName: 'layer_TolaBoundaries_1',
+            pane: 'pane_TolaBoundaries_1',
+            onEachFeature: pop_TolaBoundaries_1,
+            style: style_TolaBoundaries_1_0,
+        });
+        bounds_group.addLayer(layer_TolaBoundaries_1);
+        map.addLayer(layer_TolaBoundaries_1);
+        function pop_C3200mradius_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KAMIS_PID'] !== null ? autolinker.link(feature.properties['KAMIS_PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_C3200mradius_2_0() {
+            return {
+                pane: 'pane_C3200mradius_2',
+                opacity: 1,
+                color: 'rgba(50,105,224,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,11,11,0.00784313725490196)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_C3200mradius_2');
+        map.getPane('pane_C3200mradius_2').style.zIndex = 402;
+        map.getPane('pane_C3200mradius_2').style['mix-blend-mode'] = 'normal';
+        var layer_C3200mradius_2 = new L.geoJson(json_C3200mradius_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_C3200mradius_2',
+            layerName: 'layer_C3200mradius_2',
+            pane: 'pane_C3200mradius_2',
+            onEachFeature: pop_C3200mradius_2,
+            style: style_C3200mradius_2_0,
+        });
+        bounds_group.addLayer(layer_C3200mradius_2);
+        map.addLayer(layer_C3200mradius_2);
+        function pop_C2100mradius_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KAMIS_PID'] !== null ? autolinker.link(feature.properties['KAMIS_PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_C2100mradius_3_0() {
+            return {
+                pane: 'pane_C2100mradius_3',
+                opacity: 1,
+                color: 'rgba(255,158,23,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,119,10,0.00784313725490196)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_C2100mradius_3');
+        map.getPane('pane_C2100mradius_3').style.zIndex = 403;
+        map.getPane('pane_C2100mradius_3').style['mix-blend-mode'] = 'normal';
+        var layer_C2100mradius_3 = new L.geoJson(json_C2100mradius_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_C2100mradius_3',
+            layerName: 'layer_C2100mradius_3',
+            pane: 'pane_C2100mradius_3',
+            onEachFeature: pop_C2100mradius_3,
+            style: style_C2100mradius_3_0,
+        });
+        bounds_group.addLayer(layer_C2100mradius_3);
+        map.addLayer(layer_C2100mradius_3);
+        function pop_C150mradius_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KAMIS_PID'] !== null ? autolinker.link(feature.properties['KAMIS_PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_C150mradius_4_0() {
+            return {
+                pane: 'pane_C150mradius_4',
+                opacity: 1,
+                color: 'rgba(244,11,11,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,11,11,0.00784313725490196)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_C150mradius_4');
+        map.getPane('pane_C150mradius_4').style.zIndex = 404;
+        map.getPane('pane_C150mradius_4').style['mix-blend-mode'] = 'normal';
+        var layer_C150mradius_4 = new L.geoJson(json_C150mradius_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_C150mradius_4',
+            layerName: 'layer_C150mradius_4',
+            pane: 'pane_C150mradius_4',
+            onEachFeature: pop_C150mradius_4,
+            style: style_C150mradius_4_0,
+        });
+        bounds_group.addLayer(layer_C150mradius_4);
+        map.addLayer(layer_C150mradius_4);
+        function pop_PKDL_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Block</th>\
@@ -128,11 +298,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_PKDL_1_0(feature) {
+        function style_PKDL_5_0(feature) {
             switch(String(feature.properties['Year of diagnosis'])) {
                 case '2020':
                     return {
-                pane: 'pane_PKDL_1',
+                pane: 'pane_PKDL_5',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -148,27 +318,27 @@
                     break;
             }
         }
-        map.createPane('pane_PKDL_1');
-        map.getPane('pane_PKDL_1').style.zIndex = 401;
-        map.getPane('pane_PKDL_1').style['mix-blend-mode'] = 'normal';
-        var layer_PKDL_1 = new L.geoJson(json_PKDL_1, {
+        map.createPane('pane_PKDL_5');
+        map.getPane('pane_PKDL_5').style.zIndex = 405;
+        map.getPane('pane_PKDL_5').style['mix-blend-mode'] = 'normal';
+        var layer_PKDL_5 = new L.geoJson(json_PKDL_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_PKDL_1',
-            layerName: 'layer_PKDL_1',
-            pane: 'pane_PKDL_1',
-            onEachFeature: pop_PKDL_1,
+            dataVar: 'json_PKDL_5',
+            layerName: 'layer_PKDL_5',
+            pane: 'pane_PKDL_5',
+            onEachFeature: pop_PKDL_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_PKDL_1_0(feature));
+                return L.circleMarker(latlng, style_PKDL_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_PKDL_1);
-        map.addLayer(layer_PKDL_1);
-        function pop_VL_2(feature, layer) {
+        bounds_group.addLayer(layer_PKDL_5);
+        map.addLayer(layer_PKDL_5);
+        function pop_VL_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Block</th>\
@@ -214,11 +384,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_VL_2_0(feature) {
+        function style_VL_6_0(feature) {
             switch(String(feature.properties['Year of diagnosis'])) {
                 case '2020':
                     return {
-                pane: 'pane_VL_2',
+                pane: 'pane_VL_6',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -234,7 +404,7 @@
                     break;
                 case '2021':
                     return {
-                pane: 'pane_VL_2',
+                pane: 'pane_VL_6',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -250,94 +420,51 @@
                     break;
             }
         }
-        map.createPane('pane_VL_2');
-        map.getPane('pane_VL_2').style.zIndex = 402;
-        map.getPane('pane_VL_2').style['mix-blend-mode'] = 'normal';
-        var layer_VL_2 = new L.geoJson(json_VL_2, {
+        map.createPane('pane_VL_6');
+        map.getPane('pane_VL_6').style.zIndex = 406;
+        map.getPane('pane_VL_6').style['mix-blend-mode'] = 'normal';
+        var layer_VL_6 = new L.geoJson(json_VL_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VL_2',
-            layerName: 'layer_VL_2',
-            pane: 'pane_VL_2',
-            onEachFeature: pop_VL_2,
+            dataVar: 'json_VL_6',
+            layerName: 'layer_VL_6',
+            pane: 'pane_VL_6',
+            onEachFeature: pop_VL_6,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_VL_2_0(feature));
+                return L.circleMarker(latlng, style_VL_6_0(feature));
             },
         });
-        bounds_group.addLayer(layer_VL_2);
-        map.addLayer(layer_VL_2);
-        function pop_TolaBoundaries_3(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">id</th>\
-                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Tola</th>\
-                        <td>' + (feature.properties['Tola'] !== null ? autolinker.link(feature.properties['Tola'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_TolaBoundaries_3_0() {
-            return {
-                pane: 'pane_TolaBoundaries_3',
-                opacity: 1,
-                color: 'rgba(247,252,97,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(164,113,88,0.0392156862745098)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_TolaBoundaries_3');
-        map.getPane('pane_TolaBoundaries_3').style.zIndex = 403;
-        map.getPane('pane_TolaBoundaries_3').style['mix-blend-mode'] = 'normal';
-        var layer_TolaBoundaries_3 = new L.geoJson(json_TolaBoundaries_3, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_TolaBoundaries_3',
-            layerName: 'layer_TolaBoundaries_3',
-            pane: 'pane_TolaBoundaries_3',
-            onEachFeature: pop_TolaBoundaries_3,
-            style: style_TolaBoundaries_3_0,
-        });
-        bounds_group.addLayer(layer_TolaBoundaries_3);
-        map.addLayer(layer_TolaBoundaries_3);
+        bounds_group.addLayer(layer_VL_6);
+        map.addLayer(layer_VL_6);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/TolaBoundaries_3.png" /> Tola Boundaries': layer_TolaBoundaries_3,'VL<br /><table><tr><td style="text-align: center;"><img src="legend/VL_2_20200.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VL_2_20211.png" /></td><td>2021</td></tr></table>': layer_VL_2,'PKDL<br /><table><tr><td style="text-align: center;"><img src="legend/PKDL_1_20200.png" /></td><td>2020</td></tr></table>': layer_PKDL_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'VL<br /><table><tr><td style="text-align: center;"><img src="legend/VL_6_20200.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VL_6_20211.png" /></td><td>2021</td></tr></table>': layer_VL_6,'PKDL<br /><table><tr><td style="text-align: center;"><img src="legend/PKDL_5_20200.png" /></td><td>2020</td></tr></table>': layer_PKDL_5,'<img src="legend/C150mradius_4.png" /> C1(~50m radius)': layer_C150mradius_4,'<img src="legend/C2100mradius_3.png" /> C2(~100m radius)': layer_C2100mradius_3,'<img src="legend/C3200mradius_2.png" /> C3(~200m radius)': layer_C3200mradius_2,'<img src="legend/TolaBoundaries_1.png" /> Tola Boundaries': layer_TolaBoundaries_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
-        layer_TolaBoundaries_3.eachLayer(function(layer) {
+        layer_TolaBoundaries_1.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Tola'] !== null?String('<div style="color: #f7fc61; font-size: 8pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Tola']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TolaBoundaries_3'});
+            layer.bindTooltip((layer.feature.properties['Tola'] !== null?String('<div style="color: #f7fc61; font-size: 8pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Tola']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TolaBoundaries_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_TolaBoundaries_3]);
+        resetLabels([layer_TolaBoundaries_1]);
         map.on("zoomend", function(){
-            resetLabels([layer_TolaBoundaries_3]);
+            resetLabels([layer_TolaBoundaries_1]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_TolaBoundaries_3]);
+            resetLabels([layer_TolaBoundaries_1]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_TolaBoundaries_3]);
+            resetLabels([layer_TolaBoundaries_1]);
         });
         </script>
     </body>
