@@ -39,6 +39,7 @@
         <script src="data/RaharDiyaraPKDLCases_5.js"></script>
         <script src="data/RaharDiyaraVLCases_6.js"></script>
         <script src="data/Villages_7.js"></script>
+        <script src="data/SandFlyLightTraps_8.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -729,8 +730,50 @@
         });
         bounds_group.addLayer(layer_Villages_7);
         map.addLayer(layer_Villages_7);
+        function pop_SandFlyLightTraps_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Trap</th>\
+                        <td>' + (feature.properties['Trap'] !== null ? autolinker.link(feature.properties['Trap'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SandFlyLightTraps_8_0() {
+            return {
+                pane: 'pane_SandFlyLightTraps_8',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/SandFly_SVG.svg',
+            iconSize: [38.0, 38.0]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SandFlyLightTraps_8');
+        map.getPane('pane_SandFlyLightTraps_8').style.zIndex = 408;
+        map.getPane('pane_SandFlyLightTraps_8').style['mix-blend-mode'] = 'normal';
+        var layer_SandFlyLightTraps_8 = new L.geoJson(json_SandFlyLightTraps_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SandFlyLightTraps_8',
+            layerName: 'layer_SandFlyLightTraps_8',
+            pane: 'pane_SandFlyLightTraps_8',
+            onEachFeature: pop_SandFlyLightTraps_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_SandFlyLightTraps_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SandFlyLightTraps_8);
+        map.addLayer(layer_SandFlyLightTraps_8);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Villages_7.png" /> Villages': layer_Villages_7,'Rahar Diyara VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20205.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraVLCases_6,'Rahar Diyara PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_5_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_5_20201.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraPKDLCases_5,'Paharichak VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20205.png" /></td><td>2020</td></tr></table>': layer_PaharichakVLCases_4,'Paharichak PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_3_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_3_20201.png" /></td><td>2020</td></tr></table>': layer_PaharichakPKDLCases_3,'<img src="legend/BindTolaBoundary_2.png" /> Bind Tola Boundary': layer_BindTolaBoundary_2,'<img src="legend/BindTolaExtentPoints_1.png" /> Bind Tola Extent Points': layer_BindTolaExtentPoints_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SandFlyLightTraps_8.png" /> Sand Fly Light Traps': layer_SandFlyLightTraps_8,'<img src="legend/Villages_7.png" /> Villages': layer_Villages_7,'Rahar Diyara VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_6_20205.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraVLCases_6,'Rahar Diyara PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_5_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_5_20201.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraPKDLCases_5,'Paharichak VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_4_20205.png" /></td><td>2020</td></tr></table>': layer_PaharichakVLCases_4,'Paharichak PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_3_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_3_20201.png" /></td><td>2020</td></tr></table>': layer_PaharichakPKDLCases_3,'<img src="legend/BindTolaBoundary_2.png" /> Bind Tola Boundary': layer_BindTolaBoundary_2,'<img src="legend/BindTolaExtentPoints_1.png" /> Bind Tola Extent Points': layer_BindTolaExtentPoints_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
         layer_BindTolaExtentPoints_1.eachLayer(function(layer) {
