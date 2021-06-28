@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+      <title>Nawada, Ishuapur Saran KA Outbreak Map - 28Jun2021</title>
+    </head>
+    <body>
+        <div id="heading"><h2>&nbspNawada, Ishuapur Saran - KA Outbreak Map</h2></div>
+        <div id="map" style="height: 85%">
+        </div>
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/NawadaVLCases_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[26.003641445286682,84.80325857840992],[26.020578106819684,84.83642620724538]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org" target="_blank">feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        map.createPane('pane_GoogleSatellite_1');
+        map.getPane('pane_GoogleSatellite_1').style.zIndex = 401;
+        var layer_GoogleSatellite_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_1',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_1;
+        map.addLayer(layer_GoogleSatellite_1);
+        function pop_NawadaVLCases_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">KAMIS PID</th>\
+                        <td>' + (feature.properties['KAMIS PID'] !== null ? autolinker.link(feature.properties['KAMIS PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever</th>\
+                        <td>' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NawadaVLCases_2_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
+                case '2013':
+                    return {
+                pane: 'pane_NawadaVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,238,16,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2016':
+                    return {
+                pane: 'pane_NawadaVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2017':
+                    return {
+                pane: 'pane_NawadaVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(50,105,224,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2018':
+                    return {
+                pane: 'pane_NawadaVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,121,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2021':
+                    return {
+                pane: 'pane_NawadaVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,10,38,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_NawadaVLCases_2');
+        map.getPane('pane_NawadaVLCases_2').style.zIndex = 402;
+        map.getPane('pane_NawadaVLCases_2').style['mix-blend-mode'] = 'normal';
+        var layer_NawadaVLCases_2 = new L.geoJson(json_NawadaVLCases_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NawadaVLCases_2',
+            layerName: 'layer_NawadaVLCases_2',
+            pane: 'pane_NawadaVLCases_2',
+            onEachFeature: pop_NawadaVLCases_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_NawadaVLCases_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_NawadaVLCases_2);
+        map.addLayer(layer_NawadaVLCases_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Nawada VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_2_20130.png" /></td><td>2013</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_2_20161.png" /></td><td>2016</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_2_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_2_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_2_20214.png" /></td><td>2021</td></tr></table>': layer_NawadaVLCases_2,"Google Satellite": layer_GoogleSatellite_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
