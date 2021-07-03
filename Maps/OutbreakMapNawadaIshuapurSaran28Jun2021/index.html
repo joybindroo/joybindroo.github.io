@@ -34,11 +34,12 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/TolaBoundaries_2.js"></script>
-        <script src="data/NawadaVLCases_3.js"></script>
+        <script src="data/LightTraps_3.js"></script>
+        <script src="data/NawadaVLCases_4.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[26.00735189341841,84.81166536125842],[26.018206046919275,84.83288457295508]]);
+        }).fitBounds([[26.007308797316572,84.81112439393132],[26.018453071415873,84.83291077379963]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org" target="_blank">feedback</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -154,7 +155,57 @@
         });
         bounds_group.addLayer(layer_TolaBoundaries_2);
         map.addLayer(layer_TolaBoundaries_2);
-        function pop_NawadaVLCases_3(feature, layer) {
+        function pop_LightTraps_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat</th>\
+                        <td>' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng</th>\
+                        <td>' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LightTraps_3_0() {
+            return {
+                pane: 'pane_LightTraps_3',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/SandFly_SVG.svg',
+            iconSize: [36.47999999999998, 36.47999999999998]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LightTraps_3');
+        map.getPane('pane_LightTraps_3').style.zIndex = 403;
+        map.getPane('pane_LightTraps_3').style['mix-blend-mode'] = 'normal';
+        var layer_LightTraps_3 = new L.geoJson(json_LightTraps_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LightTraps_3',
+            layerName: 'layer_LightTraps_3',
+            pane: 'pane_LightTraps_3',
+            onEachFeature: pop_LightTraps_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_LightTraps_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_LightTraps_3);
+        map.addLayer(layer_LightTraps_3);
+        function pop_NawadaVLCases_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Block</th>\
@@ -196,11 +247,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_NawadaVLCases_3_0(feature) {
+        function style_NawadaVLCases_4_0(feature) {
             switch(String(feature.properties['Year of diagnosis'])) {
                 case '2013':
                     return {
-                pane: 'pane_NawadaVLCases_3',
+                pane: 'pane_NawadaVLCases_4',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -216,7 +267,7 @@
                     break;
                 case '2016':
                     return {
-                pane: 'pane_NawadaVLCases_3',
+                pane: 'pane_NawadaVLCases_4',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -232,7 +283,7 @@
                     break;
                 case '2017':
                     return {
-                pane: 'pane_NawadaVLCases_3',
+                pane: 'pane_NawadaVLCases_4',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -248,7 +299,7 @@
                     break;
                 case '2018':
                     return {
-                pane: 'pane_NawadaVLCases_3',
+                pane: 'pane_NawadaVLCases_4',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -264,7 +315,7 @@
                     break;
                 case '2021':
                     return {
-                pane: 'pane_NawadaVLCases_3',
+                pane: 'pane_NawadaVLCases_4',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -280,28 +331,28 @@
                     break;
             }
         }
-        map.createPane('pane_NawadaVLCases_3');
-        map.getPane('pane_NawadaVLCases_3').style.zIndex = 403;
-        map.getPane('pane_NawadaVLCases_3').style['mix-blend-mode'] = 'normal';
-        var layer_NawadaVLCases_3 = new L.geoJson(json_NawadaVLCases_3, {
+        map.createPane('pane_NawadaVLCases_4');
+        map.getPane('pane_NawadaVLCases_4').style.zIndex = 404;
+        map.getPane('pane_NawadaVLCases_4').style['mix-blend-mode'] = 'normal';
+        var layer_NawadaVLCases_4 = new L.geoJson(json_NawadaVLCases_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_NawadaVLCases_3',
-            layerName: 'layer_NawadaVLCases_3',
-            pane: 'pane_NawadaVLCases_3',
-            onEachFeature: pop_NawadaVLCases_3,
+            dataVar: 'json_NawadaVLCases_4',
+            layerName: 'layer_NawadaVLCases_4',
+            pane: 'pane_NawadaVLCases_4',
+            onEachFeature: pop_NawadaVLCases_4,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_NawadaVLCases_3_0(feature));
+                return L.circleMarker(latlng, style_NawadaVLCases_4_0(feature));
             },
         });
-        bounds_group.addLayer(layer_NawadaVLCases_3);
-        map.addLayer(layer_NawadaVLCases_3);
+        bounds_group.addLayer(layer_NawadaVLCases_4);
+        map.addLayer(layer_NawadaVLCases_4);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Nawada VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_3_20130.png" /></td><td>2013</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_3_20161.png" /></td><td>2016</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_3_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_3_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_3_20214.png" /></td><td>2021</td></tr></table>': layer_NawadaVLCases_3,'Tola Boundaries<br /><table><tr><td style="text-align: center;"><img src="legend/TolaBoundaries_2_KushwahaTola0.png" /></td><td>Kushwaha Tola</td></tr><tr><td style="text-align: center;"><img src="legend/TolaBoundaries_2_RajputTola1.png" /></td><td>Rajput Tola</td></tr><tr><td style="text-align: center;"><img src="legend/TolaBoundaries_2_YadavTola2.png" /></td><td>Yadav Tola</td></tr></table>': layer_TolaBoundaries_2,"Google Satellite": layer_GoogleSatellite_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'Nawada VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_4_20130.png" /></td><td>2013</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_4_20161.png" /></td><td>2016</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_4_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_4_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/NawadaVLCases_4_20214.png" /></td><td>2021</td></tr></table>': layer_NawadaVLCases_4,'<img src="legend/LightTraps_3.png" /> LightTraps': layer_LightTraps_3,'Tola Boundaries<br /><table><tr><td style="text-align: center;"><img src="legend/TolaBoundaries_2_KushwahaTola0.png" /></td><td>Kushwaha Tola</td></tr><tr><td style="text-align: center;"><img src="legend/TolaBoundaries_2_RajputTola1.png" /></td><td>Rajput Tola</td></tr><tr><td style="text-align: center;"><img src="legend/TolaBoundaries_2_YadavTola2.png" /></td><td>Yadav Tola</td></tr></table>': layer_TolaBoundaries_2,"Google Satellite": layer_GoogleSatellite_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
