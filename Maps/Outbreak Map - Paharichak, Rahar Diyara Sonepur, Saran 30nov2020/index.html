@@ -40,19 +40,17 @@
         <script src="data/RaharDiyaraPKDLCases_6.js"></script>
         <script src="data/RaharDiyaraVLCases_7.js"></script>
         <script src="data/Villages_8.js"></script>
-        <script src="data/SandFlyLightTraps_9.js"></script>
+        <script src="data/AreaaroundLightTraps5Ringsappx10mtoappx50m_9.js"></script>
+        <script src="data/SandFlyLightTraps_10.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        })
+        }).fitBounds([[25.684577315160226,85.15699576641344],[25.69441225744385,85.1760338925354]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
-            }
         }
         map.createPane('pane_GoogleSatellite_0');
         map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
@@ -772,7 +770,51 @@
         });
         bounds_group.addLayer(layer_Villages_8);
         map.addLayer(layer_Villages_8);
-        function pop_SandFlyLightTraps_9(feature, layer) {
+        function pop_AreaaroundLightTraps5Ringsappx10mtoappx50m_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Trap'] !== null ? autolinker.link(feature.properties['Trap'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ringId'] !== null ? autolinker.link(feature.properties['ringId'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['distance'] !== null ? autolinker.link(feature.properties['distance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AreaaroundLightTraps5Ringsappx10mtoappx50m_9_0() {
+            return {
+                pane: 'pane_AreaaroundLightTraps5Ringsappx10mtoappx50m_9',
+                opacity: 1,
+                color: 'rgba(242,24,206,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,207,80,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreaaroundLightTraps5Ringsappx10mtoappx50m_9');
+        map.getPane('pane_AreaaroundLightTraps5Ringsappx10mtoappx50m_9').style.zIndex = 409;
+        map.getPane('pane_AreaaroundLightTraps5Ringsappx10mtoappx50m_9').style['mix-blend-mode'] = 'normal';
+        var layer_AreaaroundLightTraps5Ringsappx10mtoappx50m_9 = new L.geoJson(json_AreaaroundLightTraps5Ringsappx10mtoappx50m_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreaaroundLightTraps5Ringsappx10mtoappx50m_9',
+            layerName: 'layer_AreaaroundLightTraps5Ringsappx10mtoappx50m_9',
+            pane: 'pane_AreaaroundLightTraps5Ringsappx10mtoappx50m_9',
+            onEachFeature: pop_AreaaroundLightTraps5Ringsappx10mtoappx50m_9,
+            style: style_AreaaroundLightTraps5Ringsappx10mtoappx50m_9_0,
+        });
+        bounds_group.addLayer(layer_AreaaroundLightTraps5Ringsappx10mtoappx50m_9);
+        map.addLayer(layer_AreaaroundLightTraps5Ringsappx10mtoappx50m_9);
+        function pop_SandFlyLightTraps_10(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Trap</th>\
@@ -782,9 +824,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_SandFlyLightTraps_9_0() {
+        function style_SandFlyLightTraps_10_0() {
             return {
-                pane: 'pane_SandFlyLightTraps_9',
+                pane: 'pane_SandFlyLightTraps_10',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
@@ -794,28 +836,28 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_SandFlyLightTraps_9');
-        map.getPane('pane_SandFlyLightTraps_9').style.zIndex = 409;
-        map.getPane('pane_SandFlyLightTraps_9').style['mix-blend-mode'] = 'normal';
-        var layer_SandFlyLightTraps_9 = new L.geoJson(json_SandFlyLightTraps_9, {
+        map.createPane('pane_SandFlyLightTraps_10');
+        map.getPane('pane_SandFlyLightTraps_10').style.zIndex = 410;
+        map.getPane('pane_SandFlyLightTraps_10').style['mix-blend-mode'] = 'normal';
+        var layer_SandFlyLightTraps_10 = new L.geoJson(json_SandFlyLightTraps_10, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_SandFlyLightTraps_9',
-            layerName: 'layer_SandFlyLightTraps_9',
-            pane: 'pane_SandFlyLightTraps_9',
-            onEachFeature: pop_SandFlyLightTraps_9,
+            dataVar: 'json_SandFlyLightTraps_10',
+            layerName: 'layer_SandFlyLightTraps_10',
+            pane: 'pane_SandFlyLightTraps_10',
+            onEachFeature: pop_SandFlyLightTraps_10,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_SandFlyLightTraps_9_0(feature));
+                return L.marker(latlng, style_SandFlyLightTraps_10_0(feature));
             },
         });
-        bounds_group.addLayer(layer_SandFlyLightTraps_9);
-        map.addLayer(layer_SandFlyLightTraps_9);
+        bounds_group.addLayer(layer_SandFlyLightTraps_10);
+        map.addLayer(layer_SandFlyLightTraps_10);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/SandFlyLightTraps_9.png" /> Sand Fly Light Traps': layer_SandFlyLightTraps_9,'<img src="legend/Villages_8.png" /> Villages': layer_Villages_8,'Rahar Diyara VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20205.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraVLCases_7,'Rahar Diyara PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_6_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_6_20201.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraPKDLCases_6,'Paharichak VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20205.png" /></td><td>2020</td></tr></table>': layer_PaharichakVLCases_5,'Paharichak PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_4_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_4_20201.png" /></td><td>2020</td></tr></table>': layer_PaharichakPKDLCases_4,'<img src="legend/ProposedActivityBoundaries_3.png" /> Proposed Activity Boundaries': layer_ProposedActivityBoundaries_3,'<img src="legend/BindTolaBoundary_2.png" /> Bind Tola Boundary': layer_BindTolaBoundary_2,'<img src="legend/BindTolaExtentPoints_1.png" /> Bind Tola Extent Points': layer_BindTolaExtentPoints_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SandFlyLightTraps_10.png" /> Sand Fly Light Traps': layer_SandFlyLightTraps_10,'<img src="legend/AreaaroundLightTraps5Ringsappx10mtoappx50m_9.png" /> Area around Light Traps (5Rings - appx 10m to appx 50m)': layer_AreaaroundLightTraps5Ringsappx10mtoappx50m_9,'<img src="legend/Villages_8.png" /> Villages': layer_Villages_8,'Rahar Diyara VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraVLCases_7_20205.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraVLCases_7,'Rahar Diyara PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_6_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/RaharDiyaraPKDLCases_6_20201.png" /></td><td>2020</td></tr></table>': layer_RaharDiyaraPKDLCases_6,'Paharichak VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20140.png" /></td><td>2014</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20151.png" /></td><td>2015</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20183.png" /></td><td>2018</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20194.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakVLCases_5_20205.png" /></td><td>2020</td></tr></table>': layer_PaharichakVLCases_5,'Paharichak PKDL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_4_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PaharichakPKDLCases_4_20201.png" /></td><td>2020</td></tr></table>': layer_PaharichakPKDLCases_4,'<img src="legend/ProposedActivityBoundaries_3.png" /> Proposed Activity Boundaries': layer_ProposedActivityBoundaries_3,'<img src="legend/BindTolaBoundary_2.png" /> Bind Tola Boundary': layer_BindTolaBoundary_2,'<img src="legend/BindTolaExtentPoints_1.png" /> Bind Tola Extent Points': layer_BindTolaExtentPoints_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
         layer_BindTolaExtentPoints_1.eachLayer(function(layer) {
