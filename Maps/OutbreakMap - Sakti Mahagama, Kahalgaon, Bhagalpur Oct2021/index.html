@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>OutbreakMap - Sakti Mahagama, Kahalgaon, Bhagalpur Oct2021</title>
+    </head>
+    <body>
+	<h1>&nbsp;&nbsp;OutbreakMap - Sakti Mahagama, Kahalgaon, Bhagalpur Oct2021</h2> 
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/VLCases2021_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[25.174824322606536,87.28509759639684],[25.198051956810257,87.31874955060633]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_VLCases2021_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Sl No</th>\
+                        <td>' + (feature.properties['Sl No'] !== null ? autolinker.link(feature.properties['Sl No'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">HSC</th>\
+                        <td>' + (feature.properties['HSC'] !== null ? autolinker.link(feature.properties['HSC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kamis ID</th>\
+                        <td>' + (feature.properties['Kamis ID'] !== null ? autolinker.link(feature.properties['Kamis ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Age</th>\
+                        <td>' + (feature.properties['Age'] !== null ? autolinker.link(feature.properties['Age'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Case Type</th>\
+                        <td>' + (feature.properties['Case Type'] !== null ? autolinker.link(feature.properties['Case Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Diagnosed On</th>\
+                        <td>' + (feature.properties['Diagnosed On'] !== null ? autolinker.link(feature.properties['Diagnosed On'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LAT.</th>\
+                        <td>' + (feature.properties['LAT.'] !== null ? autolinker.link(feature.properties['LAT.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LONG.</th>\
+                        <td>' + (feature.properties['LONG.'] !== null ? autolinker.link(feature.properties['LONG.'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Assesment</th>\
+                        <td>' + (feature.properties['Assesment'] !== null ? autolinker.link(feature.properties['Assesment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date of Death</th>\
+                        <td>' + (feature.properties['Date of Death'] !== null ? autolinker.link(feature.properties['Date of Death'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VLCases2021_1_0() {
+            return {
+                pane: 'pane_VLCases2021_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,39,28,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VLCases2021_1');
+        map.getPane('pane_VLCases2021_1').style.zIndex = 401;
+        map.getPane('pane_VLCases2021_1').style['mix-blend-mode'] = 'normal';
+        var layer_VLCases2021_1 = new L.geoJson(json_VLCases2021_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VLCases2021_1',
+            layerName: 'layer_VLCases2021_1',
+            pane: 'pane_VLCases2021_1',
+            onEachFeature: pop_VLCases2021_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_VLCases2021_1_0(feature));
+            },
+        });
+        var cluster_VLCases2021_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_VLCases2021_1.addLayer(layer_VLCases2021_1);
+
+        bounds_group.addLayer(layer_VLCases2021_1);
+        cluster_VLCases2021_1.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/VLCases2021_1.png" /> VL Cases 2021': cluster_VLCases2021_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>

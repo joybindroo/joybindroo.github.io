@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Outbreak Map - Balasath Sitamarhi , Mayurbhanga Dumka 24jun2020</title>
+    </head>
+    <body>
+        <div id="heading">
+            <h2>&nbsp;Outbreak Map - Balasath Sitamarhi , Mayurbhanga Dumka</h2>
+        </div>
+        <div align='right'>
+            <a href="./map_wo_clustering/index.html">Click here to Turn Off Clustering</a>
+        </div>
+        <div id="map" style="height: 85%;">
+        </div>
+        
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/BiharDistricts_1.js"></script>
+        <script src="data/JharkhandDistricts_2.js"></script>
+        <script src="data/Mayurbhanga_3.js"></script>
+        <script src="data/Balasath_4.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleImagery_0');
+        map.getPane('pane_GoogleImagery_0').style.zIndex = 400;
+        var layer_GoogleImagery_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleImagery_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleImagery_0;
+        map.addLayer(layer_GoogleImagery_0);
+        function pop_BiharDistricts_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AutoID'] !== null ? autolinker.link(feature.properties['AutoID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DISTRICT'] !== null ? autolinker.link(feature.properties['DISTRICT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE'] !== null ? autolinker.link(feature.properties['STATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BiharDistricts_1_0() {
+            return {
+                pane: 'pane_BiharDistricts_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_BiharDistricts_1');
+        map.getPane('pane_BiharDistricts_1').style.zIndex = 401;
+        map.getPane('pane_BiharDistricts_1').style['mix-blend-mode'] = 'normal';
+        var layer_BiharDistricts_1 = new L.geoJson(json_BiharDistricts_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_BiharDistricts_1',
+            layerName: 'layer_BiharDistricts_1',
+            pane: 'pane_BiharDistricts_1',
+            onEachFeature: pop_BiharDistricts_1,
+            style: style_BiharDistricts_1_0,
+        });
+        bounds_group.addLayer(layer_BiharDistricts_1);
+        map.addLayer(layer_BiharDistricts_1);
+        function pop_JharkhandDistricts_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_0'] !== null ? autolinker.link(feature.properties['ID_0'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ISO'] !== null ? autolinker.link(feature.properties['ISO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_0'] !== null ? autolinker.link(feature.properties['NAME_0'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_1'] !== null ? autolinker.link(feature.properties['ID_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_1'] !== null ? autolinker.link(feature.properties['NAME_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_2'] !== null ? autolinker.link(feature.properties['ID_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_2'] !== null ? autolinker.link(feature.properties['NAME_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_3'] !== null ? autolinker.link(feature.properties['ID_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_3'] !== null ? autolinker.link(feature.properties['NAME_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VARNAME_3'] !== null ? autolinker.link(feature.properties['VARNAME_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NL_NAME_3'] !== null ? autolinker.link(feature.properties['NL_NAME_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HASC_3'] !== null ? autolinker.link(feature.properties['HASC_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TYPE_3'] !== null ? autolinker.link(feature.properties['TYPE_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ENGTYPE_3'] !== null ? autolinker.link(feature.properties['ENGTYPE_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VALIDFR_3'] !== null ? autolinker.link(feature.properties['VALIDFR_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VALIDTO_3'] !== null ? autolinker.link(feature.properties['VALIDTO_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REMARKS_3'] !== null ? autolinker.link(feature.properties['REMARKS_3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['orig_ogc_f'] !== null ? autolinker.link(feature.properties['orig_ogc_f'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_JharkhandDistricts_2_0() {
+            return {
+                pane: 'pane_JharkhandDistricts_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_JharkhandDistricts_2');
+        map.getPane('pane_JharkhandDistricts_2').style.zIndex = 402;
+        map.getPane('pane_JharkhandDistricts_2').style['mix-blend-mode'] = 'normal';
+        var layer_JharkhandDistricts_2 = new L.geoJson(json_JharkhandDistricts_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_JharkhandDistricts_2',
+            layerName: 'layer_JharkhandDistricts_2',
+            pane: 'pane_JharkhandDistricts_2',
+            onEachFeature: pop_JharkhandDistricts_2,
+            style: style_JharkhandDistricts_2_0,
+        });
+        bounds_group.addLayer(layer_JharkhandDistricts_2);
+        map.addLayer(layer_JharkhandDistricts_2);
+        function pop_Mayurbhanga_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PID</th>\
+                        <td>' + (feature.properties['PID'] !== null ? autolinker.link(feature.properties['PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat</th>\
+                        <td>' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng</th>\
+                        <td>' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever </th>\
+                        <td>' + (feature.properties['Month of onset of fever '] !== null ? autolinker.link(feature.properties['Month of onset of fever '].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Month Diagnosed</strong><br />' + (feature.properties['Month Diagnosed'] !== null ? autolinker.link(feature.properties['Month Diagnosed'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Case Type</th>\
+                        <td>' + (feature.properties['Case Type'] !== null ? autolinker.link(feature.properties['Case Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Mayurbhanga_3_0() {
+            return {
+                pane: 'pane_Mayurbhanga_3',
+                radius: 5.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,116,4,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Mayurbhanga_3');
+        map.getPane('pane_Mayurbhanga_3').style.zIndex = 403;
+        map.getPane('pane_Mayurbhanga_3').style['mix-blend-mode'] = 'normal';
+        var layer_Mayurbhanga_3 = new L.geoJson(json_Mayurbhanga_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Mayurbhanga_3',
+            layerName: 'layer_Mayurbhanga_3',
+            pane: 'pane_Mayurbhanga_3',
+            onEachFeature: pop_Mayurbhanga_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Mayurbhanga_3_0(feature));
+            },
+        });
+        var cluster_Mayurbhanga_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_Mayurbhanga_3.addLayer(layer_Mayurbhanga_3);
+
+        bounds_group.addLayer(layer_Mayurbhanga_3);
+        cluster_Mayurbhanga_3.addTo(map);
+        function pop_Balasath_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Block</th>\
+                        <td>' + (feature.properties['Block'] !== null ? autolinker.link(feature.properties['Block'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PID</th>\
+                        <td>' + (feature.properties['PID'] !== null ? autolinker.link(feature.properties['PID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat</th>\
+                        <td>' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng</th>\
+                        <td>' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever </th>\
+                        <td>' + (feature.properties['Month of onset of fever '] !== null ? autolinker.link(feature.properties['Month of onset of fever '].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Month Diagnosed</strong><br />' + (feature.properties['Month Diagnosed'] !== null ? autolinker.link(feature.properties['Month Diagnosed'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Case Type</th>\
+                        <td>' + (feature.properties['Case Type'] !== null ? autolinker.link(feature.properties['Case Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Balasath_4_0() {
+            return {
+                pane: 'pane_Balasath_4',
+                radius: 5.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,116,4,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Balasath_4');
+        map.getPane('pane_Balasath_4').style.zIndex = 404;
+        map.getPane('pane_Balasath_4').style['mix-blend-mode'] = 'normal';
+        var layer_Balasath_4 = new L.geoJson(json_Balasath_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Balasath_4',
+            layerName: 'layer_Balasath_4',
+            pane: 'pane_Balasath_4',
+            onEachFeature: pop_Balasath_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Balasath_4_0(feature));
+            },
+        });
+        var cluster_Balasath_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_Balasath_4.addLayer(layer_Balasath_4);
+
+        bounds_group.addLayer(layer_Balasath_4);
+        cluster_Balasath_4.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Balasath_4.png" /> Balasath': cluster_Balasath_4,'<img src="legend/Mayurbhanga_3.png" /> Mayurbhanga': cluster_Mayurbhanga_3,'<img src="legend/JharkhandDistricts_2.png" /> Jharkhand Districts': layer_JharkhandDistricts_2,'<img src="legend/BiharDistricts_1.png" /> Bihar Districts': layer_BiharDistricts_1,"Google Imagery": layer_GoogleImagery_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Mayurbhanga_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Month Diagnosed'] !== null?String('<div style="color: #f8f004; font-size: 8pt; font-weight: bold; font-family: \'Fira Sans\', sans-serif;">' + layer.feature.properties['Month Diagnosed']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Mayurbhanga_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Balasath_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Month Diagnosed'] !== null?String('<div style="color: #f8f004; font-size: 8pt; font-weight: bold; font-family: \'Fira Sans\', sans-serif;">' + layer.feature.properties['Month Diagnosed']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Balasath_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Mayurbhanga_3,layer_Balasath_4]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Mayurbhanga_3,layer_Balasath_4]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Mayurbhanga_3,layer_Balasath_4]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Mayurbhanga_3,layer_Balasath_4]);
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+  <title>Pinjaur KA Outbreak Map - 10Aug2020</title>
+</head>
+<body>
+    <div id="heading"><h2>&nbspPinjaur, Jehanabad - KA Outbreak Map</h2></div>
+    <div id="map" style="height: 85%">
+    </div>
+        <script src="js/expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/AreaBoundary_1.js"></script>
+        <script src="data/PinjaurShahpurVLCases_2.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[25.187115577755645,84.93885711890604],[25.190311352564347,84.94531499592514]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org" target="_blank">feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellitewithRoadsLabels_0');
+        map.getPane('pane_GoogleSatellitewithRoadsLabels_0').style.zIndex = 400;
+        var layer_GoogleSatellitewithRoadsLabels_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellitewithRoadsLabels_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellitewithRoadsLabels_0;
+        map.addLayer(layer_GoogleSatellitewithRoadsLabels_0);
+        function pop_AreaBoundary_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AreaBoundary_1_0() {
+            return {
+                pane: 'pane_AreaBoundary_1',
+                opacity: 1,
+                color: 'rgba(255,158,23,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,0.0196078431372549)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreaBoundary_1');
+        map.getPane('pane_AreaBoundary_1').style.zIndex = 401;
+        map.getPane('pane_AreaBoundary_1').style['mix-blend-mode'] = 'normal';
+        var layer_AreaBoundary_1 = new L.geoJson(json_AreaBoundary_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreaBoundary_1',
+            layerName: 'layer_AreaBoundary_1',
+            pane: 'pane_AreaBoundary_1',
+            onEachFeature: pop_AreaBoundary_1,
+            style: style_AreaBoundary_1_0,
+        });
+        bounds_group.addLayer(layer_AreaBoundary_1);
+        map.addLayer(layer_AreaBoundary_1);
+        function pop_PinjaurShahpurVLCases_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KAMISID</th>\
+                        <td>' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Village</th>\
+                        <td>' + (feature.properties['Village'] !== null ? autolinker.link(feature.properties['Village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tola</th>\
+                        <td>' + (feature.properties['Tola'] !== null ? autolinker.link(feature.properties['Tola'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month_of_onset_of_fever_</th>\
+                        <td>' + (feature.properties['Month_of_onset_of_fever_'] !== null ? autolinker.link(feature.properties['Month_of_onset_of_fever_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year_of_onset_of_fever</th>\
+                        <td>' + (feature.properties['Year_of_onset_of_fever'] !== null ? autolinker.link(feature.properties['Year_of_onset_of_fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month_of_diagnosis</th>\
+                        <td>' + (feature.properties['Month_of_diagnosis'] !== null ? autolinker.link(feature.properties['Month_of_diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year_of_diagnosis</th>\
+                        <td>' + (feature.properties['Year_of_diagnosis'] !== null ? autolinker.link(feature.properties['Year_of_diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type_of_case</th>\
+                        <td>' + (feature.properties['Type_of_case'] !== null ? autolinker.link(feature.properties['Type_of_case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PinjaurShahpurVLCases_2_0(feature) {
+            switch(String(feature.properties['Year_of_diagnosis'])) {
+                case '2019':
+                    return {
+                pane: 'pane_PinjaurShahpurVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(242,230,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_PinjaurShahpurVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,145,10,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2021':
+                    return {
+                pane: 'pane_PinjaurShahpurVLCases_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,6,3,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_PinjaurShahpurVLCases_2');
+        map.getPane('pane_PinjaurShahpurVLCases_2').style.zIndex = 402;
+        map.getPane('pane_PinjaurShahpurVLCases_2').style['mix-blend-mode'] = 'normal';
+        var layer_PinjaurShahpurVLCases_2 = new L.geoJson(json_PinjaurShahpurVLCases_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PinjaurShahpurVLCases_2',
+            layerName: 'layer_PinjaurShahpurVLCases_2',
+            pane: 'pane_PinjaurShahpurVLCases_2',
+            onEachFeature: pop_PinjaurShahpurVLCases_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_PinjaurShahpurVLCases_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_PinjaurShahpurVLCases_2);
+        map.addLayer(layer_PinjaurShahpurVLCases_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Pinjaur Shahpur VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/PinjaurShahpurVLCases_2_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/PinjaurShahpurVLCases_2_20201.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/PinjaurShahpurVLCases_2_20212.png" /></td><td>2021</td></tr></table>': layer_PinjaurShahpurVLCases_2,'<img src="legend/AreaBoundary_1.png" /> Area Boundary': layer_AreaBoundary_1,"Google Satellite with Roads & Labels": layer_GoogleSatellitewithRoadsLabels_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>

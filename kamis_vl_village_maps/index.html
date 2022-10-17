@@ -1,0 +1,93 @@
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+   <titleVillages KAMIS</title>
+   <meta name="author" content="Joy Bindroo">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<body>
+
+    <script>
+        function show_map() {
+          var d=document.getElementById("dist").value;
+          var y=document.getElementById("yr").value;
+          document.getElementById("mframe").src=d+y;
+
+        }
+        </script>
+
+    <div class="container-fluid"><div class="container" style="margin:35px; border solid silver; padding:15px;">
+  
+               <div class="row"><div class="col-sm-12"><h2>KAMIS: VL Village Maps</h2>
+             <hr/>
+        
+                 <div class="row">
+                     <div class="col-sm-12">
+                     <h3><u>Select Map</u></h3>
+                    <label for="dist">Choose a district:</label>
+                    <select name="dist" id="dist">
+                        <!-- <option value="ARARIA_">ARARIA, BIHAR</option>
+                        <option value="ARWAL_">ARWAL, BIHAR</option>
+                        <option value="BANKA_">BANKA, BIHAR</option>
+                        <option value="BEGUSARAI_">BEGUSARAI, BIHAR</option>
+                        <option value="BHAGALPUR_">BHAGALPUR, BIHAR</option>
+                        <option value="BHOJPUR_">BHOJPUR, BIHAR</option>
+                        <option value="BUXAR_">BUXAR, BIHAR</option>
+                        <option value="DARBHANGA_">DARBHANGA, BIHAR</option> -->
+                        <option value="DUMKA_">DUMKA, JHARKHAND</option>
+                        <!-- <option value="EAST CHAMPARAN_">EAST CHAMPARAN, BIHAR</option>
+                        <option value="GODDA_">GODDA, JHARKHAND</option>
+                        <option value="GOPALGANJ_">GOPALGANJ, BIHAR</option>
+                        <option value="JEHANABAD_">JEHANABAD, BIHAR</option>
+                        <option value="KATIHAR_">KATIHAR, BIHAR</option>
+                        <option value="KHAGARIA_">KHAGARIA, BIHAR</option>
+                        <option value="KISHANGANJ_">KISHANGANJ, BIHAR</option>
+                        <option value="LAKHISARAI_">LAKHISARAI, BIHAR</option>
+                        <option value="MADHEPURA_">MADHEPURA, BIHAR</option>
+                        <option value="MADHUBANI_">MADHUBANI, BIHAR</option>
+                        <option value="MUNGER_">MUNGER, BIHAR</option>
+                        <option value="MUZAFFARPUR_">MUZAFFARPUR, BIHAR</option>
+                        <option value="NALANDA_">NALANDA, BIHAR</option>
+                        <option value="NAWADA_">NAWADA, BIHAR</option> -->
+                        <option value="PAKUR_">PAKUR, JHARKHAND</option>
+                        <!-- <option value="PATNA_">PATNA, BIHAR</option>
+                        <option value="PURNEA_">PURNEA, BIHAR</option>
+                        <option value="SAHARSA_">SAHARSA, BIHAR</option>
+                        <option value="SAHIBGANJ_">SAHIBGANJ, JHARKHAND</option>
+                        <option value="SAMASTIPUR_">SAMASTIPUR, BIHAR</option> -->
+                        <option value="SARAN_">SARAN, BIHAR</option>
+                        <!-- <option value="SHEIKHPURA_">SHEIKHPURA, BIHAR</option>
+                        <option value="SHEOHAR_">SHEOHAR, BIHAR</option>
+                        <option value="SITAMARHI_">SITAMARHI, BIHAR</option> -->
+                        <option value="SIWAN_">SIWAN, BIHAR</option>
+                        <!-- <option value="SUPAUL_">SUPAUL, BIHAR</option>
+                        <option value="VAISHALI_">VAISHALI, BIHAR</option>
+                        <option value="WEST CHAMPARAN_">WEST CHAMPARAN, BIHAR</option> -->
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="yr">Choose a year:</label>
+                    <select name="yr" id="yr">
+                    
+                        <option value="2013.html">2013</option>
+                        <option value="2014.html">2014</option>
+                        <option value="2015.html">2015</option>
+                        <option value="2016.html">2016</option>
+                        <option value="2017.html">2017</option>
+                        <option value="2018.html">2018</option>
+                        <option value="2019.html">2019</option>
+                        <option value="2020.html">2020</option>
+                        <option value="2021.html">2021</option>
+                        <option value="2022.html">2022</option>
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button onclick="show_map()">Show Map</button>
+                    <hr/>
+                    <div class="col-sm-10"><iframe name="mframe" id="mframe" width="100%" height="480px" src="DUMKA_2013.html"></iframe></div>
+                     <div><b>Legend</b></div>
+                     <img  src="legend.jpg" />
+                 </div>
+                 <center><a href="mailto:jbindroo@careindia.org">Feedback</a><br>28-01-2022</center>
+</body>
+</html>
