@@ -10,20 +10,20 @@
         <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
-        html, body, #map {
-            width: 100%;
-            height: 95%;
-            padding: 0;
-            margin: 0;
-        }
-        </style>
-        
-        <title>OutbreakMap - Suraj Nagar, Khagaria Oct2021</title>
-    </head>
-    <body>
-        <h1>OutbreakMap - Suraj Nagar, Khagaria Oct2021</h1>
-        <div id="map">
-        </div>
+            html, body, #map {
+                width: 100%;
+                height: 95%;
+                padding: 0;
+                margin: 0;
+            }
+            </style>
+            
+            <title>OutbreakMap - Suraj Nagar, Khagaria</title>
+        </head>
+        <body>
+            <h1>OutbreakMap - Suraj Nagar, Khagaria</h1>
+            <div id="map">
+            </div>
         <script src="js/gis.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
@@ -34,11 +34,11 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/SurajNagarVLcases_1.js"></script>
+        <script src="data/VLCases20_1.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[25.573203427718777,86.45864590476869],[25.57715767625464,86.46633803729789]]);
+        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -56,6 +56,9 @@
         .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
         }
         map.createPane('pane_GoogleHybrid_0');
         map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
@@ -70,114 +73,154 @@
         });
         layer_GoogleHybrid_0;
         map.addLayer(layer_GoogleHybrid_0);
-        function pop_SurajNagarVLcases_1(feature, layer) {
+        function pop_VLCases20_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">res_patient_code_original</th>\
-                        <td>' + (feature.properties['res_patient_code_original'] !== null ? autolinker.link(feature.properties['res_patient_code_original'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">KAMISID</th>\
+                        <td>' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">case_type</th>\
-                        <td>' + (feature.properties['case_type'] !== null ? autolinker.link(feature.properties['case_type'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">lat</th>\
-                        <td>' + (feature.properties['lat'] !== null ? autolinker.link(feature.properties['lat'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">lng</th>\
-                        <td>' + (feature.properties['lng'] !== null ? autolinker.link(feature.properties['lng'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Age in Years</th>\
+                        <td>' + (feature.properties['Age in Years'] !== null ? autolinker.link(feature.properties['Age in Years'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">year</th>\
-                        <td>' + (feature.properties['year'] !== null ? autolinker.link(feature.properties['year'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Sex 1=Male 2=Female</th>\
+                        <td>' + (feature.properties['Sex 1=Male 2=Female'] !== null ? autolinker.link(feature.properties['Sex 1=Male 2=Female'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">month</th>\
-                        <td>' + (feature.properties['month'] !== null ? autolinker.link(feature.properties['month'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Month of onset of fever</th>\
+                        <td>' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">village</th>\
-                        <td>' + (feature.properties['village'] !== null ? autolinker.link(feature.properties['village'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of Treatment</th>\
+                        <td>' + (feature.properties['Month of Treatment'] !== null ? autolinker.link(feature.properties['Month of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of Treatment</th>\
+                        <td>' + (feature.properties['Year of Treatment'] !== null ? autolinker.link(feature.properties['Year of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Place of Treatment</th>\
+                        <td>' + (feature.properties['Place of Treatment'] !== null ? autolinker.link(feature.properties['Place of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Duration of Fever in Days</th>\
+                        <td>' + (feature.properties['Duration of Fever in Days'] !== null ? autolinker.link(feature.properties['Duration of Fever in Days'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_SurajNagarVLcases_1_0(feature) {
-            switch(String(feature.properties['year'])) {
+        function style_VLCases20_1_0(feature) {
+            switch(String(feature.properties['Year of diagnosis'])) {
                 case '2017':
                     return {
-                pane: 'pane_SurajNagarVLcases_1',
-                radius: 4.0,
+                pane: 'pane_VLCases20_1',
+                radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(64,232,215,1.0)',
+                fillColor: 'rgba(72,197,70,1.0)',
                 interactive: true,
             }
                     break;
                 case '2020':
                     return {
-                pane: 'pane_SurajNagarVLcases_1',
-                radius: 4.0,
+                pane: 'pane_VLCases20_1',
+                radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(184,223,130,1.0)',
+                fillColor: 'rgba(248,240,84,1.0)',
                 interactive: true,
             }
                     break;
                 case '2021':
                     return {
-                pane: 'pane_SurajNagarVLcases_1',
-                radius: 4.0,
+                pane: 'pane_VLCases20_1',
+                radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(210,69,83,1.0)',
+                fillColor: 'rgba(46,206,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2022':
+                    return {
+                pane: 'pane_VLCases20_1',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,87,32,1.0)',
                 interactive: true,
             }
                     break;
             }
         }
-        map.createPane('pane_SurajNagarVLcases_1');
-        map.getPane('pane_SurajNagarVLcases_1').style.zIndex = 401;
-        map.getPane('pane_SurajNagarVLcases_1').style['mix-blend-mode'] = 'normal';
-        var layer_SurajNagarVLcases_1 = new L.geoJson(json_SurajNagarVLcases_1, {
+        map.createPane('pane_VLCases20_1');
+        map.getPane('pane_VLCases20_1').style.zIndex = 401;
+        map.getPane('pane_VLCases20_1').style['mix-blend-mode'] = 'normal';
+        var layer_VLCases20_1 = new L.geoJson(json_VLCases20_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_SurajNagarVLcases_1',
-            layerName: 'layer_SurajNagarVLcases_1',
-            pane: 'pane_SurajNagarVLcases_1',
-            onEachFeature: pop_SurajNagarVLcases_1,
+            dataVar: 'json_VLCases20_1',
+            layerName: 'layer_VLCases20_1',
+            pane: 'pane_VLCases20_1',
+            onEachFeature: pop_VLCases20_1,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_SurajNagarVLcases_1_0(feature));
+                return L.circleMarker(latlng, style_VLCases20_1_0(feature));
             },
         });
-        bounds_group.addLayer(layer_SurajNagarVLcases_1);
-        map.addLayer(layer_SurajNagarVLcases_1);
+        bounds_group.addLayer(layer_VLCases20_1);
+        map.addLayer(layer_VLCases20_1);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Suraj Nagar VL cases<br /><table><tr><td style="text-align: center;"><img src="legend/SurajNagarVLcases_1_20170.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/SurajNagarVLcases_1_20201.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/SurajNagarVLcases_1_20212.png" /></td><td>2021</td></tr></table>': layer_SurajNagarVLcases_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'VL Cases (20)<br /><table><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20170.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20201.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20212.png" /></td><td>2021</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20223.png" /></td><td>2022</td></tr></table>': layer_VLCases20_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
