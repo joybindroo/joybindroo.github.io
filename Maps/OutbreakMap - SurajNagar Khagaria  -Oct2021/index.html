@@ -26,6 +26,7 @@
             </div>
         <script src="js/gis.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -34,11 +35,13 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/VLCases20_1.js"></script>
+        <script src="data/HealthFacilities_1.js"></script>
+        <script src="data/VLCases20_2.js"></script>
+        <script src="data/SurajNagarVillage_3.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        })
+        }).fitBounds([[25.55803605314244,86.40355883365919],[25.61766469671792,86.52461963365931]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -56,9 +59,6 @@
         .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
-            }
         }
         map.createPane('pane_GoogleHybrid_0');
         map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
@@ -73,7 +73,59 @@
         });
         layer_GoogleHybrid_0;
         map.addLayer(layer_GoogleHybrid_0);
-        function pop_VLCases20_1(feature, layer) {
+        function pop_HealthFacilities_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Facility'] !== null ? autolinker.link(feature.properties['Facility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_HealthFacilities_1_0() {
+            return {
+                pane: 'pane_HealthFacilities_1',
+                shape: 'diamond',
+                radius: 8.8,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(6,250,2,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_HealthFacilities_1');
+        map.getPane('pane_HealthFacilities_1').style.zIndex = 401;
+        map.getPane('pane_HealthFacilities_1').style['mix-blend-mode'] = 'normal';
+        var layer_HealthFacilities_1 = new L.geoJson(json_HealthFacilities_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HealthFacilities_1',
+            layerName: 'layer_HealthFacilities_1',
+            pane: 'pane_HealthFacilities_1',
+            onEachFeature: pop_HealthFacilities_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_HealthFacilities_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_HealthFacilities_1);
+        map.addLayer(layer_HealthFacilities_1);
+        function pop_VLCases20_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">KAMISID</th>\
@@ -131,11 +183,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_VLCases20_1_0(feature) {
+        function style_VLCases20_2_0(feature) {
             switch(String(feature.properties['Year of diagnosis'])) {
                 case '2017':
                     return {
-                pane: 'pane_VLCases20_1',
+                pane: 'pane_VLCases20_2',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -151,7 +203,7 @@
                     break;
                 case '2020':
                     return {
-                pane: 'pane_VLCases20_1',
+                pane: 'pane_VLCases20_2',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -167,7 +219,7 @@
                     break;
                 case '2021':
                     return {
-                pane: 'pane_VLCases20_1',
+                pane: 'pane_VLCases20_2',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -183,7 +235,7 @@
                     break;
                 case '2022':
                     return {
-                pane: 'pane_VLCases20_1',
+                pane: 'pane_VLCases20_2',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -199,29 +251,117 @@
                     break;
             }
         }
-        map.createPane('pane_VLCases20_1');
-        map.getPane('pane_VLCases20_1').style.zIndex = 401;
-        map.getPane('pane_VLCases20_1').style['mix-blend-mode'] = 'normal';
-        var layer_VLCases20_1 = new L.geoJson(json_VLCases20_1, {
+        map.createPane('pane_VLCases20_2');
+        map.getPane('pane_VLCases20_2').style.zIndex = 402;
+        map.getPane('pane_VLCases20_2').style['mix-blend-mode'] = 'normal';
+        var layer_VLCases20_2 = new L.geoJson(json_VLCases20_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VLCases20_1',
-            layerName: 'layer_VLCases20_1',
-            pane: 'pane_VLCases20_1',
-            onEachFeature: pop_VLCases20_1,
+            dataVar: 'json_VLCases20_2',
+            layerName: 'layer_VLCases20_2',
+            pane: 'pane_VLCases20_2',
+            onEachFeature: pop_VLCases20_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_VLCases20_1_0(feature));
+                return L.circleMarker(latlng, style_VLCases20_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_VLCases20_1);
-        map.addLayer(layer_VLCases20_1);
+        bounds_group.addLayer(layer_VLCases20_2);
+        map.addLayer(layer_VLCases20_2);
+        function pop_SurajNagarVillage_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['village'] !== null ? autolinker.link(feature.properties['village'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lng'] !== null ? autolinker.link(feature.properties['lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lat'] !== null ? autolinker.link(feature.properties['lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SurajNagarVillage_3_0() {
+            return {
+                pane: 'pane_SurajNagarVillage_3',
+                shape: 'triangle',
+                radius: 8.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,240,84,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SurajNagarVillage_3');
+        map.getPane('pane_SurajNagarVillage_3').style.zIndex = 403;
+        map.getPane('pane_SurajNagarVillage_3').style['mix-blend-mode'] = 'normal';
+        var layer_SurajNagarVillage_3 = new L.geoJson(json_SurajNagarVillage_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SurajNagarVillage_3',
+            layerName: 'layer_SurajNagarVillage_3',
+            pane: 'pane_SurajNagarVillage_3',
+            onEachFeature: pop_SurajNagarVillage_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_SurajNagarVillage_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SurajNagarVillage_3);
+        map.addLayer(layer_SurajNagarVillage_3);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'VL Cases (20)<br /><table><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20170.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20201.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20212.png" /></td><td>2021</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_1_20223.png" /></td><td>2022</td></tr></table>': layer_VLCases20_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SurajNagarVillage_3.png" /> Suraj Nagar Village': layer_SurajNagarVillage_3,'VL Cases (20)<br /><table><tr><td style="text-align: center;"><img src="legend/VLCases20_2_20170.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_2_20201.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_2_20212.png" /></td><td>2021</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases20_2_20223.png" /></td><td>2022</td></tr></table>': layer_VLCases20_2,'<img src="legend/HealthFacilities_1.png" /> Health Facilities': layer_HealthFacilities_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
         setBounds();
+        var i = 0;
+        layer_HealthFacilities_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Facility'] !== null?String('<div style="color: #f2e600; font-size: 12pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Facility']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_HealthFacilities_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_SurajNagarVillage_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['village'] !== null?String('<div style="color: #f8f054; font-size: 11pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['village']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SurajNagarVillage_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_HealthFacilities_1,layer_SurajNagarVillage_3]);
+        map.on("zoomend", function(){
+            resetLabels([layer_HealthFacilities_1,layer_SurajNagarVillage_3]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_HealthFacilities_1,layer_SurajNagarVillage_3]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_HealthFacilities_1,layer_SurajNagarVillage_3]);
+        });
         </script>
     </body>
 </html>

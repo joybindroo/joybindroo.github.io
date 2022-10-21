@@ -1,0 +1,1 @@
+var json_SurajNagarVillage_3 = {"type":"FeatureCollection","name":"SurajNagarVillage_3","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"village":"Suraj Nagar","lng":86.46162,"lat":25.57517},"geometry":{"type":"Point","coordinates":[86.461616,25.575174]}}]}
