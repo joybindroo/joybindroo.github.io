@@ -8,7 +8,6 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>   html, body, #map {
             width: 100%;
             height: 95%;
@@ -16,12 +15,12 @@
             margin: 0;
         }
         </style>
-        <title>Saraiya JHK- KA Outbreak Map (13-JUN-2022)</title>
+        <title>Saraiya JHK- KA Outbreak Map </title>
     </head>
     <body>
         <div id="heading"><h2>&nbsp;Saraiya JHK - KA Outbreak Map</h2></div>
         <div id="map">
-            </div>
+        </div>
         <script src="js/gis.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
@@ -32,11 +31,11 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="data/SaraiyaTolas_1.js"></script>
-        <script src="data/VLCases_2.js"></script>
+        <script src="data/VLCases15_2.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[24.302765095385052,87.07371723479618],[24.318727195385048,87.10195370161382]]);
+        }).fitBounds([[24.30375518310951,87.0725371984507],[24.319717283109533,87.10494418408402]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -139,7 +138,7 @@
         });
         bounds_group.addLayer(layer_SaraiyaTolas_1);
         map.addLayer(layer_SaraiyaTolas_1);
-        function pop_VLCases_2(feature, layer) {
+        function pop_VLCases15_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">KAMIS_ID</th>\
@@ -209,59 +208,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_VLCases_2_0(feature) {
+        function style_VLCases15_2_0(feature) {
             switch(String(feature.properties['Year of diagnosis'])) {
-                case '2019':
-                    return {
-                pane: 'pane_VLCases_2',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(237,227,21,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '2020':
-                    return {
-                pane: 'pane_VLCases_2',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(22,238,29,1.0)',
-                interactive: true,
-            }
-                    break;
-                case '2021':
-                    return {
-                pane: 'pane_VLCases_2',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(38,139,190,1.0)',
-                interactive: true,
-            }
-                    break;
                 case '2022':
                     return {
-                pane: 'pane_VLCases_2',
+                pane: 'pane_VLCases15_2',
                 radius: 6.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -275,30 +226,78 @@
                 interactive: true,
             }
                     break;
+                case '2021':
+                    return {
+                pane: 'pane_VLCases15_2',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(38,139,190,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2020':
+                    return {
+                pane: 'pane_VLCases15_2',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(22,238,29,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2019':
+                    return {
+                pane: 'pane_VLCases15_2',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,227,21,1.0)',
+                interactive: true,
+            }
+                    break;
             }
         }
-        map.createPane('pane_VLCases_2');
-        map.getPane('pane_VLCases_2').style.zIndex = 402;
-        map.getPane('pane_VLCases_2').style['mix-blend-mode'] = 'normal';
-        var layer_VLCases_2 = new L.geoJson(json_VLCases_2, {
+        map.createPane('pane_VLCases15_2');
+        map.getPane('pane_VLCases15_2').style.zIndex = 402;
+        map.getPane('pane_VLCases15_2').style['mix-blend-mode'] = 'normal';
+        var layer_VLCases15_2 = new L.geoJson(json_VLCases15_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VLCases_2',
-            layerName: 'layer_VLCases_2',
-            pane: 'pane_VLCases_2',
-            onEachFeature: pop_VLCases_2,
+            dataVar: 'json_VLCases15_2',
+            layerName: 'layer_VLCases15_2',
+            pane: 'pane_VLCases15_2',
+            onEachFeature: pop_VLCases15_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_VLCases_2_0(feature));
+                return L.circleMarker(latlng, style_VLCases15_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_VLCases_2);
-        map.addLayer(layer_VLCases_2);
+        bounds_group.addLayer(layer_VLCases15_2);
+        map.addLayer(layer_VLCases15_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'VL Cases<br /><table><tr><td style="text-align: center;"><img src="legend/VLCases_2_20190.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases_2_20201.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases_2_20212.png" /></td><td>2021</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases_2_20223.png" /></td><td>2022</td></tr></table>': layer_VLCases_2,'<img src="legend/SaraiyaTolas_1.png" /> Saraiya Tolas': layer_SaraiyaTolas_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'VL Cases (15)<br /><table><tr><td style="text-align: center;"><img src="legend/VLCases15_2_20226cases0.png" /></td><td>2022 (6cases)</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases15_2_20215cases1.png" /></td><td>2021 (5cases)</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases15_2_20202cases2.png" /></td><td>2020 (2cases)</td></tr><tr><td style="text-align: center;"><img src="legend/VLCases15_2_20192cases3.png" /></td><td>2019 (2cases)</td></tr></table>': layer_VLCases15_2,'<img src="legend/SaraiyaTolas_1.png" /> Saraiya Tolas': layer_SaraiyaTolas_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
         layer_SaraiyaTolas_1.eachLayer(function(layer) {
@@ -306,7 +305,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #becf50; font-size: 12pt; font-family: \'Ubuntu\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SaraiyaTolas_1'});
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #becf50; font-size: 12pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_SaraiyaTolas_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
