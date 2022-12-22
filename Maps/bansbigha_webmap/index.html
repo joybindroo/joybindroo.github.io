@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>   html, body, #map {
+            width: 100%;
+            height: 95%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Bansbigha Patna- KA Outbreak Map </title>
+    </head>
+    <body>
+        <div id="heading"><h2>&nbsp;Bansbigha Patna- KA Outbreak Map</h2></div>
+        <div id="map">
+        </div>
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/150mrings_1.js"></script>
+        <script src="data/100mrings_2.js"></script>
+        <script src="data/50mrings_3.js"></script>
+        <script src="data/VLCases_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[25.33375773176608,85.18141475876747],[25.338532254956117,85.18800342025845]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_150mrings_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tola name'] !== null ? autolinker.link(feature.properties['Tola name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Age in Years'] !== null ? autolinker.link(feature.properties['Age in Years'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sex'] !== null ? autolinker.link(feature.properties['Sex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of Treatment'] !== null ? autolinker.link(feature.properties['Month of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of Treatment'] !== null ? autolinker.link(feature.properties['Year of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Place of Treatment'] !== null ? autolinker.link(feature.properties['Place of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duration of Fever in Days'] !== null ? autolinker.link(feature.properties['Duration of Fever in Days'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duration of skin lesions'] !== null ? autolinker.link(feature.properties['Duration of skin lesions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_150mrings_1_0() {
+            return {
+                pane: 'pane_150mrings_1',
+                opacity: 1,
+                color: 'rgba(242,230,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,90,153,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_150mrings_1');
+        map.getPane('pane_150mrings_1').style.zIndex = 401;
+        map.getPane('pane_150mrings_1').style['mix-blend-mode'] = 'normal';
+        var layer_150mrings_1 = new L.geoJson(json_150mrings_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_150mrings_1',
+            layerName: 'layer_150mrings_1',
+            pane: 'pane_150mrings_1',
+            onEachFeature: pop_150mrings_1,
+            style: style_150mrings_1_0,
+        });
+        bounds_group.addLayer(layer_150mrings_1);
+        map.addLayer(layer_150mrings_1);
+        function pop_100mrings_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tola name'] !== null ? autolinker.link(feature.properties['Tola name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Age in Years'] !== null ? autolinker.link(feature.properties['Age in Years'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sex'] !== null ? autolinker.link(feature.properties['Sex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of Treatment'] !== null ? autolinker.link(feature.properties['Month of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of Treatment'] !== null ? autolinker.link(feature.properties['Year of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Place of Treatment'] !== null ? autolinker.link(feature.properties['Place of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duration of Fever in Days'] !== null ? autolinker.link(feature.properties['Duration of Fever in Days'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duration of skin lesions'] !== null ? autolinker.link(feature.properties['Duration of skin lesions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_100mrings_2_0() {
+            return {
+                pane: 'pane_100mrings_2',
+                opacity: 1,
+                color: 'rgba(242,230,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,90,153,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_100mrings_2');
+        map.getPane('pane_100mrings_2').style.zIndex = 402;
+        map.getPane('pane_100mrings_2').style['mix-blend-mode'] = 'normal';
+        var layer_100mrings_2 = new L.geoJson(json_100mrings_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_100mrings_2',
+            layerName: 'layer_100mrings_2',
+            pane: 'pane_100mrings_2',
+            onEachFeature: pop_100mrings_2,
+            style: style_100mrings_2_0,
+        });
+        bounds_group.addLayer(layer_100mrings_2);
+        map.addLayer(layer_100mrings_2);
+        function pop_50mrings_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tola name'] !== null ? autolinker.link(feature.properties['Tola name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Age in Years'] !== null ? autolinker.link(feature.properties['Age in Years'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sex'] !== null ? autolinker.link(feature.properties['Sex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month of Treatment'] !== null ? autolinker.link(feature.properties['Month of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year of Treatment'] !== null ? autolinker.link(feature.properties['Year of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Place of Treatment'] !== null ? autolinker.link(feature.properties['Place of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duration of Fever in Days'] !== null ? autolinker.link(feature.properties['Duration of Fever in Days'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duration of skin lesions'] !== null ? autolinker.link(feature.properties['Duration of skin lesions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_50mrings_3_0() {
+            return {
+                pane: 'pane_50mrings_3',
+                opacity: 1,
+                color: 'rgba(242,230,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,90,153,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_50mrings_3');
+        map.getPane('pane_50mrings_3').style.zIndex = 403;
+        map.getPane('pane_50mrings_3').style['mix-blend-mode'] = 'normal';
+        var layer_50mrings_3 = new L.geoJson(json_50mrings_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_50mrings_3',
+            layerName: 'layer_50mrings_3',
+            pane: 'pane_50mrings_3',
+            onEachFeature: pop_50mrings_3,
+            style: style_50mrings_3_0,
+        });
+        bounds_group.addLayer(layer_50mrings_3);
+        map.addLayer(layer_50mrings_3);
+        function pop_VLCases_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KAMISID</th>\
+                        <td>' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tola name</th>\
+                        <td>' + (feature.properties['Tola name'] !== null ? autolinker.link(feature.properties['Tola name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Age in Years</th>\
+                        <td>' + (feature.properties['Age in Years'] !== null ? autolinker.link(feature.properties['Age in Years'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sex</th>\
+                        <td>' + (feature.properties['Sex'] !== null ? autolinker.link(feature.properties['Sex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of onset of fever</th>\
+                        <td>' + (feature.properties['Month of onset of fever'] !== null ? autolinker.link(feature.properties['Month of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of onset of fever</th>\
+                        <td>' + (feature.properties['Year of onset of fever'] !== null ? autolinker.link(feature.properties['Year of onset of fever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of diagnosis</th>\
+                        <td>' + (feature.properties['Month of diagnosis'] !== null ? autolinker.link(feature.properties['Month of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of diagnosis</th>\
+                        <td>' + (feature.properties['Year of diagnosis'] !== null ? autolinker.link(feature.properties['Year of diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Month of Treatment</th>\
+                        <td>' + (feature.properties['Month of Treatment'] !== null ? autolinker.link(feature.properties['Month of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Year of Treatment</th>\
+                        <td>' + (feature.properties['Year of Treatment'] !== null ? autolinker.link(feature.properties['Year of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Place of Treatment</th>\
+                        <td>' + (feature.properties['Place of Treatment'] !== null ? autolinker.link(feature.properties['Place of Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Duration of Fever in Days</th>\
+                        <td>' + (feature.properties['Duration of Fever in Days'] !== null ? autolinker.link(feature.properties['Duration of Fever in Days'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of case</th>\
+                        <td>' + (feature.properties['Type of case'] !== null ? autolinker.link(feature.properties['Type of case'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Duration of skin lesions</th>\
+                        <td>' + (feature.properties['Duration of skin lesions'] !== null ? autolinker.link(feature.properties['Duration of skin lesions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Remarks</th>\
+                        <td>' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VLCases_4_0() {
+            return {
+                pane: 'pane_VLCases_4',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,23,11,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VLCases_4');
+        map.getPane('pane_VLCases_4').style.zIndex = 404;
+        map.getPane('pane_VLCases_4').style['mix-blend-mode'] = 'normal';
+        var layer_VLCases_4 = new L.geoJson(json_VLCases_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VLCases_4',
+            layerName: 'layer_VLCases_4',
+            pane: 'pane_VLCases_4',
+            onEachFeature: pop_VLCases_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_VLCases_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_VLCases_4);
+        map.addLayer(layer_VLCases_4);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/VLCases_4.png" /> VL Cases': layer_VLCases_4,'<img src="legend/50mrings_3.png" /> 50m rings': layer_50mrings_3,'<img src="legend/100mrings_2.png" /> 100m rings': layer_100mrings_2,'<img src="legend/150mrings_1.png" /> 150m rings': layer_150mrings_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_VLCases_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['KAMISID'] !== null?String('<div style="color: #f2e600; font-size: 8pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['KAMISID']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VLCases_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_VLCases_4]);
+        map.on("zoomend", function(){
+            resetLabels([layer_VLCases_4]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_VLCases_4]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_VLCases_4]);
+        });
+        </script>
+    </body>
+</html>
