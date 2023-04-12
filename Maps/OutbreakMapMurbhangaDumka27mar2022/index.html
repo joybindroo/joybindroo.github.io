@@ -20,9 +20,12 @@
     <title>Murbhanga Dumka - KA Outbreak Map</title>
 </head>
 <body>
-    <div id="heading"><h2>&nbsp;Murbhanga, Dumka - KA Outbreak Map</h2></div><div id="map">
+    <div id="heading"><h2>&nbsp;Murbhanga, Dumka - KA Outbreak Map</h2></div>
+        <div id="map">
+        </div>
         <script src="js/gis.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -33,6 +36,8 @@
         <script src="js/leaflet-measure.js"></script>
         <script src="data/MurbhangaTolas_1.js"></script>
         <script src="data/MurbhangaVL_2.js"></script>
+        <script src="data/2023VLCase21mar23_3.js"></script>
+        <script src="data/Area1_4.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -58,10 +63,10 @@
                 map.fitBounds(bounds_group.getBounds());
             }
         }
-        map.createPane('pane_GoogleHybrid_0');
-        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
-        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleHybrid_0',
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
             opacity: 1.0,
             attribution: '',
             minZoom: 1,
@@ -69,8 +74,8 @@
             minNativeZoom: 0,
             maxNativeZoom: 18
         });
-        layer_GoogleHybrid_0;
-        map.addLayer(layer_GoogleHybrid_0);
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
         function pop_MurbhangaTolas_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -320,8 +325,113 @@
         });
         bounds_group.addLayer(layer_MurbhangaVL_2);
         map.addLayer(layer_MurbhangaVL_2);
+        function pop_2023VLCase21mar23_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KAMIS ID</th>\
+                        <td>' + (feature.properties['KAMIS ID'] !== null ? autolinker.link(feature.properties['KAMIS ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Age</th>\
+                        <td>' + (feature.properties['Age'] !== null ? autolinker.link(feature.properties['Age'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sex</th>\
+                        <td>' + (feature.properties['Sex'] !== null ? autolinker.link(feature.properties['Sex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat</th>\
+                        <td>' + (feature.properties['Lat'] !== null ? autolinker.link(feature.properties['Lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lng</th>\
+                        <td>' + (feature.properties['Lng'] !== null ? autolinker.link(feature.properties['Lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2023VLCase21mar23_3_0() {
+            return {
+                pane: 'pane_2023VLCase21mar23_3',
+                shape: 'diamond',
+                radius: 8.8,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,30,42,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_2023VLCase21mar23_3');
+        map.getPane('pane_2023VLCase21mar23_3').style.zIndex = 403;
+        map.getPane('pane_2023VLCase21mar23_3').style['mix-blend-mode'] = 'normal';
+        var layer_2023VLCase21mar23_3 = new L.geoJson(json_2023VLCase21mar23_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2023VLCase21mar23_3',
+            layerName: 'layer_2023VLCase21mar23_3',
+            pane: 'pane_2023VLCase21mar23_3',
+            onEachFeature: pop_2023VLCase21mar23_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_2023VLCase21mar23_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_2023VLCase21mar23_3);
+        map.addLayer(layer_2023VLCase21mar23_3);
+        function pop_Area1_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Area1_4_0() {
+            return {
+                pane: 'pane_Area1_4',
+                opacity: 1,
+                color: 'rgba(166,206,227,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(28,241,237,0.01568627450980392)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Area1_4');
+        map.getPane('pane_Area1_4').style.zIndex = 404;
+        map.getPane('pane_Area1_4').style['mix-blend-mode'] = 'normal';
+        var layer_Area1_4 = new L.geoJson(json_Area1_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Area1_4',
+            layerName: 'layer_Area1_4',
+            pane: 'pane_Area1_4',
+            onEachFeature: pop_Area1_4,
+            style: style_Area1_4_0,
+        });
+        bounds_group.addLayer(layer_Area1_4);
+        map.addLayer(layer_Area1_4);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Murbhanga VL<br /><table><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20080.png" /></td><td>2008</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20131.png" /></td><td>2013</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20193.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20204.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20215.png" /></td><td>2021</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20226.png" /></td><td>2022</td></tr></table>': layer_MurbhangaVL_2,'<img src="legend/MurbhangaTolas_1.png" /> Murbhanga Tolas': layer_MurbhangaTolas_1,"Google Hybrid": layer_GoogleHybrid_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/Area1_4.png" /> Area1': layer_Area1_4,'<img src="legend/2023VLCase21mar23_3.png" /> 2023 VL Case 21mar23': layer_2023VLCase21mar23_3,'Murbhanga VL<br /><table><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20080.png" /></td><td>2008</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20131.png" /></td><td>2013</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20172.png" /></td><td>2017</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20193.png" /></td><td>2019</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20204.png" /></td><td>2020</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20215.png" /></td><td>2021</td></tr><tr><td style="text-align: center;"><img src="legend/MurbhangaVL_2_20226.png" /></td><td>2022</td></tr></table>': layer_MurbhangaVL_2,'<img src="legend/MurbhangaTolas_1.png" /> Murbhanga Tolas': layer_MurbhangaTolas_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
         var i = 0;
         layer_MurbhangaTolas_1.eachLayer(function(layer) {
@@ -342,22 +452,48 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_MurbhangaVL_2_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + exp_label_MurbhangaVL_2_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_MurbhangaVL_2'});
+            layer.bindTooltip((layer.feature.properties['KAMISID'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['KAMISID']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_MurbhangaVL_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2]);
+        var i = 0;
+        layer_2023VLCase21mar23_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023VLCase21mar23_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Area1_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #ebebeb; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Area1_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2,layer_2023VLCase21mar23_3,layer_Area1_4]);
         map.on("zoomend", function(){
-            resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2]);
+            resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2,layer_2023VLCase21mar23_3,layer_Area1_4]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2]);
+            resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2,layer_2023VLCase21mar23_3,layer_Area1_4]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2]);
+            resetLabels([layer_MurbhangaTolas_1,layer_MurbhangaVL_2,layer_2023VLCase21mar23_3,layer_Area1_4]);
         });
         </script>
     </body>
