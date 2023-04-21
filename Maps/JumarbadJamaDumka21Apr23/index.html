@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/gis.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+            html, body, #map {
+                width: 100%;
+                height: 95%;
+                padding: 0;
+                margin: 0;
+            }
+            </style>
+    <title>Jumarbad Jama Dumka - KA Outbreak Map</title>
+</head>
+<body>
+    <div id="heading"><h2>&nbsp;Jumarbad Jama Dumka - KA Outbreak Map</h2></div>
+    <p style="text-align: center;">Total 8 VL cases and 1 PKDL case. The PKDL case of 2023 was VL case in 2021.</p>
+    <div id="map">   
+        </div>
+<div style="text-align:  center;">
+
+       <img src="caseTable.gif" style="border: black 2px;">
+    </div>
+        <script src="js/gis.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/CASES_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[24.293026970379383,87.16194906736115],[24.295988587387885,87.16779930377584]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="mailto:jbindroo@careindia.org">Feedback</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_CASES_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KAMISID</th>\
+                        <td>' + (feature.properties['KAMISID'] !== null ? autolinker.link(feature.properties['KAMISID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tola</th>\
+                        <td>' + (feature.properties['Tola'] !== null ? autolinker.link(feature.properties['Tola'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lat_HH</th>\
+                        <td>' + (feature.properties['Lat_HH'] !== null ? autolinker.link(feature.properties['Lat_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long_HH</th>\
+                        <td>' + (feature.properties['Long_HH'] !== null ? autolinker.link(feature.properties['Long_HH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Age</th>\
+                        <td>' + (feature.properties['Age'] !== null ? autolinker.link(feature.properties['Age'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sex</th>\
+                        <td>' + (feature.properties['Sex'] !== null ? autolinker.link(feature.properties['Sex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CaseType'] !== null ? autolinker.link(feature.properties['CaseType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month_of_diagnosis'] !== null ? autolinker.link(feature.properties['Month_of_diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year_of_diagnosis'] !== null ? autolinker.link(feature.properties['Year_of_diagnosis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Month_of_Treatment'] !== null ? autolinker.link(feature.properties['Month_of_Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Year_of_Treatment'] !== null ? autolinker.link(feature.properties['Year_of_Treatment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CASES_1_0(feature) {
+            switch(String(feature.properties['CaseType']+' '+ feature.properties['Year_of_diagnosis'])) {
+                case 'PKDL 2023':
+                    return {
+                pane: 'pane_CASES_1',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VL 2013':
+                    return {
+                pane: 'pane_CASES_1',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,203,168,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VL 2018':
+                    return {
+                pane: 'pane_CASES_1',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,116,218,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VL 2021':
+                    return {
+                pane: 'pane_CASES_1',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,223,153,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VL 2023':
+                    return {
+                pane: 'pane_CASES_1',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CASES_1');
+        map.getPane('pane_CASES_1').style.zIndex = 401;
+        map.getPane('pane_CASES_1').style['mix-blend-mode'] = 'normal';
+        var layer_CASES_1 = new L.geoJson(json_CASES_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CASES_1',
+            layerName: 'layer_CASES_1',
+            pane: 'pane_CASES_1',
+            onEachFeature: pop_CASES_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CASES_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CASES_1);
+        map.addLayer(layer_CASES_1);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'CASES<br /><table><tr><td style="text-align: center;"><img src="legend/CASES_1_PKDL20230.png" /></td><td>PKDL 2023</td></tr><tr><td style="text-align: center;"><img src="legend/CASES_1_VL20131.png" /></td><td>VL 2013</td></tr><tr><td style="text-align: center;"><img src="legend/CASES_1_VL20182.png" /></td><td>VL 2018</td></tr><tr><td style="text-align: center;"><img src="legend/CASES_1_VL20213.png" /></td><td>VL 2021</td></tr><tr><td style="text-align: center;"><img src="legend/CASES_1_VL20234.png" /></td><td>VL 2023</td></tr></table>': layer_CASES_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_CASES_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['KAMISID'] !== null?String('<div style="color: #a6cee3; font-size: 9pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['CaseType']+' - '+layer.feature.properties['KAMISID']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CASES_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_CASES_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_CASES_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_CASES_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_CASES_1]);
+        });
+        </script>
+    </body>
+</html>
