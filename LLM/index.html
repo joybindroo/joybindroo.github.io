@@ -86,7 +86,7 @@
         </div>
         <div class="message-input-container">
             <textarea class="message-input" id="user-input" placeholder="Type your query..."></textarea>
-            <button class="send-button" onclick="sendMessage()">Send</button>
+            <button id='send-button' class="send-button" onclick="sendMessage()">Send</button>
 
             
             
@@ -99,7 +99,7 @@
 
                <b> LLM:</b>&nbsp;
                 <select name="LLM" id="LLM">
-                <option value="gpt-index" >GPT Index</option>    
+                <!-- <option value="gpt-index" >GPT Index</option>     -->
                 <option value="langchain" selected=1>Langchain</option>
                 <option value="langchain-gpt3-5">Langchain GPT3.5</option>
                 <option value="langchain-gpt4">Langchain GPT4</option>
@@ -117,8 +117,9 @@
     </div>
 
     <script>
+        var stop_send=false;
     function about(){
-        alert('Chatbot Web App created by Joy Bindroo\nThis chatbot uses LLMs powered by Jugalbandi.AI API');
+        alert('KA Chatbot Web App uses LLMs powered by Jugalbandi.AI API');
     }
 
     function appendMessage(message, sender) {
@@ -148,17 +149,27 @@
 
        async  function sendMessage() {
             
+            
             const userInput = document.getElementById('user-input').value;
-            const LLM_Input = document.getElementById('LLM').value;
-           
+            
             if (userInput.trim() === '') return;
+
+            const fetchButton = document.getElementById('send-button');
+            
+            // Disable the button
+            fetchButton.disabled = true;
+           
+            const LLM_Input = document.getElementById('LLM').value;
 
             appendMessage('YOU: '+userInput, 'user');
             document.getElementById('wbox').innerHTML="<b>Working...</b>";
             const response = await fetchResponse(userInput,LLM_Input);
             document.getElementById('wbox').innerHTML=":)";
             appendMessage(LLM_Input.toUpperCase()+': '+response, 'bot');
+
+            fetchButton.disabled = false;   
         }
+        
 
 
     </script>
