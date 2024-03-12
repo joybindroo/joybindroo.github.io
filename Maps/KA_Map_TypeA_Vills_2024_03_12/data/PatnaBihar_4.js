@@ -1,0 +1,1 @@
+var json_PatnaBihar_4 = {"type":"FeatureCollection","name":"PatnaBihar_4","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"fid":"1","name":"Patna"},"geometry":{"type":"Point","coordinates":[85.110729545160396,25.628261600723242]}}]}
