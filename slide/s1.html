@@ -4,206 +4,339 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp AI Chatbot for Bihar Health Department</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333333;
+            --highlight-color: #4CAF50;
+            --secondary-color: #2196F3;
         }
-        .reveal h1, .reveal h2, .reveal h3 {
-            text-transform: none;
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100%;
         }
-        .reveal section img {
-            border: none;
-            box-shadow: none;
-        }
-        .two-column {
+        
+        .presentation {
+            height: 100%;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
         }
-        .two-column > * {
-            flex: 0 0 48%;
+        
+        .slide {
+            flex: 1;
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in-out;
+            overflow-y: auto;
         }
-        .icon-list {
-            list-style-type: none;
-            padding-left: 0;
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
-        .icon-list li {
-            margin-bottom: 10px;
+        
+        h1, h2, h3 {
+            color: var(--highlight-color);
+            text-align: center;
         }
-        .icon-list i {
-            margin-right: 10px;
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        ul, ol {
+            text-align: left;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        button {
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: var(--highlight-color);
+            transition: width 0.3s ease;
+        }
+        
+        .text-size-control {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .text-size-control input {
+            width: 100px;
         }
     </style>
 </head>
 <body>
-    <div class="reveal">
-        <div class="slides">
-            <section>
-                <h1>Transforming Health Communication with WhatsApp AI Chatbot</h1>
-                <h3>A Presentation for Bihar Health Department</h3>
-                <p>
-                    <small>Created with ❤️ using AI</small>
-                </p>
-            </section>
+    <div class="presentation">
+        <div class="progress"></div>
+        
+        <div class="slide active">
+            <h1>🚀 Transforming Health Communication with WhatsApp AI Chatbot</h1>
+            <h3>A Presentation for Bihar Health Department</h3>
+            <p><small>Created with modern web technologies</small></p>
+        </div>
 
-            <section>
-                <h2>Introducing WhatsApp AI Chatbot for Bihar's Public Health Sector</h2>
-                <h3>Revolutionizing Health Communication with AI</h3>
-                <div class="two-column">
-                    <div>
-                        <img src="/api/placeholder/400/300" alt="WhatsApp AI Chatbot Illustration" class="animate__animated animate__fadeInLeft">
-                    </div>
-                    <div>
-                        <ul class="icon-list">
-                            <li><i class="fas fa-robot"></i> Cutting-edge health communication platform</li>
-                            <li><i class="fas fa-language"></i> Leverages Bhashini for local language support</li>
-                            <li><i class="fas fa-brain"></i> Powered by ChatGPT for intelligent interactions</li>
-                            <li><i class="fas fa-chart-line"></i> Google Cloud for analytics and scalability</li>
-                        </ul>
-                    </div>
+        <div class="slide">
+            <h2>📱 Introducing WhatsApp AI Chatbot for Bihar's Public Health Sector</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>🔥 Cutting-edge health communication platform</li>
+                        <li>🗣️ Leverages Bhashini for local language support</li>
+                        <li>🤖 Powered by ChatGPT for intelligent interactions</li>
+                        <li>☁️ Google Cloud for analytics and scalability</li>
+                    </ul>
                 </div>
-            </section>
+                <div>
+                    <h3>Benefits:</h3>
+                    <ul>
+                        <li>🏙️ Rapid rural outreach via WhatsApp</li>
+                        <li>📊 Automated health protocol dissemination</li>
+                        <li>💬 Real-time, two-way communication support</li>
+                        <li>📈 Enhanced data collection and analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <section>
-                <h2>Key Features of AI Chatbot for Bihar's Health Services</h2>
-                <div class="two-column">
-                    <div>
-                        <ul class="icon-list">
-                            <li><i class="fas fa-comments"></i> Multi-language support</li>
-                            <li><i class="fas fa-robot"></i> Intelligent interactions</li>
-                            <li><i class="fas fa-chart-bar"></i> Advanced analytics</li>
-                            <li><i class="fas fa-mobile-alt"></i> Multi-channel capability</li>
-                            <li><i class="fas fa-clipboard-list"></i> Field data collection</li>
-                            <li><i class="fas fa-bullseye"></i> Targeted communication</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <img src="/api/placeholder/400/300" alt="AI Chatbot Features" class="animate__animated animate__fadeInRight">
-                    </div>
+        <div class="slide">
+            <h2>🎯 Key Features of AI Chatbot for Bihar's Health Services</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Technical Capabilities:</h3>
+                    <ul>
+                        <li>🌐 Multi-language support (Hindi, Maithili, Bhojpuri)</li>
+                        <li>🧠 Intelligent interactions powered by ChatGPT</li>
+                        <li>📊 Advanced analytics using Google Cloud AI tools</li>
+                        <li>📱 Multi-channel capability (WhatsApp, SMS, etc.)</li>
+                    </ul>
                 </div>
-            </section>
+                <div>
+                    <h3>Operational Features:</h3>
+                    <ul>
+                        <li>📝 Automated surveys for health workers</li>
+                        <li>🗺️ Geographically targeted health alerts</li>
+                        <li>🔗 Integration with existing health information systems</li>
+                        <li>📈 Scalable architecture for future expansion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <section>
-                <h2>Deployment Models for AI Chatbot</h2>
-                <h3>Cost-effective and Flexible Implementation</h3>
-                <div class="two-column">
-                    <div>
-                        <h3>SaaS Model</h3>
-                        <ul>
-                            <li>Subscription-based pricing</li>
-                            <li>Low upfront costs</li>
-                            <li>Cloud-hosted infrastructure</li>
-                            <li>Scalability and security assured</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Self-hosting Option</h3>
-                        <ul>
-                            <li>One-time setup cost</li>
-                            <li>Government Data Centres or cloud</li>
-                            <li>Long-term cost savings</li>
-                            <li>In-house technical capacity</li>
-                        </ul>
-                    </div>
+        <div class="slide">
+            <h2>💼 Deployment Models for AI Chatbot</h2>
+            <h3>Cost-effective and Flexible Implementation</h3>
+            <div class="two-column">
+                <div>
+                    <h3>SaaS Model:</h3>
+                    <ul>
+                        <li>💳 Subscription-based pricing</li>
+                        <li>💰 Low upfront costs</li>
+                        <li>☁️ Cloud-hosted infrastructure</li>
+                        <li>🔒 Scalability and security assured</li>
+                    </ul>
                 </div>
-            </section>
+                <div>
+                    <h3>Self-hosting Option:</h3>
+                    <ul>
+                        <li>🏗️ One-time setup cost</li>
+                        <li>🏢 Uses Government Data Centres or cloud infrastructure</li>
+                        <li>💹 Long-term cost savings</li>
+                        <li>🧑‍💻 In-house technical capacity building</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <section>
-                <h2>Build-Operate-Transfer (BOT) Model</h2>
-                <h3>Sustainable Model for Bihar Health Department</h3>
-                <div class="fragment fade-up">
-                    <h4>Build</h4>
-                    <p>Develop AI chatbot and integrate with existing systems</p>
+        <div class="slide">
+            <h2>🔄 Build-Operate-Transfer (BOT) Model</h2>
+            <h3>Sustainable Model for Bihar Health Department</h3>
+            <div class="two-column">
+                <div>
+                    <h3>Build:</h3>
+                    <ul>
+                        <li>🛠️ Develop AI chatbot with Bhashini and ChatGPT</li>
+                        <li>📚 Integrate with Directory Services</li>
+                        <li>📡 Set up Health Information Dissemination systems</li>
+                    </ul>
                 </div>
-                <div class="fragment fade-up">
-                    <h4>Operate</h4>
-                    <p>Manage operations, support health workers, monitor performance</p>
+                <div>
+                    <h3>Operate:</h3>
+                    <ul>
+                        <li>🏃‍♂️ Manage chatbot operations</li>
+                        <li>🧑‍🏫 Provide capacity-building support for health workers</li>
+                        <li>📊 Utilize cloud analytics for performance monitoring</li>
+                    </ul>
                 </div>
-                <div class="fragment fade-up">
-                    <h4>Transfer</h4>
-                    <p>Gradual ownership transfer to Bihar's government IT team</p>
-                </div>
-            </section>
+            </div>
+            <div>
+                <h3>Transfer:</h3>
+                <ul>
+                    <li>🤝 Gradual ownership transfer to Bihar's government IT team</li>
+                    <li>📚 Comprehensive training for self-reliance and sustainability</li>
+                </ul>
+            </div>
+        </div>
 
-            <section>
-                <h2>Initial Demo/Pilot and Future Use Cases</h2>
-                <div class="two-column">
-                    <div>
-                        <h3>Initial Demo: 5 Thematic Areas</h3>
-                        <ol>
-                            <li>Adolescent Health</li>
-                            <li>Child Health</li>
-                            <li>Family Planning</li>
-                            <li>Maternal Health</li>
-                            <li>Non-Communicable Diseases</li>
-                        </ol>
-                    </div>
-                    <div>
-                        <h3>Potential Future Use Cases</h3>
-                        <ul>
-                            <li>Emergency Response Coordination</li>
-                            <li>Vaccine Awareness and Scheduling</li>
-                            <li>Mental Health Support</li>
-                            <li>Nutrition Education</li>
-                            <li>Health Worker Training</li>
-                            <li>And many more...</li>
-                        </ul>
-                    </div>
+        <div class="slide">
+            <h2>🚀 Initial Demo/Pilot and Future Use Cases</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Initial Demo: 5 Thematic Areas</h3>
+                    <ol>
+                        <li>👩‍🦰 Adolescent Health</li>
+                        <li>👶 Child Health</li>
+                        <li>👨‍👩‍👧‍👦 Family Planning</li>
+                        <li>🤰 Maternal Health</li>
+                        <li>🏥 Non-Communicable Diseases</li>
+                    </ol>
                 </div>
-            </section>
-
-            <section>
-                <h2>Impact and Next Steps</h2>
-                <h3>Realizing the Potential of AI in Bihar's Health Sector</h3>
-                <div class="two-column">
-                    <div>
-                        <h4>Impact</h4>
-                        <ul>
-                            <li>Increased access to health information</li>
-                            <li>Personalized health guidance</li>
-                            <li>Streamlined reporting for health workers</li>
-                            <li>AI-assisted decision support</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>Next Steps</h4>
-                        <ol>
-                            <li>Initiate pilot phase</li>
-                            <li>Evaluate and refine</li>
-                            <li>Gradual scaling</li>
-                            <li>Continuous integration</li>
-                            <li>Expand use cases</li>
-                        </ol>
-                    </div>
+                <div>
+                    <h3>Potential Future Use Cases:</h3>
+                    <ul>
+                        <li>🚑 Emergency Response Coordination</li>
+                        <li>💉 Vaccine Awareness and Scheduling</li>
+                        <li>🧠 Mental Health Support and Counseling</li>
+                        <li>🥗 Nutrition Education and Monitoring</li>
+                        <li>👨‍⚕️ Health Worker Training and Certification</li>
+                        <li>📞 Telemedicine Appointment Booking</li>
+                        <li>🦠 Disease Outbreak Surveillance</li>
+                    </ul>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <section>
-                <h2>Thank You!</h2>
-                <h3>Questions?</h3>
-                <p>
-                    <small>Transforming Health Communication with WhatsApp AI Chatbot</small>
-                </p>
-            </section>
+        <div class="slide">
+            <h2>🌟 Impact and Next Steps</h2>
+            <h3>Realizing the Potential of AI in Bihar's Health Sector</h3>
+            <div class="two-column">
+                <div>
+                    <h3>Impact:</h3>
+                    <ul>
+                        <li>📈 Increased access to accurate health information</li>
+                        <li>👥 Personalized health guidance across various areas</li>
+                        <li>🚨 Timely emergency alerts and support</li>
+                        <li>📊 Streamlined reporting and data collection for health workers</li>
+                        <li>🤖 AI-assisted decision support for interventions</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Next Steps:</h3>
+                    <ol>
+                        <li>🚀 Initiate pilot phase focusing on the 5 thematic areas</li>
+                        <li>📝 Evaluate and refine based on user feedback</li>
+                        <li>📈 Gradual scaling to cover additional health topics</li>
+                        <li>🔗 Continuous integration with existing health information systems</li>
+                        <li>🗺️ Develop a roadmap for expanding into additional use cases</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🙏 Thank You!</h2>
+            <h3>Questions?</h3>
+            <p><small>Transforming Health Communication with WhatsApp AI Chatbot</small></p>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <div class="controls">
+        <button id="prevBtn">&laquo; Previous</button>
+        <button id="nextBtn">Next &raquo;</button>
+    </div>
+
+    <div class="text-size-control">
+        <span>A-</span>
+        <input type="range" id="textSizeSlider" min="0.8" max="1.5" step="0.1" value="1">
+        <span>A+</span>
+    </div>
+
     <script>
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-           // center: true,
-            hash: true,
-            transition: 'slide',
-            // Learn about plugins: https://revealjs.com/plugins/
-            plugins: [ ]
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.querySelector('.progress');
+        const textSizeSlider = document.getElementById('textSizeSlider');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            updateProgress();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function updateProgress() {
+            const progress = (currentSlide / (slides.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function updateTextSize() {
+            document.body.style.fontSize = `${textSizeSlider.value}em`;
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        textSizeSlider.addEventListener('input', updateTextSize);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
         });
+
+        updateProgress();
+        updateTextSize();
     </script>
 </body>
 </html>
