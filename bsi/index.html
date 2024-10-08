@@ -5,127 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bindroo India Solutions</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevents scrolling due to the 3D canvas */
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        header {
-            background-color: #3c4a68;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 2.5em;
-        }
-        main {
-            position: relative;
-            z-index: 1; /* Ensure content is above the 3D canvas */
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
+
+        body {
             margin: 0;
+            overflow: hidden;
         }
-        h2 {
-            margin-top: 40px;
-            font-size: 2em;
-        }
-        footer {
-            background-color: #3c4a68;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-        }
-        canvas {
+
+        /* Tab Container */
+        .tab-container {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Behind all other content */
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Tab Links */
+        .tab-links {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .tab-links button {
+            background-color: transparent;
+            border: none;
+            padding: 15px 25px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab-links button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-links button.active {
+            border-bottom: 3px solid #007bff;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            flex: 1;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            padding: 40px;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+        /* Section styles for each tab */
+        #about, #services, #solutions, #contact {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 30px;
+            width: 80%;
+            text-align: center;
+        }
+
+        /* Canvas background */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <header>
-        Bindroo India Solutions
-    </header>
-    
-    <canvas id="bgCanvas"></canvas>
-    
-    <main>
-        <h2>Our Services</h2>
-        <p>
-            At Bindroo India Solutions, we offer a range of services focused on advanced data collection and analysis. Our expertise spans:
-            <ul>
-                <li><strong>Data Analytics:</strong> Harnessing data to drive decisions.</li>
-                <li><strong>GIS Analysis:</strong> Utilizing geospatial data for better insights.</li>
-                <li><strong>Survey Experiments:</strong> Conducting RCTs and designing study parameters.</li>
-                <li><strong>NLP & AI-ML:</strong> Implementing cutting-edge technologies for predictive analytics.</li>
-                <li><strong>Data Management:</strong> Ensuring data quality and security.</li>
-            </ul>
-        </p>
-        
-        <h2>Innovative Data Solutions</h2>
-        <p>
-            We specialize in designing questionnaires, developing Android-based data collection apps, and managing comprehensive data analysis and reporting. Our processes include:
-            <ul>
-                <li>Real-time data quality checks</li>
-                <li>GPS coordinate collection of households</li>
-                <li>Surprise incentives and random assessments by supervisors</li>
-            </ul>
-        </p>
-    </main>
-    
-    <footer>
-        &copy; 2024 Bindroo India Solutions. All rights reserved.
-    </footer>
-    
+
+    <!-- Three.js Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Tab Container -->
+    <div class="tab-container">
+
+        <!-- Tab Links -->
+        <div class="tab-links">
+            <button class="tab-link active" onclick="openTab('about')">About Us</button>
+            <button class="tab-link" onclick="openTab('services')">Services</button>
+            <button class="tab-link" onclick="openTab('solutions')">Solutions</button>
+            <button class="tab-link" onclick="openTab('contact')">Contact</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="about" class="tab-content active">
+            <h2>About Bindroo India Solutions</h2>
+            <p>We specialize in data analytics, AI, GIS, and survey solutions to transform your data into actionable insights.</p>
+        </div>
+
+        <div id="services" class="tab-content">
+            <h2>Our Services</h2>
+            <p>From AI to survey design, our services offer end-to-end data solutions for any business need.</p>
+        </div>
+
+        <div id="solutions" class="tab-content">
+            <h2>Innovative Solutions</h2>
+            <p>Our cutting-edge solutions ensure your business stays ahead in a data-driven world.</p>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <h2>Contact Us</h2>
+            <p>Get in touch to learn more about how we can help with your data solutions.</p>
+        </div>
+
+    </div>
+
+    <!-- Three.js Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Three.js setup
+        // Tab Functionality
+        function openTab(tabName) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove active class from all tab links
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the current tab and mark the button as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+        // Three.js for stunning background
+        const canvas = document.querySelector('#bg-canvas');
         const scene = new THREE.Scene();
+
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), alpha: true });
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
-        
-        const torusGeometry = new THREE.TorusGeometry(1, 0.3, 16, 100);
-        const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
+        camera.position.setZ(30);
 
-        function createRandomShape() {
-            const shape = new THREE.Mesh(torusGeometry, material);
-            shape.rotation.x = Math.random() * Math.PI;
-            shape.rotation.y = Math.random() * Math.PI;
-            shape.position.x = (Math.random() - 0.5) * 10;
-            shape.position.y = (Math.random() - 0.5) * 10;
-            shape.position.z = (Math.random() - 0.5) * 10;
-            scene.add(shape);
-        }
+        const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+        const material = new THREE.MeshStandardMaterial({ color: 0x007bff });
+        const torus = new THREE.Mesh(geometry, material);
 
-        for (let i = 0; i < 10; i++) {
-            createRandomShape();
-        }
+        scene.add(torus);
 
-        camera.position.z = 5;
+        const pointLight = new THREE.PointLight(0xffffff);
+        pointLight.position.set(5, 5, 5);
+        const ambientLight = new THREE.AmbientLight(0xffffff);
+        scene.add(pointLight, ambientLight);
 
         function animate() {
             requestAnimationFrame(animate);
-            scene.rotation.y += 0.01; // Rotate the scene
+            torus.rotation.x += 0.01;
+            torus.rotation.y += 0.005;
+            torus.rotation.z += 0.01;
             renderer.render(scene, camera);
         }
 
         animate();
 
-        // Handle window resize
+        // Handle Window Resize
         window.addEventListener('resize', () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
+
     </script>
 </body>
 </html>
