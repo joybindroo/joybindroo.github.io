@@ -3,87 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bindroo India Solutions</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Tab Container */
+        .tab-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Tab Links */
+        .tab-links {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .tab-links button {
+            background-color: transparent;
+            border: none;
+            padding: 15px 25px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab-links button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-links button.active {
+            border-bottom: 3px solid #007bff;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            flex: 1;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            padding: 40px;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+        /* Section styles for each tab */
+        #about, #services, #solutions, #contact {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 30px;
+            width: 80%;
+            text-align: center;
+        }
+
+        /* Canvas background */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <h1>Bindroo India Solutions</h1>
-            <p>Your partner in Data Analytics, AI, GIS, and Survey Solutions</p>
-            <nav>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#solutions">Solutions</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Three.js Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- About Section -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Bindroo India Solutions is a leading IT solutions provider, specializing in Data Analytics, AI, GIS, and Survey Experiments. We help businesses harness the power of data to drive smart decisions and fuel innovation.</p>
-        </div>
-    </section>
+    <!-- Tab Container -->
+    <div class="tab-container">
 
-    <!-- Services Section -->
-    <section id="services" class="section-padding">
-        <div class="container">
+        <!-- Tab Links -->
+        <div class="tab-links">
+            <button class="tab-link active" onclick="openTab('about')">About Us</button>
+            <button class="tab-link" onclick="openTab('services')">Services</button>
+            <button class="tab-link" onclick="openTab('solutions')">Solutions</button>
+            <button class="tab-link" onclick="openTab('contact')">Contact</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="about" class="tab-content active">
+            <h2>About Bindroo India Solutions</h2>
+            <p>We specialize in data analytics, AI, GIS, and survey solutions to transform your data into actionable insights.</p>
+        </div>
+
+        <div id="services" class="tab-content">
             <h2>Our Services</h2>
-            <div class="service-box">
-                <h3>Data Analytics & Visualizations</h3>
-                <p>From raw data to actionable insights, our analytics services include custom dashboards, GIS mapping, report automation, and more.</p>
-            </div>
-            <div class="service-box">
-                <h3>AI, NLP, and Predictive Analytics</h3>
-                <p>We provide AI-driven solutions, including predictive models, chatbots, and natural language processing, tailored to meet business needs.</p>
-            </div>
-            <div class="service-box">
-                <h3>Survey Solutions & RCTs</h3>
-                <p>End-to-end survey solutions, from questionnaire design to real-time data collection via Android apps, ensuring high-quality results.</p>
-            </div>
-            <div class="service-box">
-                <h3>Data Management & Quality Control</h3>
-                <p>Ensure data integrity and security with our comprehensive data management, metadata control, and real-time monitoring solutions.</p>
-            </div>
+            <p>From AI to survey design, our services offer end-to-end data solutions for any business need.</p>
         </div>
-    </section>
 
-    <!-- Solutions Section -->
-    <section id="solutions" class="section-padding">
-        <div class="container">
+        <div id="solutions" class="tab-content">
             <h2>Innovative Solutions</h2>
-            <p>Our unique combination of advanced technologies, real-time data checks, AI-powered tools, and rich data libraries help us deliver unmatched solutions for your business.</p>
+            <p>Our cutting-edge solutions ensure your business stays ahead in a data-driven world.</p>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section-padding">
-        <div class="container">
+        <div id="contact" class="tab-content">
             <h2>Contact Us</h2>
-            <p>Interested in our services? Reach out to us and discover how we can help transform your data into a strategic asset.</p>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+            <p>Get in touch to learn more about how we can help with your data solutions.</p>
         </div>
-    </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Bindroo India Solutions. All Rights Reserved.</p>
-        </div>
-    </footer>
+    </div>
 
+    <!-- Three.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Tab Functionality
+        function openTab(tabName) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove active class from all tab links
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the current tab and mark the button as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+        // Three.js for stunning background
+        const canvas = document.querySelector('#bg-canvas');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+        const material = new THREE.MeshStandardMaterial({ color: 0x007bff });
+        const torus = new THREE.Mesh(geometry, material);
+
+        scene.add(torus);
+
+        const pointLight = new THREE.PointLight(0xffffff);
+        pointLight.position.set(5, 5, 5);
+        const ambientLight = new THREE.AmbientLight(0xffffff);
+        scene.add(pointLight, ambientLight);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            torus.rotation.x += 0.01;
+            torus.rotation.y += 0.005;
+            torus.rotation.z += 0.01;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+
+    </script>
 </body>
 </html>
