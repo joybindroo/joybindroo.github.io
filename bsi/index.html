@@ -1,196 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bindroo India Solutions</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        /* Tab Container */
-        .tab-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Tab Links */
-        .tab-links {
-            display: flex;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .tab-links button {
-            background-color: transparent;
-            border: none;
-            padding: 15px 25px;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .tab-links button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .tab-links button.active {
-            border-bottom: 3px solid #007bff;
-        }
-
-        /* Tab Content */
-        .tab-content {
-            flex: 1;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            padding: 40px;
-        }
-
-        .tab-content.active {
-            display: flex;
-        }
-
-        /* Section styles for each tab */
-        #about, #services, #solutions, #contact {
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            padding: 30px;
-            width: 80%;
-            text-align: center;
-        }
-
-        /* Canvas background */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bindroo India Solutions</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- 3D Canvas for Three.js -->
+  <div id="background"></div>
+  
+  <!-- Header Section -->
+  <header>
+    <h1>Bindroo India Solutions</h1>
+  </header>
+  
+  <!-- Tab Navigation -->
+  <nav>
+    <button class="tablinks" onclick="openTab(event, 'Services')">Services</button>
+    <button class="tablinks" onclick="openTab(event, 'About')">About Us</button>
+    <button class="tablinks" onclick="openTab(event, 'Contact')">Contact Us</button>
+  </nav>
 
-    <!-- Three.js Canvas -->
-    <canvas id="bg-canvas"></canvas>
+  <!-- Tab Content -->
+  <section id="Services" class="tabcontent">
+    <h2>Our Services</h2>
 
-    <!-- Tab Container -->
-    <div class="tab-container">
+    <!-- Carousel Container -->
+    <div class="carousel-container">
+      <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="next" onclick="moveSlide(1)">&#10095;</button>
 
-        <!-- Tab Links -->
-        <div class="tab-links">
-            <button class="tab-link active" onclick="openTab('about')">About Us</button>
-            <button class="tab-link" onclick="openTab('services')">Services</button>
-            <button class="tab-link" onclick="openTab('solutions')">Solutions</button>
-            <button class="tab-link" onclick="openTab('contact')">Contact</button>
+      <div class="carousel-slide">
+        <!-- Service 1: GIS Analysis, Maps, Research Studies -->
+        <div class="service">
+          <h3>GIS Analysis, Maps, Research Studies</h3>
+          <p>We provide comprehensive Geographic Information System (GIS) services that include spatial analysis, map creation, and detailed research studies. Our services ensure that businesses and organizations can visualize data effectively to make informed decisions.</p>
+          <ul>
+            <li>Custom map designs with detailed geographic data</li>
+            <li>Spatial analysis and predictive modeling</li>
+            <li>Integration of GIS with research and survey tools</li>
+          </ul>
         </div>
 
-        <!-- Tab Content -->
-        <div id="about" class="tab-content active">
-            <h2>About Bindroo India Solutions</h2>
-            <p>We specialize in data analytics, AI, GIS, and survey solutions to transform your data into actionable insights.</p>
+        <!-- Service 2: Data Modeling and Database Management -->
+        <div class="service">
+          <h3>Data Modeling and Database Management</h3>
+          <p>Our data experts design scalable database systems and create predictive models that help organizations manage, store, and analyze large datasets. We focus on ensuring data quality and integrity throughout the process.</p>
+          <ul>
+            <li>Advanced database management and optimization</li>
+            <li>Design of predictive models for business insights</li>
+            <li>Efficient data handling with high-security protocols</li>
+          </ul>
         </div>
 
-        <div id="services" class="tab-content">
-            <h2>Our Services</h2>
-            <p>From AI to survey design, our services offer end-to-end data solutions for any business need.</p>
+        <!-- Service 3: NLP, AI-ML, Predictive Analytics, Chatbots -->
+        <div class="service">
+          <h3>NLP, AI-ML, Predictive Analytics, Chatbots</h3>
+          <p>Our artificial intelligence solutions enable businesses to harness the power of natural language processing (NLP), machine learning (ML), and predictive analytics. We create custom chatbots and predictive systems that automate processes and enhance customer experiences.</p>
+          <ul>
+            <li>Custom AI-ML solutions tailored to business needs</li>
+            <li>Intelligent chatbots for customer support and engagement</li>
+            <li>Predictive analytics for proactive decision-making</li>
+          </ul>
         </div>
 
-        <div id="solutions" class="tab-content">
-            <h2>Innovative Solutions</h2>
-            <p>Our cutting-edge solutions ensure your business stays ahead in a data-driven world.</p>
+        <!-- Service 4: Survey Tools & Data Collection -->
+        <div class="service">
+          <h3>Survey Tools & Data Collection</h3>
+          <p>We specialize in designing and developing Android-based survey apps that collect real-time data. Our tools are designed to ensure accurate, efficient, and timely collection of field data, making us a leader in the survey and data collection industry.</p>
+          <ul>
+            <li>Custom Android-based survey app development</li>
+            <li>Real-time data collection with GPS and multimedia capture</li>
+            <li>Automated data quality management and checks</li>
+          </ul>
         </div>
 
-        <div id="contact" class="tab-content">
-            <h2>Contact Us</h2>
-            <p>Get in touch to learn more about how we can help with your data solutions.</p>
+        <!-- Service 5: Data Security and Quality Management -->
+        <div class="service">
+          <h3>Data Security and Quality Management</h3>
+          <p>Data security and quality are at the core of our solutions. We implement robust protocols to protect sensitive data and ensure high levels of data accuracy and quality. Our data quality management process includes real-time validation and error detection mechanisms.</p>
+          <ul>
+            <li>High-security protocols for sensitive data management</li>
+            <li>Real-time data quality checks and validation</li>
+            <li>Meta data and record management systems</li>
+          </ul>
         </div>
 
+        <!-- Service 6: Reporting and Analysis -->
+        <div class="service">
+          <h3>Reporting and Analysis</h3>
+          <p>Our experts transform raw data into insightful reports and analytics. We provide detailed reports that help businesses make strategic decisions. Our analysis covers all aspects, from market trends to customer behavior insights.</p>
+          <ul>
+            <li>Comprehensive reports with detailed analysis</li>
+            <li>Market and customer behavior insights</li>
+            <li>Custom dashboards and visualizations</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <!-- Three.js Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Tab Functionality
-        function openTab(tabName) {
-            var i, tabcontent, tablinks;
+  </section>
 
-            // Hide all tab content
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
+  <section id="About" class="tabcontent">
+    <h2>About Us</h2>
+    <p>Bindroo India Solutions is a leader in data analysis, survey tools, AI, and predictive analytics. Our expertise spans various industries...</p>
+  </section>
 
-            // Remove active class from all tab links
-            tablinks = document.getElementsByClassName("tab-link");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
+  <section id="Contact" class="tabcontent">
+    <h2>Contact Us</h2>
+    <p>For inquiries, please email us at contact@bindroosolutions.in or call +91-9876543210.</p>
+  </section>
 
-            // Show the current tab and mark the button as active
-            document.getElementById(tabName).classList.add("active");
-            event.currentTarget.classList.add("active");
-        }
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Bindroo India Solutions. All rights reserved.</p>
+  </footer>
 
-        // Three.js for stunning background
-        const canvas = document.querySelector('#bg-canvas');
-        const scene = new THREE.Scene();
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({
-            canvas: canvas,
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.setZ(30);
-
-        const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-        const material = new THREE.MeshStandardMaterial({ color: 0x007bff });
-        const torus = new THREE.Mesh(geometry, material);
-
-        scene.add(torus);
-
-        const pointLight = new THREE.PointLight(0xffffff);
-        pointLight.position.set(5, 5, 5);
-        const ambientLight = new THREE.AmbientLight(0xffffff);
-        scene.add(pointLight, ambientLight);
-
-        function animate() {
-            requestAnimationFrame(animate);
-            torus.rotation.x += 0.01;
-            torus.rotation.y += 0.005;
-            torus.rotation.z += 0.01;
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Handle Window Resize
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        });
-
-    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
