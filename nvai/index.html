@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Visual Novel Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        #media-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        #media-container img, 
+        #media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        #text-container {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 5px;
+            min-height: 100px;
+            margin-bottom: 20px;
+        }
+        #choices-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .choice-btn {
+            background: #4a4a4a;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 1em;
+        }
+        .choice-btn:hover {
+            background: #5a5a5a;
+            transform: translateX(10px);
+        }
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        #history-btn {
+            background: #3a3a3a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #history-container {
+            display: none;
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .history-entry {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #4a4a4a;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="media-container"></div>
+        <div id="text-container"></div>
+        <div id="choices-container"></div>
+        <div id="controls">
+            <button id="history-btn">History</button>
+        </div>
+        <div id="history-container"></div>
+    </div>
+
+    <script>
+        // Sample story data with branching
+        const storyData = {
+            scenes: {
+                start: {
+                    type: "text",
+                    content: "You find yourself at a crossroads...",
+                    choices: [
+                        { text: "Take the path through the forest", nextScene: "forest" },
+                        { text: "Head towards the mountains", nextScene: "mountain" }
+                    ]
+                },
+                forest: {
+                    type: "image",
+                    content: "forest.png",
+                    text: "The forest is dark and mysterious...",
+                    choices: [
+                        { text: "Explore deeper", nextScene: "forest_deep" },
+                        { text: "Turn back", nextScene: "start" }
+                    ]
+                },
+                mountain: {
+                    type: "image",
+                    content: "/api/placeholder/800/450",
+                    text: "The mountains tower before you...",
+                    choices: [
+                        { text: "Climb higher", nextScene: "mountain_peak" },
+                        { text: "Return to crossroads", nextScene: "start" }
+                    ]
+                },
+                forest_deep: {
+                    type: "text",
+                    content: "You've discovered an ancient temple!",
+                    choices: [
+                        { text: "Start over", nextScene: "start" }
+                    ]
+                },
+                mountain_peak: {
+                    type: "text",
+                    content: "You've reached the summit!",
+                    choices: [
+                        { text: "Start over", nextScene: "start" }
+                    ]
+                }
+            },
+            startScene: "start"
+        };
+
+        class VisualNovel {
+            constructor(data) {
+                this.data = data;
+                this.currentScene = data.startScene;
+                this.history = [];
+                
+                this.mediaContainer = document.getElementById('media-container');
+                this.textContainer = document.getElementById('text-container');
+                this.choicesContainer = document.getElementById('choices-container');
+                this.historyBtn = document.getElementById('history-btn');
+                this.historyContainer = document.getElementById('history-container');
+                
+                this.setupControls();
+                this.updateScene();
+            }
+
+            setupControls() {
+                this.historyBtn.addEventListener('click', () => this.toggleHistory());
+            }
+
+            toggleHistory() {
+                const isVisible = this.historyContainer.style.display === 'block';
+                this.historyContainer.style.display = isVisible ? 'none' : 'block';
+                this.historyBtn.textContent = isVisible ? 'History' : 'Hide History';
+            }
+
+            addToHistory(scene) {
+                const historyEntry = {
+                    text: scene.text || scene.content,
+                    timestamp: new Date().toLocaleTimeString()
+                };
+                this.history.push(historyEntry);
+                this.updateHistoryDisplay();
+            }
+
+            updateHistoryDisplay() {
+                this.historyContainer.innerHTML = this.history
+                    .map(entry => `
+                        <div class="history-entry">
+                            <small>${entry.timestamp}</small>
+                            <div>${entry.text}</div>
+                        </div>
+                    `)
+                    .join('');
+                this.historyContainer.scrollTop = this.historyContainer.scrollHeight;
+            }
+
+            clearMedia() {
+                this.mediaContainer.innerHTML = '';
+            }
+
+            async updateScene() {
+                const scene = this.data.scenes[this.currentScene];
+                if (!scene) {
+                    console.error('Scene not found:', this.currentScene);
+                    return;
+                }
+
+                this.clearMedia();
+                this.addToHistory(scene);
+                
+                switch(scene.type) {
+                    case 'text':
+                        this.textContainer.textContent = scene.content;
+                        break;
+                        
+                    case 'image':
+                        const img = document.createElement('img');
+                        img.src = scene.content;
+                        img.alt = 'Scene Image';
+                        this.mediaContainer.appendChild(img);
+                        this.textContainer.textContent = scene.text || '';
+                        break;
+                        
+                    case 'video':
+                        const video = document.createElement('video');
+                        video.src = scene.content;
+                        video.controls = true;
+                        this.mediaContainer.appendChild(video);
+                        this.textContainer.textContent = scene.text || '';
+                        break;
+                }
+                
+                this.updateChoices(scene.choices || []);
+            }
+
+            updateChoices(choices) {
+                this.choicesContainer.innerHTML = '';
+                choices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.className = 'choice-btn';
+                    button.textContent = choice.text;
+                    button.addEventListener('click', () => {
+                        this.currentScene = choice.nextScene;
+                        this.updateScene();
+                    });
+                    this.choicesContainer.appendChild(button);
+                });
+            }
+        }
+
+        // Initialize the visual novel
+        const novel = new VisualNovel(storyData);
+    </script>
+</body>
+</html>
