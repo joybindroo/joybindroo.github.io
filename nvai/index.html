@@ -105,49 +105,186 @@
     <script>
         // Sample story data with branching
         const storyData = {
-            scenes: {
-                start: {
-                    type: "text",
-                    content: "You find yourself at a crossroads...",
-                    choices: [
-                        { text: "Take the path through the forest", nextScene: "forest" },
-                        { text: "Head towards the mountains", nextScene: "mountain" }
-                    ]
-                },
-                forest: {
-                    type: "image",
-                    content: "forest.png",
-                    text: "The forest is dark and mysterious...",
-                    choices: [
-                        { text: "Explore deeper", nextScene: "forest_deep" },
-                        { text: "Turn back", nextScene: "start" }
-                    ]
-                },
-                mountain: {
-                    type: "image",
-                    content: "/api/placeholder/800/450",
-                    text: "The mountains tower before you...",
-                    choices: [
-                        { text: "Climb higher", nextScene: "mountain_peak" },
-                        { text: "Return to crossroads", nextScene: "start" }
-                    ]
-                },
-                forest_deep: {
-                    type: "text",
-                    content: "You've discovered an ancient temple!",
-                    choices: [
-                        { text: "Start over", nextScene: "start" }
-                    ]
-                },
-                mountain_peak: {
-                    type: "text",
-                    content: "You've reached the summit!",
-                    choices: [
-                        { text: "Start over", nextScene: "start" }
-                    ]
-                }
-            },
-            startScene: "start"
+            // scenes: {
+            //     start: {
+            //         type: "text",
+            //         content: "You find yourself at a crossroads...",
+            //         choices: [
+            //             { text: "Take the path through the forest", nextScene: "forest" },
+            //             { text: "Head towards the mountains", nextScene: "mountain" }
+            //         ]
+            //     },
+            //     forest: {
+            //         type: "image",
+            //         content: "forest.png",
+            //         text: "The forest is dark and mysterious...",
+            //         choices: [
+            //             { text: "Explore deeper", nextScene: "forest_deep" },
+            //             { text: "Turn back", nextScene: "start" }
+            //         ]
+            //     },
+            //     mountain: {
+            //         type: "image",
+            //         content: "/api/placeholder/800/450",
+            //         text: "The mountains tower before you...",
+            //         choices: [
+            //             { text: "Climb higher", nextScene: "mountain_peak" },
+            //             { text: "Return to crossroads", nextScene: "start" }
+            //         ]
+            //     },
+            //     forest_deep: {
+            //         type: "text",
+            //         content: "You've discovered an ancient temple!",
+            //         choices: [
+            //             { text: "Start over", nextScene: "start" }
+            //         ]
+            //     },
+            //     mountain_peak: {
+            //         type: "text",
+            //         content: "You've reached the summit!",
+            //         choices: [
+            //             { text: "Start over", nextScene: "start" }
+            //         ]
+            //     }
+            // },
+            // startScene: "start"
+           
+    scenes: {
+        start: {
+            type: "text",
+            content: "Leo, a brave teen with a thirst for adventure, stands at the edge of his village, looking out at the world beyond...",
+            choices: [
+                { text: "Walk towards the distant forest", nextScene: "forest_entrance" },
+                { text: "Head to the river flowing south", nextScene: "river_side" }
+            ]
+        },
+        forest_entrance: {
+            type: "image",
+            content: "/api/placeholder/800/450",
+            text: "Leo enters the forest, with trees towering above and shadows stretching long across the ground...",
+            choices: [
+                { text: "Explore deeper into the forest", nextScene: "deep_forest" },
+                { text: "Turn around and head towards the river", nextScene: "river_side" }
+            ]
+        },
+        river_side: {
+            type: "image",
+            content: "/api/placeholder/800/450",
+            text: "The river is calm and sparkling. Leo spots a small boat tethered to a tree branch.",
+            choices: [
+                { text: "Take the boat and row downriver", nextScene: "river_adventure" },
+                { text: "Follow the riverbank on foot", nextScene: "river_path" }
+            ]
+        },
+        deep_forest: {
+            type: "text",
+            content: "Leo ventures deeper into the forest and finds an abandoned cabin. The door is slightly ajar...",
+            choices: [
+                { text: "Enter the cabin", nextScene: "cabin" },
+                { text: "Turn back towards the forest entrance", nextScene: "forest_entrance" }
+            ]
+        },
+        cabin: {
+            type: "text",
+            content: "Inside, Leo discovers an old map and a note reading, 'Follow your heart and you’ll find wonders.'",
+            choices: [
+                { text: "Take the map and continue exploring", nextScene: "forest_clearing" },
+                { text: "Return to the village to rest", nextScene: "start" }
+            ]
+        },
+        forest_clearing: {
+            type: "image",
+            content: "/api/placeholder/800/450",
+            text: "Leo follows the map to a beautiful clearing, where he sees a hidden waterfall cascading down...",
+            choices: [
+                { text: "Investigate the waterfall", nextScene: "waterfall_cave" },
+                { text: "Head back to the cabin", nextScene: "cabin" }
+            ]
+        },
+        waterfall_cave: {
+            type: "text",
+            content: "Behind the waterfall, Leo finds a hidden cave filled with glowing crystals!",
+            choices: [
+                { text: "Start over and share this with the village", nextScene: "start" },
+                { text: "Keep exploring deeper into the cave", nextScene: "cave_depths" }
+            ]
+        },
+        cave_depths: {
+            type: "text",
+            content: "Leo reaches the depths of the cave and finds an ancient relic glowing in the dark...",
+            choices: [
+                { text: "Return to the village with the relic", nextScene: "start" },
+                { text: "Set up camp and study the relic", nextScene: "camp" }
+            ]
+        },
+        camp: {
+            type: "text",
+            content: "Leo sets up camp and feels the spirit of adventure in his heart, knowing this is just the beginning.",
+            choices: [
+                { text: "Start a new adventure", nextScene: "start" }
+            ]
+        },
+        river_adventure: {
+            type: "text",
+            content: "As Leo rows down the river, he encounters a fork. The left path leads into a mysterious fog, while the right continues under the open sky.",
+            choices: [
+                { text: "Take the left path into the fog", nextScene: "foggy_path" },
+                { text: "Continue under the open sky", nextScene: "sunny_path" }
+            ]
+        },
+        foggy_path: {
+            type: "text",
+            content: "The fog thickens, and strange sounds fill the air. Suddenly, Leo glimpses a shadowy figure on the riverbank...",
+            choices: [
+                { text: "Approach the figure", nextScene: "shadow_encounter" },
+                { text: "Turn back and row out of the fog", nextScene: "river_adventure" }
+            ]
+        },
+        shadow_encounter: {
+            type: "text",
+            content: "The figure is an old wanderer who shares tales of lost treasures in the mountains and gives Leo a magical compass.",
+            choices: [
+                { text: "Thank the wanderer and return to the village", nextScene: "start" },
+                { text: "Head to the mountains following the compass", nextScene: "mountain_path" }
+            ]
+        },
+        mountain_path: {
+            type: "image",
+            content: "/api/placeholder/800/450",
+            text: "With the compass in hand, Leo finds a hidden trail up the mountain, leading him to breathtaking views...",
+            choices: [
+                { text: "Climb to the mountain peak", nextScene: "mountain_peak" },
+                { text: "Camp on the mountain trail", nextScene: "mountain_camp" }
+            ]
+        },
+        sunny_path: {
+            type: "text",
+            content: "The sun shines bright, and Leo feels a sense of freedom. Birds soar overhead as he drifts peacefully.",
+            choices: [
+                { text: "Row to the village and rest", nextScene: "start" },
+                { text: "Continue down the river", nextScene: "river_falls" }
+            ]
+        },
+        river_falls: {
+            type: "text",
+            content: "The river suddenly picks up speed! Leo is headed toward a waterfall...",
+            choices: [
+                { text: "Brace for impact", nextScene: "waterfall_plunge" },
+                { text: "Try to paddle to safety", nextScene: "river_side" }
+            ]
+        },
+        waterfall_plunge: {
+            type: "text",
+            content: "Leo plunges down the waterfall and lands in a serene pool below, unharmed and exhilarated.",
+            choices: [
+                { text: "Return to the village with his story", nextScene: "start" },
+                { text: "Venture into the nearby forest", nextScene: "forest_entrance" }
+            ]
+        }
+    },
+    startScene: "start"
+
+            
         };
 
         class VisualNovel {
