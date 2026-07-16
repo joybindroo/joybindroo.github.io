@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The KAMIS Register — Joy Bindroo's Journey Building India's Kala-azar System</title>
+<style>
+:root{
+  --paper:#eeece3;
+  --paper-raised:#f7f5ec;
+  --ink:#1c2420;
+  --ink-soft:#4a5049;
+  --rule:#c9c4b2;
+  --stamp:#a23c2a;
+  --stamp-soft:#a23c2a1a;
+  --mustard:#b8862a;
+  --mustard-soft:#b8862a22;
+  --card:#ffffffb0;
+  --focus:#2a5c52;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#171b17;
+    --paper-raised:#1e231e;
+    --ink:#e7e6dc;
+    --ink-soft:#a9ac9f;
+    --rule:#3a3f37;
+    --stamp:#e0693f;
+    --stamp-soft:#e0693f22;
+    --mustard:#e0b24a;
+    --mustard-soft:#e0b24a22;
+    --card:#20251f99;
+    --focus:#7fc9b8;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#171b17;
+  --paper-raised:#1e231e;
+  --ink:#e7e6dc;
+  --ink-soft:#a9ac9f;
+  --rule:#3a3f37;
+  --stamp:#e0693f;
+  --stamp-soft:#e0693f22;
+  --mustard:#e0b24a;
+  --mustard-soft:#e0b24a22;
+  --card:#20251f99;
+  --focus:#7fc9b8;
+}
+:root[data-theme="light"]{
+  --paper:#eeece3;
+  --paper-raised:#f7f5ec;
+  --ink:#1c2420;
+  --ink-soft:#4a5049;
+  --rule:#c9c4b2;
+  --stamp:#a23c2a;
+  --stamp-soft:#a23c2a1a;
+  --mustard:#b8862a;
+  --mustard-soft:#b8862a22;
+  --card:#ffffffb0;
+  --focus:#2a5c52;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:ui-sans-serif,"Segoe UI",Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--mustard-soft);}
+a{color:var(--focus);}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+}
+
+h1,h2,h3,h4{
+  font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+  font-weight:600;
+  text-wrap:balance;
+  margin:0;
+  color:var(--ink);
+}
+
+.mono{
+  font-family:ui-monospace,"SF Mono","Cascadia Mono",Consolas,monospace;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- Header / hero ---------- */
+.hero{
+  position:relative;
+  padding:5.5rem 1.5rem 4rem;
+  max-width:920px;
+  margin:0 auto;
+  border-bottom:1px solid var(--rule);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 38px, var(--rule) 38px 39px);
+  opacity:0.35;
+  pointer-events:none;
+}
+.eyebrow{
+  font-family:ui-monospace,Consolas,monospace;
+  font-size:0.72rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--stamp);
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  border:1px solid var(--stamp);
+  padding:0.28rem 0.7rem;
+  border-radius:2px;
+  position:relative;
+  z-index:1;
+}
+.hero h1{
+  font-size:clamp(2.1rem,5vw,3.4rem);
+  line-height:1.08;
+  margin-top:1.1rem;
+  position:relative;
+  z-index:1;
+}
+.hero .accent{color:var(--stamp);}
+.hero p.lede{
+  max-width:640px;
+  font-size:1.08rem;
+  color:var(--ink-soft);
+  margin-top:1.2rem;
+  position:relative;
+  z-index:1;
+}
+.hero .meta{
+  display:flex;
+  gap:1.6rem;
+  flex-wrap:wrap;
+  margin-top:2rem;
+  font-family:ui-monospace,Consolas,monospace;
+  font-size:0.78rem;
+  color:var(--ink-soft);
+  position:relative;
+  z-index:1;
+}
+.hero .meta b{color:var(--ink);font-weight:600;display:block;font-size:1rem;margin-bottom:0.15rem;}
+
+/* ---------- Layout ---------- */
+.wrap{
+  max-width:920px;
+  margin:0 auto;
+  padding:0 1.5rem 6rem;
+  display:grid;
+  grid-template-columns:120px minmax(0,1fr);
+  gap:2.2rem;
+}
+@media (max-width:720px){
+  .wrap{grid-template-columns:1fr;}
+  .rail{display:none;}
+}
+
+.rail{
+  position:sticky;
+  top:1.5rem;
+  align-self:start;
+  padding-top:3rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.35rem;
+}
+.rail a{
+  font-family:ui-monospace,Consolas,monospace;
+  font-size:0.85rem;
+  color:var(--ink-soft);
+  text-decoration:none;
+  padding:0.3rem 0.5rem;
+  border-left:2px solid var(--rule);
+  transition:border-color .15s, color .15s;
+}
+.rail a:hover, .rail a.active{
+  color:var(--stamp);
+  border-left-color:var(--stamp);
+}
+
+.timeline{padding-top:3rem;}
+
+/* nav for mobile */
+.topnav{
+  display:none;
+  overflow-x:auto;
+  gap:0.5rem;
+  padding:0.9rem 1.5rem;
+  border-bottom:1px solid var(--rule);
+  position:sticky;
+  top:0;
+  background:var(--paper);
+  z-index:5;
+}
+@media (max-width:720px){ .topnav{display:flex;} }
+.topnav a{
+  flex:0 0 auto;
+  font-family:ui-monospace,Consolas,monospace;
+  font-size:0.8rem;
+  padding:0.3rem 0.6rem;
+  border:1px solid var(--rule);
+  border-radius:2px;
+  color:var(--ink-soft);
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+/* ---------- Chapter ---------- */
+.chapter{
+  scroll-margin-top:1.5rem;
+  padding-bottom:3.4rem;
+  margin-bottom:3.4rem;
+  border-bottom:1px dashed var(--rule);
+}
+.chapter:last-child{border-bottom:none;}
+
+.chapter-head{
+  display:flex;
+  align-items:baseline;
+  gap:0.9rem;
+  margin-bottom:0.6rem;
+}
+.chapter-year{
+  font-family:Georgia,serif;
+  font-size:2.6rem;
+  font-weight:700;
+  color:var(--stamp);
+  line-height:1;
+}
+.chapter-tag{
+  font-family:ui-monospace,Consolas,monospace;
+  font-size:0.78rem;
+  color:var(--ink-soft);
+  letter-spacing:0.03em;
+}
+
+.chapter p{
+  margin:0 0 1rem;
+  max-width:66ch;
+  font-size:1.01rem;
+}
+.chapter p:last-of-type{margin-bottom:1.4rem;}
+
+.cardgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:0.9rem;
+  margin-top:1.2rem;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:0.95rem 1rem 1.05rem;
+}
+.card h4{
+  font-family:ui-monospace,Consolas,monospace;
+  font-size:0.72rem;
+  letter-spacing:0.11em;
+  text-transform:uppercase;
+  color:var(--mustard);
+  margin-bottom:0.6rem;
+}
+.card ul{
+  margin:0;
+  padding-left:1.05rem;
+  font-size:0.88rem;
+  color:var(--ink-soft);
+}
+.card.events h4{color:var(--stamp);}
+.card ul li{margin-bottom:0.4rem;}
+.card ul li:last-child{margin-bottom:0;}
+.card.people ul{
+  list-style:none;
+  padding-left:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.35rem;
+}
+.card.people li{
+  background:var(--mustard-soft);
+  border:1px solid var(--rule);
+  border-radius:12px;
+  padding:0.15rem 0.6rem;
+  font-size:0.78rem;
+  color:var(--ink);
+}
+
+/* ---------- Footer ---------- */
+.colophon{
+  max-width:920px;
+  margin:0 auto;
+  padding:2.5rem 1.5rem 4rem;
+  color:var(--ink-soft);
+  font-size:0.85rem;
+  border-top:1px solid var(--rule);
+}
+.colophon b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="eyebrow">Field record · 2016–2023</span>
+  <h1>The <span class="accent">KAMIS</span> Register</h1>
+  <p class="lede">Eight years of sent and received mail, read back as one story: how a rebuilt data system for tracking Kala-azar (visceral leishmaniasis) across Bihar, Jharkhand, and beyond grew from a buggy pilot into the operational backbone of a national elimination programme — and how Joy Bindroo's role grew with it, from data-entry troubleshooter to the person WHO and NVBDCP call when the system needs to talk to the rest of the government.</p>
+  <div class="meta">
+    <div><b>4,746</b>KAMIS-tagged emails read</div>
+    <div><b>8</b>years, 2016 → 2023</div>
+    <div><b>3</b>software rebuilds</div>
+    <div><b>3</b>parallel systems absorbed or compared (VLDRS, DDMS, DHIS2)</div>
+    <div><b>1</b>constant: Joy Bindroo</div>
+  </div>
+</div>
+
+<nav class="topnav" id="topnav" aria-label="Jump to year"></nav>
+
+<div class="wrap">
+  <nav class="rail" id="rail" aria-label="Chapters"></nav>
+  <main class="timeline" id="timeline"></main>
+</div>
+
+<div class="colophon">
+  Compiled from CARE India's KAMIS-related Sent Items and Inbox exports (Jul 2023 snapshot). Chapters are narrative syntheses of email headers and bodies mentioning KAMIS each year — names, dates and events are drawn directly from that correspondence, supplemented by targeted follow-up searches (VLDRS/Kaszona, DDMS/LSTM, LSHTM's SPEAK India collaboration, the Village Mapping Exercise, and KAMIS's mobile-app history) and by direct clarifications from Joy Bindroo on design roles and the 2016 DHIS2 comparison. <b>KAMIS</b> = Kala-azar Management Information System.
+</div>
+
+<script>
+const chapters = [
+{
+  year: "2016",
+  tag: "The rebuild begins",
+  paragraphs: [
+    "The year opens mid-story: on January 6, 2016, ERM (a Kolkata-based consulting firm led by Nilanjan Paul and Joydeep Bhattacharjee) mobilized to write the Software Requirements and Design Document for a rebuilt KAMIS, and by mid-January the SRS was signed off and \"core software development\" had begun. Joy Bindroo joined CARE India as HMISO-VL in mid-May 2016 and almost immediately became the operational hinge between the field, CARE's VL leadership, the state VL lead Sridhar Srikantiah, and the vendor. His first weeks were spent chasing basic data hygiene: reconciling district-wise KAMIS entry counts against government numbers across nine Bihar districts, and untangling duplicate patient records caused by parallel ID schemes in the old system.",
+    "By late May the \"New KAMIS\" test bed was live for testing, and Joy and Khushbu Priyamvada ran formal User Acceptance Testing, producing the first bug report. What followed was a summer of mounting pressure: NVBDCP and CARE's leadership were pushing for a Training-of-Trainers before the August 1 Indoor Residual Spraying round, but the vendor kept slipping deadlines. Sridhar Srikantiah's exasperated line — \"I wish we had known about the mess that the reports were in over the last two months\" — captures the frustration. The team decided to go live with reports disabled just to unblock data entry.",
+    "The new system finally launched at www.ka-mis.org on July 21, 2016 — it nearly backfired: within two days a critical bug surfaced where patient-ID serial numbers lost their leading zeroes, corrupting the whole unique-ID scheme, forcing a full data-entry freeze. Through August and September, senior NVBDCP officials, including Dr. A.C. Dhariwal and Dr. Nupur Roy, were logging into KAMIS directly — a sign the system had become nationally visible. The year closes with a second full redevelopment cycle already underway, including a new \"Patient Linking\" feature, formally accepted by Joy on December 21.",
+    "Underneath the vendor drama was a deliberate design choice. Sridhar Srikantiah owned the programme's business logic; Joy Bindroo translated it into KAMIS's software architecture and data model — built to be a job-aid for health workers across six arms of the intervention: Case Surveillance, Vector Control, Active Case Search, Drug & Diagnostic Inventory, Wage-loss compensation, and village-level Microplans for Indoor Residual Spraying. At the time, DHIS2 could only collect aggregate data and its Tracker module for individual records was still being designed — no easy way to run Kala-azar's patient-level workflow. Two field efforts followed from that scope: on October 27, DPOs began the intensive, multi-year Village Mapping Exercise to build the village/HSC master the Microplans depended on, and on September 27 Joy shipped the earliest Android artifact in the record, a self-built prototype named \"VL-Mobile.\""
+  ],
+  events: [
+    "6–15 Jan — ERM finalizes the SRS for the New KAMIS rebuild",
+    "18 May — Joy Bindroo joins CARE India as HMISO-VL",
+    "30–31 May — UAT begins; first formal bug report filed",
+    "21 Jul — New KAMIS goes live at www.ka-mis.org",
+    "23 Jul — Critical patient-ID bug freezes data entry, days after launch",
+    "27 Sep — Earliest Android prototype (\"VL-Mobile v1.0\") built by Joy Bindroo",
+    "Sep — National NVBDCP officials issued direct KAMIS logins",
+    "27 Oct — DPOs begin the Village Mapping Exercise across Bihar and Jharkhand",
+    "24 Nov–21 Dec — Second SRS cycle accepted, including Patient Linking"
+  ],
+  challenges: [
+    "Chronic vendor delivery delays, especially on the reports module",
+    "Legacy duplicate/orphaned patient IDs from the pre-2016 system",
+    "Launch-week critical bug forcing a full data-entry freeze",
+    "Political deadline pressure outrunning system readiness",
+    "Manual, error-prone paper census data still digitized PHC by PHC",
+    "DHIS2, the obvious generic alternative, had no individual-patient workflow yet"
+  ],
+  people: ["Joy Bindroo","Afaq Shah","Dr. Indranath Banerjee","Sridhar Srikantiah","Khushbu Priyamvada","Joydeep Bhattacharjee (ERM)","Dr. A.C. Dhariwal","Dr. Nupur Roy"]
+},
+{
+  year: "2017",
+  tag: "Cracks, then a hard decision",
+  paragraphs: [
+    "January was pure plumbing: dozens of emails issuing and resetting login credentials for district hospitals across Bihar, following a DPO meet where Joy circulated standard formats for reporting master-data errors. Almost immediately the cracks in the software itself started showing — duplicate patient IDs, the same serial number allotted twice, NR and resident records failing to reconcile. Mid-month brought a genuine crisis: a hardware upgrade left the system down for days, provoking angry queries from field staff before Joy could announce it was live again.",
+    "By March, data quality had become a political problem. NVBDCP's Dr. R.K. Das Gupta wrote bluntly that CARE India's promised 20–25 day fix hadn't happened and \"the data available is of not much use.\" Sridhar's own math confirmed it: only 339 of 614 reported Bihar cases had been entered — a gap of more than 50%. Through spring, Joy ran a running campaign to close it, with district-by-district backlog checklists and reconciliation work plans.",
+    "By August, the team concluded the codebase itself was beyond fixing. Joy's note to Sridhar was blunt: \"We have to redevelop KAMIS from scratch as the code of the current application is outdated... It would take at least 90-100 days.\" (The ERM-built application was written in .NET — the technology, not a feature, that had aged out.) That decision — to redevelop on a Time & Material contract rather than patch the old system — reshaped the rest of the year: TORs for in-house developers, vendor evaluation (TCS, Algoworks), and, in October, West Bengal's first onboarding to the platform.",
+    "The redevelopment scope kept widening. In August, Joy sent a separate vendor, Wizcom Systems, requirements for a standalone Active Case Detection mobile app — a second software track running alongside the core rebuild. And by December 30, Joy laid out just how much the \"revamping of KAMIS\" was meant to absorb: integration of VLDRS (a portal for IRS coverage and quality data, built and hosted since at least 2016 by a vendor called Kaszona Technologies), the new Active Case Detection MIS, dynamic geo-mapping, and an Android app for offline field data entry — four separate efforts, all meant to converge into one platform. Underneath it all, the Village Mapping Exercise ground on district by district — Saran, Bhagalpur, Nawada, Champaran, Jehanabad, Siwan, Vaishali, Darbhanga, Muzaffarpur, Banka, Dumka, Sheikhpura — the most labor-intensive fieldwork in KAMIS's history."
+  ],
+  events: [
+    "5–10 Jan — Linking-module bugs (duplicate serials/records) reported to vendor ERM",
+    "17–20 Jan — Hardware upgrade takes KAMIS offline system-wide",
+    "15 Mar — NVBDCP formally escalates data-quality complaints",
+    "6 Apr — Bihar-wide backlog data-entry directive issued",
+    "3 Aug — Decision made to redevelop KAMIS from scratch (the old app was built in .NET)",
+    "22 Aug — ACD Mobile App requirements sent to a new vendor, Wizcom Systems",
+    "12 Oct — West Bengal onboarded (11 district + 206 block logins)",
+    "20 Nov — Full 2013–2017 reconciliation plan launched",
+    "30 Dec — Joy details the revamp plan: fold VLDRS (Kaszona's IRS portal), ACD, geo-mapping and an Android app into the new KAMIS"
+  ],
+  challenges: [
+    "Duplicate patient IDs and mismatched resident/non-resident records",
+    "Chronically wrong village/HSC master data",
+    "Over 50% entry lag versus government case counts",
+    "Legacy codebase judged unfixable, forcing a vendor transition",
+    "Enormous administrative load resetting district/block credentials",
+    "A parallel external system (VLDRS) duplicating IRS data collection outside KAMIS",
+    "The intensive, district-by-district Village Mapping Exercise consuming most of the year"
+  ],
+  people: ["Joy Bindroo","Sridhar Srikantiah","Sourish Roy (ERM)","Joydeep Bhattacharjee (ERM)","Manash Kumar","Dr. R.K. Das Gupta","Kumar Kundan","TCS / Algoworks","Arindam (Wizcom Systems)","Md. Kasif (Kaszona Technologies)"]
+},
+{
+  year: "2018",
+  tag: "A vendor changes hands mid-flight",
+  paragraphs: [
+    "By January 2018, KAMIS had become the arena where CARE's field data and the government's official numbers collided. Bihar's SPO flagged a gap between government-reported and KAMIS-reported case counts, and for weeks Joy worked through reconciliation, clearing a backlog of non-resident acceptances — 27% pending in Bihar, 42% in Jharkhand. Meanwhile West Bengal's rollout was stalling for the familiar reason that village masters hadn't been set up.",
+    "The year's defining event was the mid-year migration. In early July, Joy announced the live system would go dark for an upgrade, targeting relaunch by 16 July. Sridhar pushed back immediately — \"why 16th, why not earlier?\" The outgoing vendor, ERM, admitted it couldn't even hand over a server OS image because it held no licence for one. The new version was built instead by a fresh vendor, Live for Lives (developer Divyanshu Singh) — the start of a relationship that would run for years.",
+    "The migration's aftershocks ran into autumn — patient-ID mismatches, a chronic bug where duplicate records simply couldn't be deleted. But KAMIS's institutional profile also grew: in August, drug-utilisation data pulled straight from the system was presented to the Joint Secretary (VBD) in Delhi, and WHO convened a KAMIS orientation meeting in Uttar Pradesh as that state prepared to adopt it — what had started as a Bihar/Jharkhand tool was becoming shared national infrastructure.",
+    "KAMIS also started attracting outside researchers. On April 11, LSHTM's Graham Medley convened a \"SPEAK India Modelling Workshop\" — with Sridhar, Joy, DNDi's Suman Rijal, WHO staff and NVBDCP officials all on the invite — the start of a modelling collaboration that would run for years. The following month, LSHTM's Lloyd Chapman connected CARE to IntVen and the Institute for Disease Modeling over a tool called RiskMapper, probing whether vector-risk mapping software built elsewhere could plug into KAMIS's world."
+  ],
+  events: [
+    "Jan — Bihar case-count discrepancy triggers weeks of reconciliation",
+    "6–9 Jul — Live system taken offline for vendor migration off ERM",
+    "Jul — Live for Lives (Divyanshu Singh) becomes new development vendor",
+    "11 Apr — LSHTM's Graham Medley convenes the SPEAK India Modelling Workshop",
+    "May — RiskMapper vector-mapping tool contact brokered via LSHTM's Lloyd Chapman",
+    "29–31 Aug — Drug-treatment data presented to Joint Secretary VBD in Delhi",
+    "Aug — WHO holds KAMIS orientation meeting in Uttar Pradesh",
+    "Oct — Post-migration bugs found and fixed same-day"
+  ],
+  challenges: [
+    "Government vs. KAMIS case-count mismatches requiring reconciliation",
+    "Rocky vendor handover — no licensed server image to transfer",
+    "Incomplete village masters blocking West Bengal rollout",
+    "Chronic inability to delete duplicate patient records",
+    "Constant password/login administration across a widening state footprint"
+  ],
+  people: ["Joy Bindroo","Kumar Kundan","Basab Rooj","Sridhar Srikantiah","Divyanshu Singh (Live for Lives)","Dr. M.P. Sharma","Vikas Sheel","Nicole Seguy (WHO)","Graham Medley (LSHTM)","Lloyd Chapman (LSHTM)"]
+},
+{
+  year: "2019",
+  tag: "\"The brain behind KAMIS\"",
+  paragraphs: [
+    "By 2019, KAMIS had matured into the operational backbone of India's kala-azar elimination programme, and Joy was its de facto owner — a role Bikas Sinha named outright, calling him \"the brain behind KAMIS\" when introducing him to LSHTM modellers. The year opened with village-matching cleanup across Bihar and Jharkhand and weekly \"Data Completeness Report\" mailers serious enough that Dr. Indranath Banerjee told the Jharkhand team to treat the gaps as a priority.",
+    "Through spring, KAMIS became a magnet for external research: LSHTM negotiated de-identified data access for space-time modelling, and in May Joy worked with Divyanshu Singh to build an automated cross-state notification feature for non-resident cases — a real technical build, not just data wrangling. August was the year's moment of validation: Graham Medley reported the NVBDCP Director calling KAMIS \"a very impressive tool\" that \"should form the backbone of the programme,\" and NVBDCP's own IT consultant requested KAMIS's architecture to evaluate hosting it on government NIC servers.",
+    "That scrutiny triggered the year's biggest technical initiative: a formal third-party security audit by AKS IT Services, run against a decoy demo tenant to keep real patient data away from auditors. It found a dozen vulnerabilities across web and mobile — SQL injection, broken authentication among them — and patching ran through December, briefly breaking login and dashboards over the New Year. By year's end, CARE was seconding a dedicated \"Officer – KAMIS\" to NVBDCP's Delhi headquarters — a sign the system's stewardship was being institutionalized beyond one person.",
+    "In between, Joy turned the security lens outward. In February, at the direct request of BMGF's Will Starbuck, he reviewed a rival system called DDMS — hosted by the Liverpool School of Tropical Medicine — and did not hold back: outdated Java UI libraries, a technology called Mojo.JS he flagged as obsolete, no SSL, broken reports on every load. It read like an inventory of problems KAMIS itself had already lived through and fixed. That same spring, KAMIS's own fractured mobile-app landscape finally converged: a dedicated Android app for IRS monitoring shipped in April, and by August 12 Divyanshu Singh had merged it with the separate KAMIS and ACD apps into one unified mobile client. VLDRS — the Kaszona-built IRS portal that had run in parallel since 2016 — sent its last emails that same month, its function fully absorbed. The long Village Mapping Exercise also reached a landmark close on May 28, with a \"final\" village master compiled and pushed online.",
+    "KAMIS's reach went international too. On August 21, Joy sent the KAMIS Data Dictionary straight to LSHTM's Ana Franco, cc'ing Caryn Bern — the schema itself now travelling outward as a research artifact. And that November, NVBDCP's Dr. Naresh Kumar Gill asked CARE to complete the annual WHO \"global VL reporting format,\" the country-profile template that feeds WHO's Global Health Observatory; Joy supplied data he'd already compiled back in September, careful to note it \"only includes list of indicators and report items for which data is available in KAMIS\" — a small, precise admission that the global picture of India's kala-azar burden was, in practice, bounded by what one system could capture."
+  ],
+  events: [
+    "Jan — Village-matching cleanup across Bihar/Jharkhand districts",
+    "Jan — LSHTM negotiates terms for research use of KAMIS data",
+    "1 Feb — Joy reviews DDMS (LSTM's system) for BMGF, at Will Starbuck's request",
+    "Apr — Dedicated KAMIS Android app for IRS Monitoring ships",
+    "May — Cross-state non-resident case-alert feature built with Live for Lives",
+    "28 May — Village Mapping Exercise reaches a \"final\" compiled village master",
+    "Aug — NVBDCP Director praises KAMIS in Delhi demo; NIC hosting inquiry begins",
+    "12 Aug — Unified KAMIS mobile app ships, merging KAMIS + ACD + IRS into one",
+    "Aug — VLDRS (Kaszona) sends its last recorded emails, function absorbed into KAMIS",
+    "21 Aug — KAMIS Data Dictionary shared directly with LSHTM's Ana Franco",
+    "Nov — NVBDCP tasks CARE with the annual WHO global VL reporting format, sourced from KAMIS",
+    "Nov–Dec — Third-party security audit (AKS IT Services) finds and patches vulnerabilities",
+    "Dec — Officer–KAMIS seconded to NVBDCP headquarters in Delhi"
+  ],
+  challenges: [
+    "Missing villages, diagnosis/treatment/follow-up fields, duplicate records",
+    "Password/access churn from constant staff turnover",
+    "Ethical ambiguity sharing geotagged data with external researchers",
+    "Security vulnerabilities (SQL injection, broken auth, CSV injection)",
+    "Server fragility during version upgrades causing year-end outages",
+    "Three separate mobile-app tracks (KAMIS, ACD, IRS) needing consolidation",
+    "A rival system (DDMS) found running the exact class of problems KAMIS once had"
+  ],
+  people: ["Joy Bindroo","Kumar Kundan","Bikas Sinha","Divyanshu Singh (Live for Lives)","Graham Medley (LSHTM)","Emily Nightingale (LSHTM)","Dr. Caryn Bern (UCSF)","Ajay Negi (NVBDCP/NIC)","Will Starbuck (BMGF)","Ana Franco (LSHTM)","Dr. Naresh Kumar Gill (NVBDCP)"]
+},
+{
+  year: "2020",
+  tag: "A pandemic, and the road to NIC",
+  paragraphs: [
+    "The year opened with KAMIS mid-handover: AKS IT Services issued final security-audit certificates in January, which Joy and Bikas Sinha treated as the trigger to formally request migrating KAMIS onto NIC government servers. A seven-item development roadmap for 2020 was circulated on January 21 — new dashboard indicators, a case-management module, an inventory module, and more — a plan that would collide head-on with the pandemic weeks later.",
+    "By late March, COVID-19 had stopped VL field operations across Bihar and Jharkhand. NVBDCP asked pointedly for updates on long-pending items, and Joy's reply was rare good news amid the disruption: \"Dashboard is done and is available in KAMIS... Geo tagging is almost complete also.\" Even so, the vendor's invoice that April apologized \"for the delay in sending over the invoice due to the lockdown\" — the first sign the pandemic was slowing development, not just fieldwork.",
+    "COVID reached further than KAMIS's own vendor contracts — it cancelled the international VL calendar too. WHO's Rosa Maria Perea Ibanez had spent February lining up a Global Leishmaniasis Programme Review Meeting in Istanbul, 10-12 March, with Joy and Bikas Sinha preparing to attend; it was called off days beforehand, a casualty of the same pandemic already grounding KAMIS's own field teams. A quieter international thread kept going regardless: on January 22, LSTM's Rinki Deb shared the first of what became a recurring \"integrated report\" on entomological surveillance from VL sentinel sites, cc'ing Michael Coleman, Rudra Pratap Singh, and LSTM Director Janet Hemingway — internal review first, then onward \"to our stakeholders and partners.\"",
+    "November brought an honest reckoning: drafting a contract-closure letter, Joy wrote that two of three deliverables \"could not be completed within stipulated time by agency, mainly because... the COVID-19 related lockdown significantly impact[ed] the pace of development.\" That closure triggered a fresh procurement cycle for a new KAMIS vendor — setting up the contracting story that would run through 2021 and 2022."
+  ],
+  events: [
+    "4–13 Jan — Security-audit certificates issued for web and mobile apps",
+    "17–21 Jan — NIC migration request drafted; 7-item 2020 dev roadmap circulated",
+    "22 Jan — LSTM's Rinki Deb shares the first integrated entomological sentinel-site report",
+    "Feb–Mar — WHO's Global Leishmaniasis Programme Review Meeting (Istanbul) planned, then cancelled for COVID-19",
+    "14 Apr — \"VL Sentinel Sites Integrated Report\" for March 2020 circulated",
+    "Late Mar — COVID lockdown halts VL fieldwork; dashboard/app confirmed complete",
+    "29 Apr — Vendor invoice cites lockdown delay on new modules",
+    "Sep–Oct — NIC sends technical onboarding checklist for eforms.nic.in hosting",
+    "27 Nov — Contract with Live for Lives formally closed; new vendor RFP begins",
+    "15 Dec — KAMIS app registration begun on Government's Mobile Seva AppStore"
+  ],
+  challenges: [
+    "COVID lockdown halting both fieldwork and vendor development pace",
+    "Multi-agency bureaucratic coordination for the NIC server migration",
+    "Geo-tagging mismatches requiring district-by-district manual reconciliation",
+    "Admin-panel limitations preventing deletion of bad village-master records",
+    "Vendor unable to complete two of three contracted deliverables on time",
+    "A planned WHO global programme review meeting cancelled outright by the pandemic"
+  ],
+  people: ["Joy Bindroo","Bikas Sinha","Dr. Sridhar Srikantiah","Divyanshu Singh (Live for Lives)","Satyajit Ghosh","Dr. Naresh Gill","Ajay Negi","Gajanana V Hegde","Rosa Maria Perea Ibanez (WHO)","Michael Coleman (LSTM)","Rinki Deb (LSTM)","Prof. Janet Hemingway (LSTM)"]
+},
+{
+  year: "2021",
+  tag: "Taking the keys back",
+  paragraphs: [
+    "January was classic sysadmin firefighting: a lapsed SSL certificate took down the dashboard, Chrome stopped accepting CSV downloads, and a recurring permissions bug kept blocking Apache on the government VM. By March the domain itself nearly lapsed — Joy personally fronted the renewal fee on his own card when online payment failed — while, in parallel, NIC finished provisioning a public IP and sub-domain, kamis.nvbdcp.gov.in, beginning the migration onto government cloud infrastructure in earnest.",
+    "Mid-year, the story turned to governance and money. Bikas Sinha ordered the existing developer contract closed out, and Joy proposed something more deliberate: bringing KAMIS hosting fully under CARE's own control by buying a dedicated VPS and SSL certificate rather than depending on the developer's infrastructure. It wasn't a clean transition — a lapsed certificate broke the system again mid-move, prompting complaints from partners like CHAI, and the VPS itself needed renewing again just months later at roughly Rs. 15,500 per quarter, a cost Joy had to keep flagging up the chain.",
+    "The public-health work never paused underneath this: geo-tagging climbed to 97.9% in Bihar, and October saw a major initiative to trace patients who had ended up with multiple different KAMIS IDs, oriented to every DPO over Teams and chased block by block into November. The year closed on a security scare — NIC's routine vulnerability assessment flagged outdated Apache and OpenSSL on the government-hosted system, exposing it to remote code execution risk, and Joy was told to patch it \"at the earliest.\"",
+    "The DDMS story also turned a corner. On September 30, Joy emailed LSTM's Rudra Singh directly, asking for updated DDMS data exports to load into KAMIS's new Entomology Dashboard — the same rival system he'd picked apart two years earlier had become an upstream data supplier. And in late October, an \"Accepted: Predictive Tool\" calendar invite over Zoom (lshtm.zoom.us) marked the start of a formal short-term forecasting collaboration with Graham Medley's LSHTM group. LSTM's separate entomological reporting relationship never let up either — Michael Coleman sent further sentinel-site indicator reports in January and May, this time straight to a wider NVBDCP/state distribution list."
+  ],
+  events: [
+    "Jan — SSL lapse takes down dashboard; recurring VM permissions bug",
+    "29 Jan — Michael Coleman (LSTM) sends a Visceral Leishmaniasis Entomological Indicator Report",
+    "8 Mar — Joy personally pays domain renewal to keep ka-mis.org alive",
+    "5 Mar — NIC confirms kamis.nvbdcp.gov.in sub-domain, migration begins",
+    "27 May — Michael Coleman sends a further LSTM Entomological Report",
+    "15 Jul — Live for Life contract ordered closed out",
+    "20–21 Jul — CARE takes hosting in-house with its own VPS and SSL",
+    "13–18 Oct — Duplicate-ID patient mapping exercise launched nationwide",
+    "6 Sep — NIC vulnerability assessment flags critical Apache/OpenSSL risk",
+    "30 Sep — Joy requests fresh DDMS data exports from LSTM for KAMIS's Entomology Dashboard",
+    "26 Oct — \"Predictive Tool\" meeting with LSHTM kicks off forecast-modelling work"
+  ],
+  challenges: [
+    "Repeated SSL/domain-renewal lapses causing live outages",
+    "Persistent VM permissions bug blocking Apache from starting",
+    "Bureaucratic friction migrating to NIC Cloud (DNS, SMTP ports, sender email)",
+    "Patients ending up with multiple different KAMIS IDs across districts",
+    "Ongoing procurement overhead just to keep hosting alive quarter to quarter"
+  ],
+  people: ["Joy Bindroo","Bikas Sinha","Dr. Sridhar Srikantiah","Divyanshu Singh (Live for Lives)","Satyajit Ghosh","Ajay Negi","Dr. Nupur Roy","Arvinder Walia (CHAI)","Rudra Singh (LSTM)","Graham Medley (LSHTM)","Michael Coleman (LSTM)"]
+},
+{
+  year: "2022",
+  tag: "Cloud, contracts, and a conference",
+  paragraphs: [
+    "January's unglamorous plumbing kept the dashboard credible: fixing a false-endemicity bug in a Jharkhand block within days, and chasing a recurring headache where the live dashboard and downloaded data disagreed — traced, in the end, to a workflow error, not a software one. Alongside it, Joy ran a major de-duplication exercise mapping tens of thousands of case IDs into unique patient identities, foundational cleanup that recurred all year.",
+    "May brought the year's biggest technical milestone: migrating KAMIS off its VPS entirely onto NIC's government cloud, with a coordinated maintenance window and a domain change to the now-official kamis.nvbdcp.gov.in. Around the same time, a full procurement cycle for the next development contract ground through 19-then-23 vendors solicited, with Joy writing an explicit justification for retaining incumbent vendor Live for Lives rather than starting a new team from zero mid-elimination-push.",
+    "The year's academic high point came in July–August: Joy co-drafted a WorldLeish7 conference presentation, \"KAMIS Development and Applications in the Post-Elimination Phase,\" with Sridhar Srikantiah and UCSF's Caryn Bern — KAMIS's data now feeding outbreak-prediction modelling as case counts declined. The final quarter, though, was dominated by infrastructure firefighting: repeated portal outages and NIC VPN certificate failures that became a semi-permanent support burden.",
+    "The LSHTM forecasting thread also bore fruit: on February 1, Graham Medley sent over a one-page write-up, \"Integration of short-term forecasts to the KAMIS dashboard,\" co-authored with Emily Nightingale — the beginning of actual forecast output landing inside KAMIS's own dashboard rather than staying an external research exercise. The broader \"SPEAK India\" modelling collaboration kept scaling in parallel through the year's recurring catch-up calls."
+  ],
+  events: [
+    "Jan — False-endemicity bug fixed; dashboard-vs-data mismatch traced to workflow error",
+    "17 Jan — Joy personally funds a VPS renewal to keep KAMIS online",
+    "1 Feb — LSHTM sends \"Integration of short-term forecasts to the KAMIS dashboard\" write-up",
+    "13–16 May — Full migration from VPS to NIC government cloud",
+    "May — Written case made to retain incumbent vendor Live for Lives",
+    "Jul — Technical committee scores 7 vendor proposals for next contract",
+    "Jul–Aug — WorldLeish7 conference presentation drafted with Sridhar Srikantiah and Caryn Bern",
+    "Oct–Nov — Repeated portal outages and NIC VPN certificate failures",
+    "Throughout the year — \"SPEAK India\" modelling collaboration scaled up"
+  ],
+  challenges: [
+    "Dashboard-vs-raw-data mismatches from district-level workflow errors",
+    "Large-scale duplicate patient-ID mapping requiring manual cross-checking",
+    "Slow multi-month government procurement cycle for the dev contract",
+    "Post-migration instability — VPN certificates, firewall, account lockouts",
+    "Continuous frontline support: resets, onboarding, four-state coverage"
+  ],
+  people: ["Joy Bindroo","Bikas Sinha","Satyajit Ghosh","Divyanshu Singh (Live for Lives)","Sridhar Srikantiah","Caryn Bern (UCSF)","Niraj Kumar","Shailendra Mishra (PATH)","Graham Medley (LSHTM)","Emily Nightingale (LSHTM)"]
+},
+{
+  year: "2023",
+  tag: "Joining the national grid",
+  paragraphs: [
+    "By 2023, KAMIS had settled into the role of India's operational backbone for tracking kala-azar — a mature, routine system with thousands of tiered logins. Much of Joy's daily work was now administrative housekeeping: fixing login outages, issuing VPN certificates, reconciling dashboard numbers against raw exports. A parallel thread ran through the year with a drug-trial sponsor: to protect trial blinding, KAMIS's treatment drop-down was relabeled from the drug's real name to \"Other Drug 1\" — a small but telling example of the system being adapted to serve research as well as routine care.",
+    "The dominant technical story was KAMIS's first steps into India's national disease-surveillance backbone, IHIP, run jointly by WHO and NCVBDC. From February, WHO pushed for a REST API so IHIP could pull KAMIS case data daily; Joy ran a live walkthrough for the IHIP technical team, and by May a working export endpoint with a dedicated API token was live — \"we have started the integration work,\" WHO confirmed, already asking for the next phase of incremental data extraction.",
+    "By July 2023, where this email archive ends, KAMIS stood as a well-worn, institutionally embedded national system — hosting migrated to NIC, tiered access governed jointly with NCVBDC, and now, for the first time, wired via API into a platform tracking disease outbreaks across the whole of India. The arc across eight years of correspondence is unmistakable: a standalone tool built and championed from inside CARE India had become a permanent node in the country's public-health data infrastructure.",
+    "The LSHTM research thread reached its own milestone in parallel: on March 18, Mary Cameron circulated the \"SPEAK India Toolkit for Surveillance of Visceral Leishmaniasis\" to a wide list spanning WHO, NVBDCP, ICMR and LSHTM/LSTM staff — seven years after Joy first flagged a Kaszona-built system called VLdrs as a reference point, and five years after Graham Medley's first modelling workshop, the research relationship had produced a named, distributable toolkit of its own."
+  ],
+  events: [
+    "4–5 Jan — Drug-trial blinding: KAMIS relabels a treatment to \"Other Drug 1\"",
+    "1–2 Feb — Login-credential audit with NCVBDC; system-wide outage fixed same day",
+    "9 Feb — WHO formally proposes KA-MIS-to-IHIP API integration",
+    "15 Apr — \"KAMIS NIC Migration\" write-up submitted for the annual report",
+    "13 May — Working IHIP export API goes live with dedicated access token",
+    "18 Mar — \"SPEAK India Toolkit for Surveillance of Visceral Leishmaniasis\" circulated to WHO, NVBDCP, ICMR",
+    "Jan–Jul — Monthly indicator analyses (case load, follow-up, compensation) continue"
+  ],
+  challenges: [
+    "Recurring login/access outages affecting entire state teams",
+    "Dashboard figures diverging from raw exported data",
+    "Months-long delay delivering the REST API WHO/IHIP needed",
+    "Vendor financial instability threatening development continuity",
+    "Low follow-up completion and wage-compensation payment rates in the field"
+  ],
+  people: ["Joy Bindroo","Bikas Sinha","Dr. Nupur Roy","Ajay Negi","Raghavendra Kedlaya (WHO)","Satyajit Ghosh","Sheeraz Raja (DNDi)","Dr. Caryn Bern (UCSF)","Mary Cameron (LSHTM)"]
+}
+];
+
+const timeline = document.getElementById('timeline');
+const rail = document.getElementById('rail');
+const topnav = document.getElementById('topnav');
+
+chapters.forEach(ch => {
+  const id = 'y' + ch.year;
+
+  const railLink = document.createElement('a');
+  railLink.href = '#' + id;
+  railLink.textContent = ch.year;
+  rail.appendChild(railLink);
+
+  const topLink = document.createElement('a');
+  topLink.href = '#' + id;
+  topLink.textContent = ch.year;
+  topnav.appendChild(topLink);
+
+  const section = document.createElement('section');
+  section.className = 'chapter';
+  section.id = id;
+
+  const head = document.createElement('div');
+  head.className = 'chapter-head';
+  head.innerHTML = `<span class="chapter-year mono">${ch.year}</span><span class="chapter-tag">${ch.tag}</span>`;
+  section.appendChild(head);
+
+  ch.paragraphs.forEach(t => {
+    const p = document.createElement('p');
+    p.textContent = t;
+    section.appendChild(p);
+  });
+
+  const grid = document.createElement('div');
+  grid.className = 'cardgrid';
+
+  const eventsCard = document.createElement('div');
+  eventsCard.className = 'card events';
+  eventsCard.innerHTML = `<h4>Key events</h4><ul>${ch.events.map(e=>`<li>${e}</li>`).join('')}</ul>`;
+  grid.appendChild(eventsCard);
+
+  const challengesCard = document.createElement('div');
+  challengesCard.className = 'card challenges';
+  challengesCard.innerHTML = `<h4>Challenges</h4><ul>${ch.challenges.map(e=>`<li>${e}</li>`).join('')}</ul>`;
+  grid.appendChild(challengesCard);
+
+  const peopleCard = document.createElement('div');
+  peopleCard.className = 'card people';
+  peopleCard.innerHTML = `<h4>People</h4><ul>${ch.people.map(e=>`<li>${e}</li>`).join('')}</ul>`;
+  grid.appendChild(peopleCard);
+
+  section.appendChild(grid);
+  timeline.appendChild(section);
+});
+
+const links = [...rail.querySelectorAll('a'), ...topnav.querySelectorAll('a')];
+const sections = [...document.querySelectorAll('.chapter')];
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if(en.isIntersecting){
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#'+en.target.id));
+    }
+  });
+}, {rootMargin: '-20% 0px -70% 0px'});
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
