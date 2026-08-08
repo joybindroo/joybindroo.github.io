@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Learners — Learn English & Numbers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="title">🌟 Little Learners</h1>
+    <div class="topbar-controls">
+      <div class="zoom-controls" role="group" aria-label="Zoom">
+        <button id="btnZoomOut" class="zoom-btn" aria-label="Zoom out">−</button>
+        <span class="zoom-value" id="zoomValue">100%</span>
+        <button id="btnZoomIn" class="zoom-btn" aria-label="Zoom in">+</button>
+      </div>
+      <button id="btnVoice" class="voice-btn" aria-label="Change voice">🗣️ Voice</button>
+      <div class="mode-switch" role="tablist" aria-label="Game mode">
+        <button id="btnLearnMode" class="mode-btn active" role="tab" aria-selected="true">Learn English</button>
+        <button id="btnQuizMode" class="mode-btn" role="tab" aria-selected="false">English Quiz</button>
+        <button id="btnLearnNumbersMode" class="mode-btn" role="tab" aria-selected="false">Learn Numbers</button>
+        <button id="btnNumbersQuizMode" class="mode-btn" role="tab" aria-selected="false">Numbers Quiz</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== FLOATING MASCOTS (per-screen characters) ===== -->
+  <div class="mascots" aria-hidden="true">
+    <span class="mascot" data-screen="learn">🐵</span>
+    <span class="mascot" data-screen="learn">🦜</span>
+    <span class="mascot" data-screen="quiz">🐯</span>
+    <span class="mascot" data-screen="quiz">🐨</span>
+    <span class="mascot" data-screen="numlearn">🐱</span>
+    <span class="mascot" data-screen="numlearn">🐼</span>
+    <span class="mascot" data-screen="numquiz">🐻</span>
+    <span class="mascot" data-screen="numquiz">🦊</span>
+  </div>
+
+  <!-- ===== LEARN ENGLISH ===== -->
+  <main id="learnScreen" class="screen">
+    <div class="screen-left">
+      <table class="letter-grid" id="letterGrid" aria-label="Alphabet letters"></table>
+    </div>
+    <div class="screen-right">
+      <div id="learnGuide" class="guide-card" role="region" aria-label="How to play">
+        <div class="guide-mascot">🐵</div>
+        <p class="guide-title">Tap a letter card!</p>
+        <p class="guide-sub">or press any key <kbd>A</kbd>–<kbd>Z</kbd> on your keyboard</p>
+        <div class="guide-bounce">👆</div>
+      </div>
+      <div id="showcase" class="showcase hidden" role="region" aria-label="Letter details">
+        <div class="showcase-card">
+          <button id="btnCloseShowcase" class="close-btn" aria-label="Close">✕</button>
+          <div class="showcase-letter" id="showcaseLetter"></div>
+          <div class="showcase-emoji" id="showcaseEmoji" aria-hidden="true"></div>
+          <p class="showcase-word" id="showcaseWord"></p>
+          <div class="showcase-words" id="showcaseWords"></div>
+          <p class="showcase-sound" id="showcaseSound"></p>
+          <div class="showcase-nav">
+            <button id="btnPrevLetter" class="nav-btn">◀ Previous</button>
+            <button id="btnSpeakLetter" class="speak-btn">🔊 Listen</button>
+            <button id="btnNextLetter" class="nav-btn">Next ▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== ENGLISH QUIZ ===== -->
+  <main id="quizScreen" class="screen hidden">
+    <div class="quiz-top">
+      <div class="quiz-progress" role="progressbar" aria-label="Quiz progress">
+        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+      </div>
+      <div class="quiz-meta">
+        <span class="quiz-score" id="quizScore">⭐ 0</span>
+        <div class="quiz-mode-toggle">
+          <span>Ask for:</span>
+          <button id="btnAskName" class="mini-btn active">Letter name</button>
+          <button id="btnAskPhonic" class="mini-btn">Phonic sound</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-question" id="quizQuestion">
+      <p class="quiz-prompt" id="quizPrompt">Find the letter…</p>
+      <div class="quiz-target" id="quizTarget"></div>
+      <button id="btnReplayQuestion" class="replay-btn" aria-label="Hear the question again">🔊 Hear again</button>
+      <p class="quiz-hint" id="quizHint"><kbd>A</kbd>–<kbd>Z</kbd> on keyboard, or tap the right card!</p>
+    </div>
+
+    <div class="quiz-options" id="quizOptions" aria-live="polite"></div>
+  </main>
+
+  <!-- ===== LEARN NUMBERS ===== -->
+  <main id="numbersLearnScreen" class="screen hidden">
+    <div class="screen-left">
+      <table class="number-grid" id="numberGrid" aria-label="Numbers 1 to 100"></table>
+    </div>
+    <div class="screen-right">
+      <div id="numGuide" class="guide-card" role="region" aria-label="How to play">
+        <div class="guide-mascot">🐱</div>
+        <p class="guide-title">Tap a number card!</p>
+        <p class="guide-sub">to see it grow with fun emojis</p>
+        <div class="guide-bounce">👆</div>
+      </div>
+      <div id="numberShowcase" class="showcase hidden" role="region" aria-label="Number details">
+        <div class="showcase-card">
+          <button id="btnCloseNumberShowcase" class="close-btn" aria-label="Close">✕</button>
+          <div class="showcase-letter" id="numberShowcaseTile"></div>
+          <p class="showcase-word" id="numberShowcaseWord"></p>
+          <div id="numberCountEmojis" class="count-emojis" aria-hidden="true"></div>
+          <div class="showcase-nav">
+            <button id="btnPrevNumber" class="nav-btn">◀ Previous</button>
+            <button id="btnSpeakNumber" class="speak-btn">🔊 Listen</button>
+            <button id="btnNextNumber" class="nav-btn">Next ▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== NUMBERS QUIZ ===== -->
+  <main id="numbersQuizScreen" class="screen hidden">
+    <div class="quiz-top">
+      <div class="quiz-progress" role="progressbar" aria-label="Quiz progress">
+        <div class="quiz-progress-fill" id="numQuizProgressFill"></div>
+      </div>
+      <div class="quiz-meta">
+        <span class="quiz-score" id="numQuizScore">⭐ 0</span>
+        <div class="quiz-mode-toggle">
+          <span>Ask for:</span>
+          <button id="btnAskNumber" class="mini-btn active">Number</button>
+          <button id="btnAskNumberWord" class="mini-btn">Word</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-question" id="numQuizQuestion">
+      <p class="quiz-prompt" id="numQuizPrompt">Find the number…</p>
+      <div class="quiz-target" id="numQuizTarget"></div>
+      <button id="btnNumReplayQuestion" class="replay-btn" aria-label="Hear the question again">🔊 Hear again</button>
+      <p class="quiz-hint" id="numQuizHint">Tap the right number card!</p>
+    </div>
+
+    <div class="quiz-options" id="numQuizOptions" aria-live="polite"></div>
+  </main>
+
+  <!-- ===== EMOTION BURST (correct answers) ===== -->
+  <div id="burstLayer" class="burst-layer hidden" aria-hidden="true"></div>
+
+  <!-- ===== QUIZ COMPLETE / CELEBRATION ===== -->
+  <div id="celebration" class="celebration hidden" role="dialog" aria-modal="true" aria-label="Quiz complete">
+    <div class="celebration-card">
+      <p class="celebration-emoji">🎉</p>
+      <h2 class="celebration-title">Great job!</h2>
+      <p class="celebration-message" id="celebrationMessage"></p>
+      <div class="stars" id="celebrationStars"></div>
+      <div class="celebration-actions">
+        <button id="btnLearnEnglish" class="ghost-btn">🔤 Learn English</button>
+        <button id="btnEnglishQuiz" class="primary-btn">🎯 English Quiz</button>
+        <button id="btnLearnNumbers" class="ghost-btn">🔢 Learn Numbers</button>
+        <button id="btnNumbersQuiz" class="primary-btn">🎯 Numbers Quiz</button>
+      </div>
+      <p class="celebration-hint">Press 1: Learn English · 2: English Quiz · 3: Learn Numbers · 4: Numbers Quiz</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
